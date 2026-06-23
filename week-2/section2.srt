@@ -1,0 +1,5855 @@
+0
+00:00:02,339 --> 00:00:04,309
+This is CS 50 week 2.
+
+1
+00:00:06,030 --> 00:00:08,500
+we're excited to have like a little group here,
+
+2
+00:00:08,510 --> 00:00:11,909
+so feel free to drop questions in the chat.
+
+3
+00:00:12,189 --> 00:00:12,489
+Um,
+
+4
+00:00:12,510 --> 00:00:14,430
+hopefully this will be an interactive session,
+
+5
+00:00:14,550 --> 00:00:16,530
+so I'm gonna be asking you guys for
+
+6
+00:00:16,709 --> 00:00:18,000
+some input and
+
+7
+00:00:18,389 --> 00:00:21,010
+and you can feel free to ask questions as well.
+
+8
+00:00:22,600 --> 00:00:23,559
+So,
+
+9
+00:00:24,590 --> 00:00:25,530
+Let's get started.
+
+10
+00:00:26,030 --> 00:00:27,290
+So I'm Kelly.
+
+11
+00:00:27,389 --> 00:00:28,649
+If you haven't seen me before,
+
+12
+00:00:29,030 --> 00:00:30,850
+I'm the preceptor here at Harvard,
+
+13
+00:00:30,989 --> 00:00:31,610
+so I run
+
+14
+00:00:31,850 --> 00:00:32,689
+the college,
+
+15
+00:00:32,750 --> 00:00:33,139
+uh,
+
+16
+00:00:33,150 --> 00:00:34,569
+class on campus here.
+
+17
+00:00:34,950 --> 00:00:36,569
+That's my email if you ever
+
+18
+00:00:37,029 --> 00:00:37,919
+want to contact me.
+
+19
+00:00:40,509 --> 00:00:42,029
+And so this week,
+
+20
+00:00:42,189 --> 00:00:42,959
+week two,
+
+21
+00:00:43,319 --> 00:00:43,900
+we got
+
+22
+00:00:44,200 --> 00:00:46,779
+more in depth on C.
+
+23
+00:00:47,240 --> 00:00:48,880
+and so some of the questions that
+
+24
+00:00:49,119 --> 00:00:51,840
+that in lecture David addressed and some
+
+25
+00:00:51,840 --> 00:00:53,819
+questions that you might still be thinking about
+
+26
+00:00:54,200 --> 00:00:54,700
+are
+
+27
+00:00:55,040 --> 00:00:57,630
+what steps are involved in compilation.
+
+28
+00:00:57,729 --> 00:00:58,580
+So how does
+
+29
+00:00:59,000 --> 00:00:59,659
+code
+
+30
+00:01:00,000 --> 00:01:01,619
+turn from source code
+
+31
+00:01:01,799 --> 00:01:02,459
+to
+
+32
+00:01:03,119 --> 00:01:04,580
+what actually runs?
+
+33
+00:01:04,919 --> 00:01:06,559
+When should we use arrays?
+
+34
+00:01:07,040 --> 00:01:08,220
+What are strings?
+
+35
+00:01:08,839 --> 00:01:12,199
+And what's the point of command line arguments?
+
+36
+00:01:12,650 --> 00:01:13,370
+What are these things?
+
+37
+00:01:13,449 --> 00:01:14,830
+What's the difference between
+
+38
+00:01:15,529 --> 00:01:16,459
+a standard input?
+
+39
+00:01:17,980 --> 00:01:20,970
+And then finally a question that you might be thinking about
+
+40
+00:01:21,309 --> 00:01:22,650
+as you write your code
+
+41
+00:01:23,160 --> 00:01:25,370
+is what makes for good design?
+
+42
+00:01:25,750 --> 00:01:26,269
+What does
+
+43
+00:01:26,620 --> 00:01:27,419
+design mean?
+
+44
+00:01:27,519 --> 00:01:29,279
+And as you may know,
+
+45
+00:01:29,709 --> 00:01:34,800
+design is one of the axes that we grade for and so what are we looking for
+
+46
+00:01:35,069 --> 00:01:36,669
+when we think about good design?
+
+47
+00:01:37,790 --> 00:01:39,849
+So we're gonna start with that point
+
+48
+00:01:40,230 --> 00:01:42,129
+and I'm gonna ask you all
+
+49
+00:01:42,669 --> 00:01:44,129
+what you think are
+
+50
+00:01:44,349 --> 00:01:47,650
+some characteristics of good design
+
+51
+00:01:47,989 --> 00:01:48,830
+in code.
+
+52
+00:01:50,360 --> 00:01:53,019
+So feel free to write in the chat what do you think
+
+53
+00:01:53,440 --> 00:01:55,339
+good design means?
+
+54
+00:02:01,980 --> 00:02:02,699
+Simple,
+
+55
+00:02:03,519 --> 00:02:05,050
+easy for someone else to read,
+
+56
+00:02:05,180 --> 00:02:05,900
+not for boast,
+
+57
+00:02:05,980 --> 00:02:06,449
+yeah,
+
+58
+00:02:06,819 --> 00:02:07,029
+yeah,
+
+59
+00:02:07,139 --> 00:02:09,779
+so is it helpful for someone else?
+
+60
+00:02:09,839 --> 00:02:12,119
+Can they understand what's going on in your code?
+
+61
+00:02:12,419 --> 00:02:13,580
+Is it efficient?
+
+62
+00:02:13,660 --> 00:02:14,639
+Is it simple?
+
+63
+00:02:15,139 --> 00:02:15,589
+Yeah,
+
+64
+00:02:15,919 --> 00:02:16,009
+yeah,
+
+65
+00:02:16,100 --> 00:02:16,789
+these are great.
+
+66
+00:02:17,559 --> 00:02:19,639
+So some of the things that we came up with
+
+67
+00:02:20,330 --> 00:02:22,639
+that you can think about when you're writing your code,
+
+68
+00:02:23,059 --> 00:02:23,820
+first question is,
+
+69
+00:02:23,899 --> 00:02:24,679
+is your code
+
+70
+00:02:24,899 --> 00:02:25,750
+efficient?
+
+71
+00:02:26,300 --> 00:02:26,419
+Yeah,
+
+72
+00:02:26,580 --> 00:02:26,740
+no,
+
+73
+00:02:27,229 --> 00:02:28,119
+don't repeat yourself.
+
+74
+00:02:28,220 --> 00:02:29,809
+So as the slide says,
+
+75
+00:02:30,100 --> 00:02:32,619
+we wanna avoid unnecessary repetition
+
+76
+00:02:32,860 --> 00:02:34,800
+and redundant operations.
+
+77
+00:02:35,410 --> 00:02:35,949
+So
+
+78
+00:02:36,570 --> 00:02:38,850
+you should avoid copying and pasting your code
+
+79
+00:02:39,089 --> 00:02:42,940
+even if you're making slight changes and that usually should be a sign
+
+80
+00:02:43,169 --> 00:02:45,130
+if you're doing some copy and pasting
+
+81
+00:02:45,630 --> 00:02:48,750
+perhaps this is a good time for you to consider using
+
+82
+00:02:48,919 --> 00:02:52,500
+loops or abstractions using a function
+
+83
+00:02:52,850 --> 00:02:56,429
+to try to hide away some of that repetition.
+
+84
+00:02:57,610 --> 00:03:00,160
+And then with redundant operations
+
+85
+00:03:00,460 --> 00:03:03,279
+if a variable is computed multiple times
+
+86
+00:03:03,740 --> 00:03:08,199
+that can be also a sign that maybe you should consider storing this variable
+
+87
+00:03:08,539 --> 00:03:09,000
+in
+
+88
+00:03:09,479 --> 00:03:12,520
+storing this value in a variable so that you're not
+
+89
+00:03:12,899 --> 00:03:15,899
+repeatedly computing the same thing over and over again.
+
+90
+00:03:17,479 --> 00:03:19,149
+Another question you can ask is,
+
+91
+00:03:19,440 --> 00:03:21,559
+is your code easy to maintain?
+
+92
+00:03:21,880 --> 00:03:24,059
+So if your problem gets bigger
+
+93
+00:03:24,160 --> 00:03:24,940
+and bigger,
+
+94
+00:03:25,559 --> 00:03:27,300
+is your code going to be easy
+
+95
+00:03:27,440 --> 00:03:28,339
+to keep up
+
+96
+00:03:28,529 --> 00:03:30,339
+with the scale of
+
+97
+00:03:30,479 --> 00:03:31,429
+what you're working on?
+
+98
+00:03:32,000 --> 00:03:32,210
+So
+
+99
+00:03:32,600 --> 00:03:35,919
+two things to think about here are prototyping your functions.
+
+100
+00:03:36,320 --> 00:03:37,559
+So as a reminder,
+
+101
+00:03:37,600 --> 00:03:38,300
+this is when
+
+102
+00:03:38,639 --> 00:03:39,500
+you're declaring
+
+103
+00:03:40,059 --> 00:03:41,559
+potentially a helper function,
+
+104
+00:03:41,839 --> 00:03:44,850
+so a function that's helping you solve the problem you're doing.
+
+105
+00:03:45,490 --> 00:03:47,000
+And taking that first
+
+106
+00:03:47,660 --> 00:03:48,419
+prototype,
+
+107
+00:03:48,619 --> 00:03:50,979
+the first line that declares this function
+
+108
+00:03:51,339 --> 00:03:52,279
+and declaring it
+
+109
+00:03:52,380 --> 00:03:54,300
+above your main function.
+
+110
+00:03:54,940 --> 00:03:55,679
+And so
+
+111
+00:03:55,940 --> 00:04:00,479
+it's easy for other humans to read and it keeps your main code at the top
+
+112
+00:04:00,899 --> 00:04:02,059
+and so that's helpful.
+
+113
+00:04:02,460 --> 00:04:06,410
+Another thing we would like to note is to avoid magic numbers.
+
+114
+00:04:06,490 --> 00:04:06,839
+So
+
+115
+00:04:07,220 --> 00:04:08,399
+what does that mean?
+
+116
+00:04:09,139 --> 00:04:10,160
+Magic numbers
+
+117
+00:04:10,339 --> 00:04:13,410
+we think of as hard coded numbers.
+
+118
+00:04:13,820 --> 00:04:14,279
+So
+
+119
+00:04:14,580 --> 00:04:17,059
+these numbers that might be might seem a little bit
+
+120
+00:04:17,059 --> 00:04:20,358
+arbitrary and their value will not change throughout the program.
+
+121
+00:04:20,949 --> 00:04:23,058
+And so if that's the case we encourage you to use
+
+122
+00:04:23,398 --> 00:04:25,688
+constants to define that as a constant.
+
+123
+00:04:26,069 --> 00:04:26,868
+For example,
+
+124
+00:04:27,009 --> 00:04:29,709
+something you might do in this week's problem set
+
+125
+00:04:30,069 --> 00:04:31,248
+is use
+
+126
+00:04:31,378 --> 00:04:32,558
+the fact that
+
+127
+00:04:32,709 --> 00:04:35,009
+the alphabet has 26 letters
+
+128
+00:04:35,269 --> 00:04:35,889
+and so
+
+129
+00:04:36,148 --> 00:04:37,718
+over the course of your program,
+
+130
+00:04:38,069 --> 00:04:41,889
+the alphabet is not suddenly going to add more letters
+
+131
+00:04:42,069 --> 00:04:44,368
+and so that is a number 26
+
+132
+00:04:44,829 --> 00:04:47,308
+that might be good to define as a constant
+
+133
+00:04:47,549 --> 00:04:48,449
+rather than just
+
+134
+00:04:48,628 --> 00:04:50,669
+simply typing in 26.
+
+135
+00:04:53,079 --> 00:04:54,059
+So to
+
+136
+00:04:54,519 --> 00:04:57,329
+sort of reinforce some of these ideas we're gonna play a little game.
+
+137
+00:04:57,799 --> 00:04:59,250
+I'm gonna show two
+
+138
+00:04:59,480 --> 00:05:00,380
+pieces of code
+
+139
+00:05:00,920 --> 00:05:04,209
+and I'd like you to put in the chat which one do you think
+
+140
+00:05:04,399 --> 00:05:05,380
+is better
+
+141
+00:05:05,600 --> 00:05:07,399
+and why do you think that?
+
+142
+00:05:09,480 --> 00:05:13,049
+So I take a second to think about that and read the pieces of code here.
+
+143
+00:05:18,769 --> 00:05:19,029
+Yeah,
+
+144
+00:05:19,160 --> 00:05:20,470
+so I'm seeing people
+
+145
+00:05:20,690 --> 00:05:21,890
+are saying the second option,
+
+146
+00:05:22,089 --> 00:05:22,750
+option B,
+
+147
+00:05:22,760 --> 00:05:23,510
+is better.
+
+148
+00:05:24,429 --> 00:05:25,470
+Someone says A.
+
+149
+00:05:27,940 --> 00:05:28,260
+Yeah,
+
+150
+00:05:28,420 --> 00:05:28,799
+so
+
+151
+00:05:29,100 --> 00:05:30,160
+the difference here
+
+152
+00:05:30,299 --> 00:05:31,500
+we can see is that
+
+153
+00:05:31,660 --> 00:05:32,880
+in option A
+
+154
+00:05:33,540 --> 00:05:37,320
+in this conditional check we're checking is I less than
+
+155
+00:05:37,540 --> 00:05:38,839
+the length of
+
+156
+00:05:39,299 --> 00:05:40,200
+some string.
+
+157
+00:05:41,079 --> 00:05:42,260
+Option B,
+
+158
+00:05:42,480 --> 00:05:43,459
+we're declaring
+
+159
+00:05:44,079 --> 00:05:46,260
+this length of the string sterling
+
+160
+00:05:46,600 --> 00:05:47,040
+um
+
+161
+00:05:47,230 --> 00:05:48,279
+as N
+
+162
+00:05:48,760 --> 00:05:51,920
+and then the conditional check is I is less than N.
+
+163
+00:05:52,690 --> 00:05:53,500
+And so
+
+164
+00:05:54,670 --> 00:05:57,250
+We would prefer option B in this scenario
+
+165
+00:05:57,750 --> 00:06:00,489
+because we don't have to perform this
+
+166
+00:06:00,649 --> 00:06:05,089
+string length computation every time we run this loop.
+
+167
+00:06:05,750 --> 00:06:07,470
+If we kept it as option A,
+
+168
+00:06:07,529 --> 00:06:10,290
+we'd be doing a lot of unnecessary computation
+
+169
+00:06:10,630 --> 00:06:12,010
+because we have to get the length.
+
+170
+00:06:12,070 --> 00:06:13,489
+We're asking every single time
+
+171
+00:06:13,709 --> 00:06:14,619
+how long is the string?
+
+172
+00:06:14,739 --> 00:06:15,730
+How long is the string?
+
+173
+00:06:16,070 --> 00:06:16,420
+When,
+
+174
+00:06:16,589 --> 00:06:17,730
+when you run this loop,
+
+175
+00:06:17,910 --> 00:06:20,690
+it's not necessarily going to change lengths.
+
+176
+00:06:21,880 --> 00:06:22,149
+All right,
+
+177
+00:06:22,239 --> 00:06:23,059
+so how about
+
+178
+00:06:23,480 --> 00:06:24,100
+this
+
+179
+00:06:24,519 --> 00:06:25,519
+example here?
+
+180
+00:06:27,200 --> 00:06:29,290
+So you have option A and option B.
+
+181
+00:06:38,429 --> 00:06:38,709
+All right,
+
+182
+00:06:38,790 --> 00:06:38,910
+yeah,
+
+183
+00:06:39,059 --> 00:06:40,820
+so I'm seeing a lot of people say option A.
+
+184
+00:06:43,350 --> 00:06:44,850
+So as we see here
+
+185
+00:06:45,070 --> 00:06:46,529
+talking about magic numbers,
+
+186
+00:06:47,350 --> 00:06:52,450
+option A declares months in a year equals 12 as a constant integer
+
+187
+00:06:52,869 --> 00:06:53,670
+and so
+
+188
+00:06:54,190 --> 00:06:55,230
+like someone said in the chat here,
+
+189
+00:06:55,339 --> 00:06:57,269
+the number of months in a year
+
+190
+00:06:57,510 --> 00:06:58,570
+are not gonna change
+
+191
+00:06:58,670 --> 00:07:00,489
+throughout the course of your program
+
+192
+00:07:00,670 --> 00:07:01,450
+and so
+
+193
+00:07:02,149 --> 00:07:03,690
+having that defined as a constant
+
+194
+00:07:03,869 --> 00:07:05,750
+is arguably better design.
+
+195
+00:07:06,260 --> 00:07:09,670
+Than having just a 12 in your code where
+
+196
+00:07:09,670 --> 00:07:12,179
+someone reading it might not know what that means.
+
+197
+00:07:12,480 --> 00:07:15,850
+So this is a good example of avoiding magic numbers.
+
+198
+00:07:16,850 --> 00:07:17,089
+OK,
+
+199
+00:07:17,170 --> 00:07:17,989
+how about
+
+200
+00:07:18,450 --> 00:07:18,989
+this
+
+201
+00:07:19,619 --> 00:07:19,989
+example?
+
+202
+00:07:21,929 --> 00:07:22,750
+So we have 2
+
+203
+00:07:23,209 --> 00:07:24,690
+if statements here.
+
+204
+00:07:41,890 --> 00:07:42,149
+OK,
+
+205
+00:07:42,250 --> 00:07:42,429
+yeah,
+
+206
+00:07:42,549 --> 00:07:44,119
+so I'm seeing some people say A.
+
+207
+00:07:47,339 --> 00:07:48,450
+Does anyone want to
+
+208
+00:07:48,630 --> 00:07:50,489
+make a guess as to why
+
+209
+00:07:50,880 --> 00:07:52,950
+A might be a better option here?
+
+210
+00:08:02,429 --> 00:08:03,609
+One less line of code.
+
+211
+00:08:04,429 --> 00:08:05,660
+It's redundant to ask else,
+
+212
+00:08:06,269 --> 00:08:06,649
+yeah,
+
+213
+00:08:06,910 --> 00:08:07,109
+yeah,
+
+214
+00:08:07,230 --> 00:08:08,549
+so that that's exactly right.
+
+215
+00:08:08,670 --> 00:08:09,109
+So
+
+216
+00:08:09,390 --> 00:08:09,989
+in these
+
+217
+00:08:10,260 --> 00:08:11,049
+two options.
+
+218
+00:08:11,910 --> 00:08:13,119
+We see option A.
+
+219
+00:08:13,350 --> 00:08:13,910
+We have,
+
+220
+00:08:14,029 --> 00:08:16,190
+we're checking if some expression is true.
+
+221
+00:08:16,670 --> 00:08:17,309
+If that's true,
+
+222
+00:08:17,470 --> 00:08:19,170
+let's return a success,
+
+223
+00:08:19,390 --> 00:08:20,890
+otherwise we'll do
+
+224
+00:08:21,190 --> 00:08:23,290
+uh return status code of one.
+
+225
+00:08:23,790 --> 00:08:24,709
+And the other option,
+
+226
+00:08:24,940 --> 00:08:25,670
+option B,
+
+227
+00:08:26,209 --> 00:08:27,750
+we're still checking that expression,
+
+228
+00:08:27,829 --> 00:08:28,929
+but in the case
+
+229
+00:08:29,190 --> 00:08:31,089
+that the expression is not true.
+
+230
+00:08:31,899 --> 00:08:34,479
+We're also adding an ES case here,
+
+231
+00:08:34,979 --> 00:08:35,400
+but the ELS
+
+232
+00:08:36,250 --> 00:08:36,460
+case,
+
+233
+00:08:36,500 --> 00:08:37,260
+as people are saying,
+
+234
+00:08:37,299 --> 00:08:38,239
+is redundant
+
+235
+00:08:38,669 --> 00:08:40,400
+because you're not gonna reach that,
+
+236
+00:08:40,659 --> 00:08:41,239
+um,
+
+237
+00:08:41,580 --> 00:08:42,909
+in any other case
+
+238
+00:08:43,219 --> 00:08:43,840
+and so
+
+239
+00:08:43,979 --> 00:08:46,530
+no matter what we're gonna be returning one and so it's,
+
+240
+00:08:46,539 --> 00:08:48,539
+it's not necessary to have that
+
+241
+00:08:48,789 --> 00:08:49,799
+extra case.
+
+242
+00:08:50,539 --> 00:08:50,859
+OK,
+
+243
+00:08:50,940 --> 00:08:52,020
+how about this next one?
+
+244
+00:08:52,099 --> 00:08:53,239
+So this is also.
+
+245
+00:08:54,140 --> 00:08:56,039
+A conditional.
+
+246
+00:08:58,140 --> 00:08:58,150
+Which
+
+247
+00:08:59,219 --> 00:09:00,739
+flows better,
+
+248
+00:09:00,859 --> 00:09:01,719
+which makes
+
+249
+00:09:01,940 --> 00:09:03,179
+which one's better designed.
+
+250
+00:09:21,210 --> 00:09:21,419
+OK,
+
+251
+00:09:21,530 --> 00:09:21,619
+yeah,
+
+252
+00:09:21,739 --> 00:09:23,400
+so I'm seeing a lot of people say B.
+
+253
+00:09:24,380 --> 00:09:25,880
+And why might that be?
+
+254
+00:09:33,979 --> 00:09:35,190
+It's more succinct,
+
+255
+00:09:35,200 --> 00:09:35,659
+if false,
+
+256
+00:09:35,770 --> 00:09:36,940
+exit immediately,
+
+257
+00:09:37,260 --> 00:09:37,619
+yeah,
+
+258
+00:09:37,780 --> 00:09:37,979
+yeah,
+
+259
+00:09:38,150 --> 00:09:38,599
+so.
+
+260
+00:09:39,510 --> 00:09:41,729
+What's going on in in this program
+
+261
+00:09:42,039 --> 00:09:42,729
+is that
+
+262
+00:09:42,830 --> 00:09:43,869
+we have some
+
+263
+00:09:44,150 --> 00:09:45,070
+bullying
+
+264
+00:09:45,179 --> 00:09:47,090
+that's storing either true or false,
+
+265
+00:09:47,669 --> 00:09:48,330
+and
+
+266
+00:09:48,469 --> 00:09:49,890
+we wanna check if
+
+267
+00:09:50,270 --> 00:09:51,750
+that is true.
+
+268
+00:09:52,549 --> 00:09:53,950
+If success is true,
+
+269
+00:09:54,469 --> 00:09:56,369
+we're gonna like do a lot of
+
+270
+00:09:56,789 --> 00:09:57,210
+code
+
+271
+00:09:57,390 --> 00:09:58,609
+we're gonna run a lot of things.
+
+272
+00:09:58,750 --> 00:09:59,929
+If it's not true,
+
+273
+00:10:00,340 --> 00:10:01,330
+then we might have some.
+
+274
+00:10:02,340 --> 00:10:03,570
+Exit case like
+
+275
+00:10:03,739 --> 00:10:05,700
+you should just stop the program immediately.
+
+276
+00:10:06,809 --> 00:10:07,669
+And so
+
+277
+00:10:08,289 --> 00:10:11,909
+adding that as a guardrail at the beginning before you have your
+
+278
+00:10:12,169 --> 00:10:13,469
+lots of code
+
+279
+00:10:13,919 --> 00:10:14,590
+is
+
+280
+00:10:15,080 --> 00:10:17,989
+arguably like easier to tell what's going on here
+
+281
+00:10:18,229 --> 00:10:19,510
+um and because
+
+282
+00:10:19,650 --> 00:10:21,890
+it is a little bit more succinct here we're avoiding
+
+283
+00:10:22,090 --> 00:10:23,570
+that extra ES case.
+
+284
+00:10:24,609 --> 00:10:24,890
+OK,
+
+285
+00:10:25,049 --> 00:10:25,530
+great.
+
+286
+00:10:27,849 --> 00:10:32,770
+So I just want to pause here if anyone has any questions about design,
+
+287
+00:10:33,090 --> 00:10:34,250
+what we're looking for in design,
+
+288
+00:10:34,330 --> 00:10:35,869
+any of those scenarios.
+
+289
+00:10:48,590 --> 00:10:49,450
+OK,
+
+290
+00:10:50,150 --> 00:10:50,469
+alright,
+
+291
+00:10:50,590 --> 00:10:52,070
+so let's get into the actual,
+
+292
+00:10:52,190 --> 00:10:52,900
+oh,
+
+293
+00:10:52,919 --> 00:10:53,039
+question.
+
+294
+00:10:53,150 --> 00:10:58,190
+So we only need to use Ls when we have more than 2 possible answers or options.
+
+295
+00:10:59,099 --> 00:10:59,299
+Yeah,
+
+296
+00:10:59,380 --> 00:11:02,140
+so it'll depend on the code that you're running,
+
+297
+00:11:02,260 --> 00:11:02,559
+but
+
+298
+00:11:02,659 --> 00:11:07,340
+you can think about whether or not adding this ELS case is gonna be redundant or not.
+
+299
+00:11:07,739 --> 00:11:08,239
+So
+
+300
+00:11:08,820 --> 00:11:10,909
+is the code within your ELSE block
+
+301
+00:11:11,380 --> 00:11:12,119
+going to run.
+
+302
+00:11:13,059 --> 00:11:13,070
+In
+
+303
+00:11:13,580 --> 00:11:14,700
+either case,
+
+304
+00:11:14,940 --> 00:11:15,419
+like
+
+305
+00:11:15,619 --> 00:11:18,039
+if you had the ES block or if you didn't,
+
+306
+00:11:18,380 --> 00:11:19,919
+so that's sort of a good way to tell.
+
+307
+00:11:20,950 --> 00:11:20,960
+But
+
+308
+00:11:21,390 --> 00:11:22,429
+thank you for the question.
+
+309
+00:11:23,780 --> 00:11:24,580
+OK.
+
+310
+00:11:25,900 --> 00:11:26,460
+Anyone else?
+
+311
+00:11:26,510 --> 00:11:26,880
+OK,
+
+312
+00:11:27,219 --> 00:11:29,260
+feel free to drop more questions in the chat and
+
+313
+00:11:29,260 --> 00:11:31,530
+we'll move on to the content of this week.
+
+314
+00:11:32,140 --> 00:11:34,500
+First of which we're talking about arrays.
+
+315
+00:11:36,140 --> 00:11:36,150
+So
+
+316
+00:11:37,099 --> 00:11:38,750
+as an example,
+
+317
+00:11:39,369 --> 00:11:41,929
+some of you may know this game Pac-Man
+
+318
+00:11:42,369 --> 00:11:45,429
+or have seen a leaderboard like this on a video game
+
+319
+00:11:45,849 --> 00:11:46,630
+and so
+
+320
+00:11:47,330 --> 00:11:50,989
+if we were making a video game of our own here and we wanted to store
+
+321
+00:11:51,250 --> 00:11:54,830
+the top 5 scores of our players.
+
+322
+00:11:55,820 --> 00:11:58,469
+So far the only way we know how to do this
+
+323
+00:11:58,710 --> 00:12:02,510
+is by declaring like 5 integers maybe
+
+324
+00:12:02,809 --> 00:12:05,400
+score 1 score 2 score 3,
+
+325
+00:12:05,409 --> 00:12:06,789
+score 4 score 5,
+
+326
+00:12:08,130 --> 00:12:10,549
+but that is not necessarily going to be
+
+327
+00:12:10,690 --> 00:12:11,909
+the best way to do this,
+
+328
+00:12:12,010 --> 00:12:12,380
+right?
+
+329
+00:12:12,729 --> 00:12:15,429
+It's a lot of variables to keep track of
+
+330
+00:12:15,780 --> 00:12:16,469
+and
+
+331
+00:12:16,570 --> 00:12:17,869
+um it's not
+
+332
+00:12:18,090 --> 00:12:18,969
+super well designed,
+
+333
+00:12:19,010 --> 00:12:19,880
+it's a little sloppy,
+
+334
+00:12:19,929 --> 00:12:20,330
+right?
+
+335
+00:12:20,770 --> 00:12:21,390
+And so.
+
+336
+00:12:22,119 --> 00:12:24,380
+Arrays that we introduced this week
+
+337
+00:12:24,659 --> 00:12:26,119
+are a nice way of
+
+338
+00:12:26,679 --> 00:12:30,700
+of categorizing or storing these items together
+
+339
+00:12:31,200 --> 00:12:33,539
+so you might imagine that we have an array
+
+340
+00:12:33,679 --> 00:12:34,640
+like this
+
+341
+00:12:34,880 --> 00:12:37,099
+that stores our top 5
+
+342
+00:12:37,280 --> 00:12:39,239
+scores in Pac-Man.
+
+343
+00:12:41,000 --> 00:12:43,469
+So if I were to try to actually declare this array,
+
+344
+00:12:43,510 --> 00:12:45,409
+how do I make this array,
+
+345
+00:12:45,869 --> 00:12:46,809
+you might write a line,
+
+346
+00:12:46,940 --> 00:12:48,840
+a line of code that looks sort of like this.
+
+347
+00:12:48,950 --> 00:12:49,520
+So we have in
+
+348
+00:12:50,109 --> 00:12:51,130
+scores,
+
+349
+00:12:51,869 --> 00:12:53,830
+square brackets 5.
+
+350
+00:12:55,000 --> 00:12:58,059
+And so what is this actually composed of?
+
+351
+00:12:58,760 --> 00:12:59,719
+First we have the name,
+
+352
+00:13:00,000 --> 00:13:02,099
+so we have a name of the array,
+
+353
+00:13:02,200 --> 00:13:04,059
+this case called scores.
+
+354
+00:13:05,619 --> 00:13:07,119
+We also specify the
+
+355
+00:13:07,460 --> 00:13:10,320
+number of items we're gonna have in this,
+
+356
+00:13:10,500 --> 00:13:10,729
+uh,
+
+357
+00:13:10,739 --> 00:13:11,440
+array,
+
+358
+00:13:11,659 --> 00:13:13,039
+which in this case is 5.
+
+359
+00:13:14,450 --> 00:13:16,549
+And then we also have to specify the type,
+
+360
+00:13:16,969 --> 00:13:18,349
+so what are
+
+361
+00:13:18,650 --> 00:13:19,750
+the items gonna be?
+
+362
+00:13:19,929 --> 00:13:20,010
+What,
+
+363
+00:13:20,070 --> 00:13:21,109
+what type will they be?
+
+364
+00:13:21,419 --> 00:13:22,590
+So in this case integers.
+
+365
+00:13:24,059 --> 00:13:24,460
+OK,
+
+366
+00:13:24,669 --> 00:13:27,820
+and so that's how I declare like an empty array.
+
+367
+00:13:27,830 --> 00:13:29,200
+We don't have any values in it.
+
+368
+00:13:29,669 --> 00:13:31,090
+How might I,
+
+369
+00:13:31,400 --> 00:13:31,820
+uh,
+
+370
+00:13:31,869 --> 00:13:33,729
+update this with say our
+
+371
+00:13:33,989 --> 00:13:34,640
+first,
+
+372
+00:13:34,950 --> 00:13:35,179
+uh,
+
+373
+00:13:35,190 --> 00:13:35,630
+score,
+
+374
+00:13:35,710 --> 00:13:36,909
+our highest score.
+
+375
+00:13:40,559 --> 00:13:42,359
+So that might look something like this,
+
+376
+00:13:42,479 --> 00:13:42,609
+right?
+
+377
+00:13:42,719 --> 00:13:43,059
+So
+
+378
+00:13:43,200 --> 00:13:45,669
+arrays are 0 indexed,
+
+379
+00:13:45,869 --> 00:13:47,000
+meaning that
+
+380
+00:13:47,239 --> 00:13:48,859
+the first thing in the array
+
+381
+00:13:49,080 --> 00:13:51,659
+we call the index 0
+
+382
+00:13:51,869 --> 00:13:54,609
+and then index 1234,
+
+383
+00:13:54,640 --> 00:13:55,599
+and so on.
+
+384
+00:13:56,039 --> 00:13:58,099
+So if I wanted to set the first
+
+385
+00:13:58,640 --> 00:14:01,219
+highest score to 120,
+
+386
+00:14:01,719 --> 00:14:04,340
+I would write a line of code like so that says
+
+387
+00:14:04,840 --> 00:14:05,960
+the name of the array,
+
+388
+00:14:06,119 --> 00:14:07,020
+so scores
+
+389
+00:14:07,359 --> 00:14:09,539
+at the index of 0.
+
+390
+00:14:10,150 --> 00:14:12,059
+We're going to set that equal to 120.
+
+391
+00:14:13,229 --> 00:14:14,809
+And so similarly
+
+392
+00:14:15,549 --> 00:14:17,890
+if I wanted to update the next highest score,
+
+393
+00:14:18,030 --> 00:14:19,690
+it would be scores
+
+394
+00:14:19,909 --> 00:14:22,520
+at the index of 1 equals 86
+
+395
+00:14:22,909 --> 00:14:24,280
+so so on and so forth
+
+396
+00:14:24,429 --> 00:14:26,609
+we can fill up our entire array
+
+397
+00:14:26,909 --> 00:14:29,210
+if you knew all 5 ahead of time,
+
+398
+00:14:29,510 --> 00:14:32,450
+this is another way of doing so so you can
+
+399
+00:14:32,789 --> 00:14:34,429
+immediately declare
+
+400
+00:14:34,789 --> 00:14:36,369
+the array scores
+
+401
+00:14:36,719 --> 00:14:40,059
+with its five values in curly braces like so,
+
+402
+00:14:40,190 --> 00:14:40,690
+and that would
+
+403
+00:14:41,070 --> 00:14:42,010
+set up your array.
+
+404
+00:14:42,659 --> 00:14:43,070
+Like
+
+405
+00:14:43,299 --> 00:14:43,900
+this.
+
+406
+00:14:45,739 --> 00:14:46,299
+OK,
+
+407
+00:14:46,619 --> 00:14:48,359
+if I have this array
+
+408
+00:14:48,580 --> 00:14:52,500
+and I wanted to say print them to the screen so we're like showing the leaderboard,
+
+409
+00:14:52,900 --> 00:14:55,539
+we might have a 4 loop like so.
+
+410
+00:14:56,289 --> 00:14:56,890
+So
+
+411
+00:14:57,710 --> 00:15:00,210
+I've set up my array of scores
+
+412
+00:15:01,150 --> 00:15:02,429
+like so and then
+
+413
+00:15:02,549 --> 00:15:03,969
+I've set up a 4 loop
+
+414
+00:15:04,070 --> 00:15:05,289
+that starts at 0
+
+415
+00:15:05,859 --> 00:15:06,750
+and goes up to 5,
+
+416
+00:15:06,789 --> 00:15:09,140
+which means it's gonna repeat 5 times,
+
+417
+00:15:09,390 --> 00:15:10,489
+which is the amount
+
+418
+00:15:10,710 --> 00:15:11,849
+of scores we have
+
+419
+00:15:12,440 --> 00:15:15,330
+and then for each repetition we're gonna print
+
+420
+00:15:15,659 --> 00:15:16,210
+the
+
+421
+00:15:17,030 --> 00:15:18,010
+placeholder
+
+422
+00:15:18,510 --> 00:15:19,450
+of an integer
+
+423
+00:15:19,640 --> 00:15:23,049
+and have scores at the index of
+
+424
+00:15:23,150 --> 00:15:23,789
+I.
+
+425
+00:15:24,750 --> 00:15:26,169
+So what's going on there?
+
+426
+00:15:27,130 --> 00:15:27,140
+Well,
+
+427
+00:15:28,159 --> 00:15:29,669
+you can think of the first time
+
+428
+00:15:29,849 --> 00:15:32,830
+this 4 loop repeating I is going to equal 0
+
+429
+00:15:33,289 --> 00:15:35,950
+and so on that first iteration we're gonna print out
+
+430
+00:15:36,210 --> 00:15:37,489
+scores at index zero,
+
+431
+00:15:37,609 --> 00:15:40,190
+which is like the first score of 120
+
+432
+00:15:40,530 --> 00:15:42,190
+and then on every subsequent
+
+433
+00:15:42,330 --> 00:15:46,469
+iteration I is gonna go from 0 to 11 to 2,
+
+434
+00:15:46,809 --> 00:15:49,169
+and then print the next item in the array.
+
+435
+00:15:50,369 --> 00:15:51,390
+So that is
+
+436
+00:15:51,770 --> 00:15:55,960
+one way that we can print out the items that are in our array.
+
+437
+00:15:58,190 --> 00:15:58,869
+OK,
+
+438
+00:15:59,349 --> 00:16:02,150
+any questions about arrays,
+
+439
+00:16:02,549 --> 00:16:03,460
+working with them,
+
+440
+00:16:03,619 --> 00:16:04,669
+declaring them?
+
+441
+00:16:05,729 --> 00:16:07,150
+Updating values.
+
+442
+00:16:17,049 --> 00:16:17,520
+Alright,
+
+443
+00:16:17,700 --> 00:16:18,700
+feel free to drop
+
+444
+00:16:19,219 --> 00:16:20,719
+them in the chat if you do.
+
+445
+00:16:21,020 --> 00:16:22,219
+We'll move on to strings.
+
+446
+00:16:22,289 --> 00:16:22,599
+OK,
+
+447
+00:16:22,809 --> 00:16:27,039
+what if you don't know the size of the array and want it to be updated by user input?
+
+448
+00:16:27,580 --> 00:16:28,530
+That's a great question.
+
+449
+00:16:29,510 --> 00:16:30,979
+And this actually
+
+450
+00:16:31,200 --> 00:16:34,500
+will be something that we address in a coming week,
+
+451
+00:16:35,080 --> 00:16:35,559
+um,
+
+452
+00:16:35,760 --> 00:16:36,419
+but
+
+453
+00:16:36,919 --> 00:16:39,500
+one way to do so could be actually that you just
+
+454
+00:16:40,159 --> 00:16:42,919
+ask the user first you get the size,
+
+455
+00:16:43,080 --> 00:16:45,260
+and then you declare the array
+
+456
+00:16:45,440 --> 00:16:45,849
+so you
+
+457
+00:16:46,159 --> 00:16:47,479
+so that you actually know
+
+458
+00:16:47,880 --> 00:16:50,739
+that length arrays are always dynamic.
+
+459
+00:16:51,719 --> 00:16:52,380
+So
+
+460
+00:16:53,000 --> 00:16:54,599
+if you have experience with Python,
+
+461
+00:16:54,619 --> 00:16:55,859
+it is a little bit different.
+
+462
+00:16:56,119 --> 00:16:56,460
+Um,
+
+463
+00:16:56,750 --> 00:16:57,619
+Python's like
+
+464
+00:16:57,880 --> 00:16:59,960
+lists versus sees arrays.
+
+465
+00:17:00,280 --> 00:17:00,530
+Um,
+
+466
+00:17:00,590 --> 00:17:02,450
+when you declare an array in C,
+
+467
+00:17:02,780 --> 00:17:06,439
+that's the length that it's gonna be like that's the memory that's allocated,
+
+468
+00:17:06,750 --> 00:17:07,069
+um,
+
+469
+00:17:07,160 --> 00:17:08,750
+you can't necessarily change that,
+
+470
+00:17:08,760 --> 00:17:09,160
+but
+
+471
+00:17:09,479 --> 00:17:13,479
+in coming weeks we're gonna learn about another data structure that is dynamic.
+
+472
+00:17:13,560 --> 00:17:14,579
+You can add
+
+473
+00:17:15,040 --> 00:17:17,640
+more things to the end of it and change that length.
+
+474
+00:17:19,138 --> 00:17:20,308
+Some great questions.
+
+475
+00:17:22,578 --> 00:17:24,698
+What's the difference between an array and a list?
+
+476
+00:17:24,818 --> 00:17:25,928
+Does he use lists?
+
+477
+00:17:26,288 --> 00:17:27,519
+C does not use lists.
+
+478
+00:17:28,298 --> 00:17:30,499
+And you can actually we'll talk about this
+
+479
+00:17:30,499 --> 00:17:32,918
+in Python Week when we see those differences,
+
+480
+00:17:33,249 --> 00:17:33,619
+but
+
+481
+00:17:33,869 --> 00:17:35,629
+um C uses arrays.
+
+482
+00:17:35,899 --> 00:17:36,629
+Those are,
+
+483
+00:17:36,779 --> 00:17:36,979
+you know,
+
+484
+00:17:37,058 --> 00:17:37,798
+static.
+
+485
+00:17:38,338 --> 00:17:40,038
+They're not gonna be changing lengths.
+
+486
+00:17:40,438 --> 00:17:40,448
+Uh,
+
+487
+00:17:40,458 --> 00:17:44,318
+Python does use lists which are a little bit different because
+
+488
+00:17:44,739 --> 00:17:45,918
+they're a little bit more
+
+489
+00:17:46,098 --> 00:17:47,038
+dynamic,
+
+490
+00:17:47,298 --> 00:17:47,818
+um,
+
+491
+00:17:48,259 --> 00:17:49,678
+but you'll hear more about that
+
+492
+00:17:49,779 --> 00:17:50,779
+in Python.
+
+493
+00:17:55,219 --> 00:17:55,619
+OK,
+
+494
+00:17:55,829 --> 00:17:56,189
+so
+
+495
+00:17:56,589 --> 00:17:57,959
+we'll move on to strings,
+
+496
+00:17:58,109 --> 00:17:58,530
+which.
+
+497
+00:18:00,209 --> 00:18:00,329
+Oh,
+
+498
+00:18:00,410 --> 00:18:01,839
+do they support multiple data types?
+
+499
+00:18:02,170 --> 00:18:02,329
+No.
+
+500
+00:18:02,449 --> 00:18:03,550
+So that's actually a good question.
+
+501
+00:18:03,689 --> 00:18:03,949
+In
+
+502
+00:18:04,250 --> 00:18:05,030
+an array,
+
+503
+00:18:05,380 --> 00:18:06,770
+every single item in that array,
+
+504
+00:18:06,849 --> 00:18:07,530
+the element
+
+505
+00:18:07,729 --> 00:18:09,489
+has to be of the same data type,
+
+506
+00:18:09,609 --> 00:18:10,849
+which is why we,
+
+507
+00:18:10,969 --> 00:18:12,589
+when we declare an array,
+
+508
+00:18:13,930 --> 00:18:15,319
+state that very explicitly,
+
+509
+00:18:15,329 --> 00:18:16,209
+like in
+
+510
+00:18:16,449 --> 00:18:17,670
+scores
+
+511
+00:18:18,729 --> 00:18:19,810
+square bracket 5,
+
+512
+00:18:19,969 --> 00:18:20,130
+right?
+
+513
+00:18:20,170 --> 00:18:21,270
+That's gonna be 5
+
+514
+00:18:21,410 --> 00:18:22,349
+integers
+
+515
+00:18:22,650 --> 00:18:23,550
+in an array.
+
+516
+00:18:24,010 --> 00:18:24,569
+Great question.
+
+517
+00:18:27,079 --> 00:18:27,290
+OK,
+
+518
+00:18:27,369 --> 00:18:28,750
+so we'll move on to strings.
+
+519
+00:18:29,170 --> 00:18:29,689
+Strings,
+
+520
+00:18:29,810 --> 00:18:30,349
+as,
+
+521
+00:18:30,800 --> 00:18:31,010
+uh,
+
+522
+00:18:31,020 --> 00:18:32,189
+we heard in lecture,
+
+523
+00:18:32,569 --> 00:18:34,349
+are actually not a key word
+
+524
+00:18:34,650 --> 00:18:36,640
+that are in C natively,
+
+525
+00:18:36,719 --> 00:18:36,859
+right?
+
+526
+00:18:36,969 --> 00:18:37,290
+So
+
+527
+00:18:37,489 --> 00:18:38,829
+this like string,
+
+528
+00:18:39,150 --> 00:18:39,790
+um,
+
+529
+00:18:39,880 --> 00:18:42,949
+variable type is actually ACS 50
+
+530
+00:18:43,329 --> 00:18:43,670
+provided
+
+531
+00:18:43,969 --> 00:18:45,410
+training wheel per se,
+
+532
+00:18:45,849 --> 00:18:46,170
+um,
+
+533
+00:18:46,209 --> 00:18:48,290
+before we actually dive into what that is.
+
+534
+00:18:50,520 --> 00:18:52,150
+But one thing we did learn is that
+
+535
+00:18:52,530 --> 00:18:54,180
+just like an array,
+
+536
+00:18:54,209 --> 00:18:56,729
+a string can actually just be thought of
+
+537
+00:18:56,939 --> 00:18:57,550
+as
+
+538
+00:18:57,770 --> 00:19:00,030
+an array of characters,
+
+539
+00:19:00,530 --> 00:19:02,910
+so in this case if I have the name Emma.
+
+540
+00:19:03,880 --> 00:19:05,260
+The way you can think about it
+
+541
+00:19:05,800 --> 00:19:07,260
+as an array
+
+542
+00:19:07,560 --> 00:19:09,739
+name is actually gonna just be these
+
+543
+00:19:10,040 --> 00:19:10,880
+five
+
+544
+00:19:11,719 --> 00:19:12,619
+characters,
+
+545
+00:19:12,890 --> 00:19:13,000
+right?
+
+546
+00:19:13,079 --> 00:19:14,400
+So E M M A
+
+547
+00:19:14,599 --> 00:19:17,420
+and then what is that backslash zero?
+
+548
+00:19:17,560 --> 00:19:19,359
+Does anyone wanna put that in the chat?
+
+549
+00:19:21,010 --> 00:19:21,969
+What's that for?
+
+550
+00:19:23,119 --> 00:19:23,560
+No,
+
+551
+00:19:23,680 --> 00:19:23,910
+yeah,
+
+552
+00:19:24,119 --> 00:19:24,660
+exactly,
+
+553
+00:19:25,119 --> 00:19:25,739
+so
+
+554
+00:19:26,469 --> 00:19:28,430
+that backslash 00
+
+555
+00:19:28,650 --> 00:19:31,319
+indicates the end of your string.
+
+556
+00:19:31,640 --> 00:19:32,160
+So
+
+557
+00:19:32,439 --> 00:19:34,099
+when it's stored in memory,
+
+558
+00:19:34,880 --> 00:19:37,199
+you know exactly where that string is ending.
+
+559
+00:19:38,390 --> 00:19:39,729
+So in the same way that
+
+560
+00:19:39,949 --> 00:19:41,630
+strings are arrayed
+
+561
+00:19:41,750 --> 00:19:42,660
+just like arrays,
+
+562
+00:19:42,670 --> 00:19:43,410
+we can actually
+
+563
+00:19:43,709 --> 00:19:45,170
+index into them
+
+564
+00:19:45,310 --> 00:19:47,170
+to get certain characters.
+
+565
+00:19:47,750 --> 00:19:49,050
+So if I wanted to get
+
+566
+00:19:49,310 --> 00:19:52,140
+specifically the first letter of this string,
+
+567
+00:19:52,430 --> 00:19:56,250
+I can do the same square bracket notation to index
+
+568
+00:19:56,380 --> 00:19:58,689
+and get the 0th index.
+
+569
+00:19:59,160 --> 00:20:00,089
+So in this case,
+
+570
+00:20:00,589 --> 00:20:03,140
+name square bracket 0 would get us E.
+
+571
+00:20:04,880 --> 00:20:07,000
+Why we put and why do we put the end
+
+572
+00:20:07,000 --> 00:20:09,939
+on the string so the null character is helpful because
+
+573
+00:20:10,219 --> 00:20:10,739
+um
+
+574
+00:20:11,359 --> 00:20:14,739
+just so that when it's in memory or if you're working with strings
+
+575
+00:20:15,119 --> 00:20:16,699
+if you encounter the null character,
+
+576
+00:20:16,739 --> 00:20:17,819
+then you know that
+
+577
+00:20:18,000 --> 00:20:19,859
+the string has finished,
+
+578
+00:20:20,479 --> 00:20:21,260
+that the string
+
+579
+00:20:21,400 --> 00:20:21,939
+is,
+
+580
+00:20:22,119 --> 00:20:23,459
+that's the end of the string.
+
+581
+00:20:24,640 --> 00:20:25,339
+Good question.
+
+582
+00:20:26,900 --> 00:20:27,339
+OK,
+
+583
+00:20:27,609 --> 00:20:28,560
+and so similarly,
+
+584
+00:20:28,579 --> 00:20:29,719
+if I wanted to get the second
+
+585
+00:20:29,890 --> 00:20:30,319
+character,
+
+586
+00:20:30,699 --> 00:20:32,670
+I would do name at index 1
+
+587
+00:20:32,900 --> 00:20:33,780
+and so on.
+
+588
+00:20:34,619 --> 00:20:35,609
+Any questions about
+
+589
+00:20:36,189 --> 00:20:38,810
+more questions about strings and how that works?
+
+590
+00:20:45,400 --> 00:20:45,949
+OK.
+
+591
+00:20:47,270 --> 00:20:47,439
+All right,
+
+592
+00:20:47,520 --> 00:20:50,540
+so we're going to put this into practice a little bit.
+
+593
+00:20:52,599 --> 00:20:53,489
+Um,
+
+594
+00:20:53,930 --> 00:20:55,250
+it is NUL,
+
+595
+00:20:55,369 --> 00:20:55,650
+yes,
+
+596
+00:20:55,810 --> 00:20:56,229
+NUL,
+
+597
+00:20:56,290 --> 00:20:56,949
+I believe.
+
+598
+00:20:58,479 --> 00:20:58,969
+Yeah,
+
+599
+00:20:59,400 --> 00:21:00,180
+good question.
+
+600
+00:21:00,640 --> 00:21:01,199
+OK,
+
+601
+00:21:01,680 --> 00:21:03,459
+so we're gonna start out with this exercise.
+
+602
+00:21:04,109 --> 00:21:06,430
+If you're watching this asynchronously,
+
+603
+00:21:06,479 --> 00:21:07,660
+I encourage you
+
+604
+00:21:07,880 --> 00:21:10,839
+to pause here and give this a try for yourself,
+
+605
+00:21:11,219 --> 00:21:11,349
+um,
+
+606
+00:21:11,400 --> 00:21:13,380
+but we're gonna walk through
+
+607
+00:21:13,520 --> 00:21:14,260
+this.
+
+608
+00:21:14,910 --> 00:21:15,380
+So
+
+609
+00:21:16,040 --> 00:21:16,540
+this
+
+610
+00:21:17,079 --> 00:21:18,300
+exercise character by character,
+
+611
+00:21:18,520 --> 00:21:21,160
+we wanna write a program called Printtsy
+
+612
+00:21:21,359 --> 00:21:24,260
+that takes a string as input from the user
+
+613
+00:21:24,599 --> 00:21:26,719
+and then prints it character by character.
+
+614
+00:21:28,160 --> 00:21:29,069
+OK.
+
+615
+00:21:30,390 --> 00:21:32,380
+So I moved to the terminal.
+
+616
+00:21:36,189 --> 00:21:36,459
+OK,
+
+617
+00:21:36,510 --> 00:21:37,410
+oops.
+
+618
+00:21:38,060 --> 00:21:38,229
+OK,
+
+619
+00:21:38,270 --> 00:21:39,319
+I'll restart my
+
+620
+00:21:40,150 --> 00:21:40,939
+code space here.
+
+621
+00:21:41,150 --> 00:21:43,839
+What are the operations that can be performed using strings?
+
+622
+00:21:43,910 --> 00:21:44,880
+That's a great question,
+
+623
+00:21:45,310 --> 00:21:45,770
+so.
+
+624
+00:21:46,640 --> 00:21:48,489
+As we'll talk about very shortly,
+
+625
+00:21:48,530 --> 00:21:49,189
+strings
+
+626
+00:21:50,109 --> 00:21:51,109
+and each character within them,
+
+627
+00:21:51,170 --> 00:21:52,020
+the character
+
+628
+00:21:52,209 --> 00:21:53,890
+is also represented as,
+
+629
+00:21:54,010 --> 00:21:54,239
+um,
+
+630
+00:21:54,329 --> 00:21:55,569
+can be represented as a number,
+
+631
+00:21:55,650 --> 00:21:55,829
+right?
+
+632
+00:21:55,969 --> 00:21:57,150
+So capital A
+
+633
+00:21:57,560 --> 00:22:00,589
+on the ASCI tables is equivalent to
+
+634
+00:22:01,729 --> 00:22:03,209
+A or 65,
+
+635
+00:22:03,369 --> 00:22:03,709
+yeah,
+
+636
+00:22:04,250 --> 00:22:04,910
+and so.
+
+637
+00:22:05,829 --> 00:22:08,530
+You can do these sorts of operations where you
+
+638
+00:22:08,890 --> 00:22:09,530
+add
+
+639
+00:22:09,989 --> 00:22:10,560
+say
+
+640
+00:22:10,819 --> 00:22:11,439
+1
+
+641
+00:22:11,589 --> 00:22:14,329
+to 65 and represent that as a character
+
+642
+00:22:14,670 --> 00:22:16,329
+and that will be B
+
+643
+00:22:16,469 --> 00:22:17,130
+and so
+
+644
+00:22:17,550 --> 00:22:22,489
+we're gonna actually do this in a following exercise but let's start out here.
+
+645
+00:22:23,640 --> 00:22:23,790
+We're gonna
+
+646
+00:22:24,920 --> 00:22:25,859
+hide this away.
+
+647
+00:22:26,920 --> 00:22:28,800
+I'm gonna start by coding print.
+
+648
+00:22:29,900 --> 00:22:30,339
+Oops.
+
+649
+00:22:34,469 --> 00:22:34,709
+OK,
+
+650
+00:22:34,810 --> 00:22:37,349
+we're gonna start by coding print.c.
+
+651
+00:22:38,469 --> 00:22:38,500
+It's
+
+652
+00:22:39,540 --> 00:22:43,250
+and we're gonna include some libraries to start with.
+
+653
+00:22:44,560 --> 00:22:46,699
+So what are some libraries that I know I'm gonna use
+
+654
+00:22:47,420 --> 00:22:47,920
+um.
+
+655
+00:22:49,089 --> 00:22:51,829
+I know that I'm gonna be using Get string,
+
+656
+00:22:52,410 --> 00:22:54,089
+which is in CS50.H,
+
+657
+00:22:54,170 --> 00:22:55,229
+so I'm gonna include that.
+
+658
+00:22:56,390 --> 00:22:58,719
+I also know that I need standard IO yeah.
+
+659
+00:23:00,420 --> 00:23:01,339
+Standard IO.
+
+660
+00:23:01,660 --> 00:23:01,900
+H.
+
+661
+00:23:06,880 --> 00:23:08,160
+And
+
+662
+00:23:08,369 --> 00:23:09,589
+I also
+
+663
+00:23:10,369 --> 00:23:11,089
+know.
+
+664
+00:23:12,229 --> 00:23:12,630
+Actually,
+
+665
+00:23:12,790 --> 00:23:12,989
+yeah,
+
+666
+00:23:13,150 --> 00:23:13,349
+we'll,
+
+667
+00:23:13,430 --> 00:23:14,689
+we'll start with those two,
+
+668
+00:23:15,030 --> 00:23:16,939
+and then I'm gonna do Ain't Maine Void
+
+669
+00:23:17,699 --> 00:23:17,949
+here.
+
+670
+00:23:19,719 --> 00:23:23,540
+And so first off I want to start by asking the user for some input.
+
+671
+00:23:23,969 --> 00:23:25,739
+So I'm gonna do string
+
+672
+00:23:26,640 --> 00:23:27,180
+text.
+
+673
+00:23:28,130 --> 00:23:29,930
+Equals get string and then.
+
+674
+00:23:30,709 --> 00:23:31,599
+Ask for
+
+675
+00:23:31,959 --> 00:23:33,099
+some input here.
+
+676
+00:23:36,250 --> 00:23:36,609
+All right,
+
+677
+00:23:36,719 --> 00:23:37,750
+and so once I get
+
+678
+00:23:38,250 --> 00:23:39,829
+this text variable.
+
+679
+00:23:41,699 --> 00:23:43,329
+How am I going to print it out
+
+680
+00:23:43,699 --> 00:23:44,880
+character by character.
+
+681
+00:23:47,650 --> 00:23:49,140
+So if I'm doing it character by character,
+
+682
+00:23:49,280 --> 00:23:49,680
+what?
+
+683
+00:23:50,550 --> 00:23:51,250
+Might I use
+
+684
+00:23:54,140 --> 00:23:55,609
+To do something repeatedly.
+
+685
+00:23:59,439 --> 00:23:59,920
+A loop.
+
+686
+00:24:00,089 --> 00:24:00,329
+Yes,
+
+687
+00:24:00,489 --> 00:24:01,010
+thank you.
+
+688
+00:24:01,329 --> 00:24:01,609
+OK,
+
+689
+00:24:01,689 --> 00:24:02,800
+but what kind of loop?
+
+690
+00:24:03,050 --> 00:24:03,609
+That's the question.
+
+691
+00:24:03,689 --> 00:24:05,089
+So we could do a 4 loop.
+
+692
+00:24:05,520 --> 00:24:06,520
+We could do a Y loop.
+
+693
+00:24:07,130 --> 00:24:07,329
+OK,
+
+694
+00:24:07,410 --> 00:24:08,439
+so people are saying 4 loop.
+
+695
+00:24:08,689 --> 00:24:08,770
+Yeah,
+
+696
+00:24:08,890 --> 00:24:09,770
+let's do a 4 loop.
+
+697
+00:24:11,150 --> 00:24:12,119
+So for
+
+698
+00:24:13,500 --> 00:24:15,959
+And I equals 0.
+
+699
+00:24:16,739 --> 00:24:18,319
+And then what is this 4 loop?
+
+700
+00:24:18,739 --> 00:24:19,780
+How many times it's going,
+
+701
+00:24:20,060 --> 00:24:22,280
+how many times is it going to repeat?
+
+702
+00:24:26,510 --> 00:24:27,439
+Depends on
+
+703
+00:24:27,800 --> 00:24:28,680
+the user's input,
+
+704
+00:24:28,760 --> 00:24:29,119
+right?
+
+705
+00:24:31,290 --> 00:24:33,380
+So how do I get the length of
+
+706
+00:24:34,560 --> 00:24:37,180
+The string that the user is going to input.
+
+707
+00:24:40,099 --> 00:24:40,569
+Sterling,
+
+708
+00:24:40,910 --> 00:24:41,550
+yes.
+
+709
+00:24:43,849 --> 00:24:44,130
+Yes,
+
+710
+00:24:44,199 --> 00:24:44,349
+OK,
+
+711
+00:24:44,489 --> 00:24:44,770
+great,
+
+712
+00:24:44,890 --> 00:24:45,869
+so I can use
+
+713
+00:24:46,910 --> 00:24:47,530
+sterling,
+
+714
+00:24:47,650 --> 00:24:49,010
+which is a function
+
+715
+00:24:49,410 --> 00:24:52,089
+that is actually in string.h.
+
+716
+00:24:52,939 --> 00:24:55,510
+So I also need to make sure that I include that up here
+
+717
+00:24:55,849 --> 00:24:56,609
+before using it.
+
+718
+00:24:57,640 --> 00:24:59,969
+So this is going to go up to the length of
+
+719
+00:25:00,609 --> 00:25:01,390
+The text
+
+720
+00:25:01,849 --> 00:25:03,650
+and then each time increment.
+
+721
+00:25:04,930 --> 00:25:05,489
+Great,
+
+722
+00:25:05,849 --> 00:25:06,869
+and then for each
+
+723
+00:25:07,170 --> 00:25:08,050
+iteration,
+
+724
+00:25:08,250 --> 00:25:09,349
+I wanna print out.
+
+725
+00:25:10,699 --> 00:25:12,329
+What am I printing out here?
+
+726
+00:25:15,699 --> 00:25:17,170
+If I want to do character by character,
+
+727
+00:25:17,260 --> 00:25:17,380
+yeah,
+
+728
+00:25:17,550 --> 00:25:18,300
+percent C,
+
+729
+00:25:18,459 --> 00:25:20,479
+which is the format code for a character,
+
+730
+00:25:20,619 --> 00:25:21,160
+great,
+
+731
+00:25:21,699 --> 00:25:22,630
+and
+
+732
+00:25:23,219 --> 00:25:25,280
+that will be a placeholder for
+
+733
+00:25:26,099 --> 00:25:26,680
+my
+
+734
+00:25:27,060 --> 00:25:27,800
+character
+
+735
+00:25:28,109 --> 00:25:28,400
+within
+
+736
+00:25:28,619 --> 00:25:29,560
+the text,
+
+737
+00:25:30,219 --> 00:25:30,459
+right,
+
+738
+00:25:30,619 --> 00:25:31,119
+so.
+
+739
+00:25:32,810 --> 00:25:35,410
+Which index am I going to do here?
+
+740
+00:25:36,890 --> 00:25:37,020
+Yeah,
+
+741
+00:25:37,099 --> 00:25:39,329
+people are saying text at index I.
+
+742
+00:25:39,459 --> 00:25:39,579
+Yeah,
+
+743
+00:25:39,689 --> 00:25:41,520
+so that I is going to iterate each time.
+
+744
+00:25:44,619 --> 00:25:46,420
+Someone asked about including the.
+
+745
+00:25:47,319 --> 00:25:48,689
+Backslash and
+
+746
+00:25:49,319 --> 00:25:51,020
+what might that do stylistically
+
+747
+00:25:51,219 --> 00:25:51,969
+you think about.
+
+748
+00:25:55,920 --> 00:25:56,949
+I can also show you,
+
+749
+00:25:57,119 --> 00:25:57,359
+yeah,
+
+750
+00:25:57,430 --> 00:25:57,599
+OK,
+
+751
+00:25:57,680 --> 00:26:00,060
+that's gonna put each character on a new line exactly,
+
+752
+00:26:00,359 --> 00:26:00,479
+yeah,
+
+753
+00:26:00,560 --> 00:26:02,239
+if I included this backslash N
+
+754
+00:26:02,579 --> 00:26:03,859
+rather than seeing
+
+755
+00:26:04,160 --> 00:26:04,599
+like
+
+756
+00:26:04,880 --> 00:26:05,869
+if I put Kelly,
+
+757
+00:26:05,920 --> 00:26:06,339
+my name,
+
+758
+00:26:06,959 --> 00:26:07,819
+we would have
+
+759
+00:26:08,319 --> 00:26:09,119
+K on one line,
+
+760
+00:26:09,199 --> 00:26:10,780
+then E on the next line,
+
+761
+00:26:10,839 --> 00:26:11,160
+L,
+
+762
+00:26:11,280 --> 00:26:12,180
+and so on.
+
+763
+00:26:12,719 --> 00:26:15,530
+So let's start by making this print.
+
+764
+00:26:17,030 --> 00:26:18,089
+Dot slash print
+
+765
+00:26:18,609 --> 00:26:19,630
+I put in my name.
+
+766
+00:26:20,939 --> 00:26:21,140
+Yeah,
+
+767
+00:26:21,260 --> 00:26:21,699
+so if that,
+
+768
+00:26:21,810 --> 00:26:24,680
+if I include the backslash and then it prints it out on each line.
+
+769
+00:26:27,329 --> 00:26:27,530
+Right,
+
+770
+00:26:27,810 --> 00:26:29,250
+as someone's saying in the chat.
+
+771
+00:26:30,160 --> 00:26:33,479
+If I want a new line at the end of printing it out,
+
+772
+00:26:33,640 --> 00:26:34,800
+I should include.
+
+773
+00:26:35,780 --> 00:26:37,079
+A backslash and here
+
+774
+00:26:38,219 --> 00:26:38,619
+instead.
+
+775
+00:26:39,959 --> 00:26:41,339
+So let's
+
+776
+00:26:42,040 --> 00:26:43,119
+make print again.
+
+777
+00:26:44,189 --> 00:26:45,209
+Dot slash print.
+
+778
+00:26:47,150 --> 00:26:47,630
+Great,
+
+779
+00:26:48,109 --> 00:26:50,729
+so we've printed out what the user has given us.
+
+780
+00:26:52,000 --> 00:26:54,479
+Any questions about this exercise,
+
+781
+00:26:54,800 --> 00:26:56,099
+feel free to put them in the chat.
+
+782
+00:26:56,800 --> 00:26:59,170
+So before we move on to the next exercise,
+
+783
+00:26:59,479 --> 00:27:03,020
+I do want to take a second to look back at our print.c program
+
+784
+00:27:03,319 --> 00:27:07,979
+and ask if we're noticing any design improvements that could be made
+
+785
+00:27:08,439 --> 00:27:10,000
+because this program does work,
+
+786
+00:27:10,079 --> 00:27:11,099
+it's correct,
+
+787
+00:27:11,439 --> 00:27:11,800
+but
+
+788
+00:27:12,160 --> 00:27:14,390
+like we were talking about design earlier,
+
+789
+00:27:14,400 --> 00:27:16,660
+there are always ways that we can make this maybe
+
+790
+00:27:17,319 --> 00:27:19,459
+happen a little bit more efficiently.
+
+791
+00:27:20,880 --> 00:27:21,520
+So,
+
+792
+00:27:21,790 --> 00:27:23,219
+one thing you might notice here
+
+793
+00:27:23,520 --> 00:27:25,199
+is within our for loop,
+
+794
+00:27:25,599 --> 00:27:28,959
+we're comparing I is less than ster length of text.
+
+795
+00:27:29,569 --> 00:27:32,430
+And so the Stirling function is being computed
+
+796
+00:27:32,599 --> 00:27:34,430
+every single time we run
+
+797
+00:27:34,689 --> 00:27:35,369
+the for loop.
+
+798
+00:27:36,640 --> 00:27:39,689
+But is that number gonna be changing while we run the for loop?
+
+799
+00:27:39,880 --> 00:27:40,569
+Probably not.
+
+800
+00:27:41,130 --> 00:27:44,890
+That text length is just gonna be a static number.
+
+801
+00:27:45,369 --> 00:27:45,910
+So
+
+802
+00:27:46,689 --> 00:27:49,109
+one way we can improve this design
+
+803
+00:27:49,410 --> 00:27:50,430
+is by
+
+804
+00:27:51,329 --> 00:27:53,750
+setting the length to its own variable.
+
+805
+00:27:55,800 --> 00:27:58,119
+And this will be computed at the beginning of the 4 loop.
+
+806
+00:27:58,930 --> 00:28:03,030
+And then each time we perform this comparison within the for loop,
+
+807
+00:28:03,689 --> 00:28:05,390
+we're just comparing to
+
+808
+00:28:05,729 --> 00:28:07,910
+this new variable that I call Ln.
+
+809
+00:28:09,020 --> 00:28:09,760
+And so
+
+810
+00:28:09,979 --> 00:28:10,560
+this way
+
+811
+00:28:10,739 --> 00:28:13,000
+we're reducing some of that computation
+
+812
+00:28:13,300 --> 00:28:16,319
+and this program will run just a little bit more efficiently.
+
+813
+00:28:17,719 --> 00:28:19,189
+So if you have any questions about that,
+
+814
+00:28:19,479 --> 00:28:20,939
+feel free to drop them in the chat.
+
+815
+00:28:22,030 --> 00:28:24,099
+But now we can move on to
+
+816
+00:28:24,239 --> 00:28:24,979
+reverse.
+
+817
+00:28:25,439 --> 00:28:25,780
+C,
+
+818
+00:28:26,160 --> 00:28:28,119
+which is going to be similar to the last one,
+
+819
+00:28:28,160 --> 00:28:30,000
+but with a little bit of a
+
+820
+00:28:30,199 --> 00:28:31,000
+spin on things.
+
+821
+00:28:31,160 --> 00:28:31,540
+So,
+
+822
+00:28:31,839 --> 00:28:32,680
+we're going to write a program,
+
+823
+00:28:32,709 --> 00:28:34,819
+reverse.c that takes an input
+
+824
+00:28:35,280 --> 00:28:38,540
+as a string and then reverses it.
+
+825
+00:28:38,839 --> 00:28:41,250
+So the first letter becomes the last letter,
+
+826
+00:28:41,520 --> 00:28:43,040
+the second becomes second last,
+
+827
+00:28:43,150 --> 00:28:44,310
+and so on.
+
+828
+00:28:45,650 --> 00:28:46,790
+So I'm gonna go back
+
+829
+00:28:47,170 --> 00:28:48,790
+to my ID
+
+830
+00:28:49,170 --> 00:28:51,150
+and I'm going to code reverse.
+
+831
+00:28:51,930 --> 00:28:52,349
+C.
+
+832
+00:28:54,459 --> 00:28:55,170
+And since
+
+833
+00:28:55,790 --> 00:28:58,160
+this program is going to be pretty similar to the last one,
+
+834
+00:28:58,229 --> 00:28:59,900
+I'm just gonna copy and paste,
+
+835
+00:29:00,189 --> 00:29:02,810
+print that C here and use that as a base.
+
+836
+00:29:03,930 --> 00:29:05,170
+So what
+
+837
+00:29:05,369 --> 00:29:07,130
+is gonna be different about reverse.
+
+838
+00:29:07,449 --> 00:29:07,890
+C
+
+839
+00:29:08,239 --> 00:29:09,130
+rather than print?
+
+840
+00:29:09,410 --> 00:29:11,430
+We know we want to print it backwards.
+
+841
+00:29:12,170 --> 00:29:12,750
+So
+
+842
+00:29:13,569 --> 00:29:16,229
+what line of code might I want to change here?
+
+843
+00:29:19,109 --> 00:29:19,280
+Yeah,
+
+844
+00:29:19,400 --> 00:29:20,760
+so this 4 loop.
+
+845
+00:29:21,810 --> 00:29:23,219
+Right now we're iterating
+
+846
+00:29:23,770 --> 00:29:25,739
+I starting at 0 and then
+
+847
+00:29:26,520 --> 00:29:27,910
+until the length of the text.
+
+848
+00:29:28,869 --> 00:29:32,099
+But maybe it makes sense for us to reverse that,
+
+849
+00:29:32,680 --> 00:29:33,209
+so.
+
+850
+00:29:36,300 --> 00:29:38,040
+Rather than starting I at 0,
+
+851
+00:29:38,380 --> 00:29:39,760
+maybe I'm going to start it
+
+852
+00:29:40,339 --> 00:29:41,060
+at
+
+853
+00:29:41,290 --> 00:29:42,160
+the length of the text.
+
+854
+00:29:46,439 --> 00:29:49,040
+And then instead of incrementing,
+
+855
+00:29:49,239 --> 00:29:49,979
+maybe I
+
+856
+00:29:50,670 --> 00:29:51,319
+decrement.
+
+857
+00:29:52,630 --> 00:29:54,599
+And I want I to stop
+
+858
+00:29:54,910 --> 00:29:57,119
+when I get to the 0 with the character
+
+859
+00:29:57,750 --> 00:29:58,650
+so I can do.
+
+860
+00:29:59,900 --> 00:30:04,000
+Keep iterating until I is greater or equal to 0,
+
+861
+00:30:04,500 --> 00:30:06,699
+but are there any issues with this?
+
+862
+00:30:09,520 --> 00:30:11,880
+So setting I to sterling
+
+863
+00:30:12,439 --> 00:30:13,089
+text.
+
+864
+00:30:14,010 --> 00:30:15,369
+So let's say I have
+
+865
+00:30:15,569 --> 00:30:16,630
+an input of
+
+866
+00:30:16,760 --> 00:30:19,709
+the word cat that's 3 characters long.
+
+867
+00:30:20,890 --> 00:30:22,189
+This is gonna give me
+
+868
+00:30:22,489 --> 00:30:23,339
+3.
+
+869
+00:30:24,660 --> 00:30:25,459
+But
+
+870
+00:30:25,859 --> 00:30:26,339
+as we know,
+
+871
+00:30:26,500 --> 00:30:27,920
+because of zero indexing.
+
+872
+00:30:28,760 --> 00:30:31,359
+That is actually not gonna be within the string itself.
+
+873
+00:30:31,640 --> 00:30:34,300
+I'm actually gonna get the Noel character which
+
+874
+00:30:34,560 --> 00:30:36,260
+um we talked a little bit about
+
+875
+00:30:36,760 --> 00:30:39,660
+which looks like that backslash zero,
+
+876
+00:30:40,000 --> 00:30:41,300
+but that's not gonna print anything.
+
+877
+00:30:42,119 --> 00:30:44,109
+And so I actually want to start
+
+878
+00:30:44,290 --> 00:30:46,810
+this loop at ster length of text
+
+879
+00:30:47,050 --> 00:30:47,829
+minus 1,
+
+880
+00:30:48,010 --> 00:30:49,030
+so that it starts
+
+881
+00:30:49,290 --> 00:30:51,189
+at the end of my string rather than
+
+882
+00:30:51,560 --> 00:30:52,239
+beyond it
+
+883
+00:30:52,410 --> 00:30:53,510
+at that null character.
+
+884
+00:30:55,219 --> 00:30:57,339
+So let me try this out.
+
+885
+00:30:58,949 --> 00:31:00,329
+Gonna make rivers.
+
+886
+00:31:01,900 --> 00:31:03,319
+Dot slash reverse.
+
+887
+00:31:04,119 --> 00:31:04,900
+And then
+
+888
+00:31:05,119 --> 00:31:06,290
+maybe I'll put my name again.
+
+889
+00:31:07,430 --> 00:31:07,670
+Great.
+
+890
+00:31:07,750 --> 00:31:09,209
+And then we see it going
+
+891
+00:31:09,699 --> 00:31:12,209
+Y L L E K in reverse,
+
+892
+00:31:12,310 --> 00:31:13,880
+just like we wanted to.
+
+893
+00:31:15,219 --> 00:31:15,459
+All right,
+
+894
+00:31:15,579 --> 00:31:17,540
+so we've done these two exercises,
+
+895
+00:31:17,969 --> 00:31:18,209
+um,
+
+896
+00:31:18,650 --> 00:31:21,339
+drop in the chat if you have any questions about either of them,
+
+897
+00:31:21,819 --> 00:31:22,579
+but
+
+898
+00:31:22,979 --> 00:31:24,239
+we'll continue from here.
+
+899
+00:31:26,069 --> 00:31:27,949
+So working with strings a little bit more
+
+900
+00:31:28,229 --> 00:31:29,489
+if you recall
+
+901
+00:31:29,949 --> 00:31:32,689
+each of the letters that we work with
+
+902
+00:31:33,390 --> 00:31:36,349
+by the ASCI table that was decided by
+
+903
+00:31:36,670 --> 00:31:37,930
+some humans many
+
+904
+00:31:38,150 --> 00:31:38,609
+time
+
+905
+00:31:38,949 --> 00:31:39,819
+a long time ago
+
+906
+00:31:40,150 --> 00:31:41,130
+I declared
+
+907
+00:31:41,310 --> 00:31:44,010
+these numbers to be equivalent
+
+908
+00:31:44,150 --> 00:31:45,119
+to these letters
+
+909
+00:31:45,390 --> 00:31:47,770
+and so because they have these numerical
+
+910
+00:31:48,140 --> 00:31:49,130
+representations
+
+911
+00:31:49,270 --> 00:31:50,569
+we can actually do some.
+
+912
+00:31:51,290 --> 00:31:52,790
+Like operations
+
+913
+00:31:53,130 --> 00:31:53,829
+and
+
+914
+00:31:54,650 --> 00:31:57,109
+checking things using these
+
+915
+00:31:57,250 --> 00:31:59,109
+numbers and so one example of that.
+
+916
+00:32:00,250 --> 00:32:01,459
+Might be with
+
+917
+00:32:02,000 --> 00:32:04,500
+so Emma for example the string here
+
+918
+00:32:05,189 --> 00:32:05,900
+actually
+
+919
+00:32:06,119 --> 00:32:07,180
+can be written out
+
+920
+00:32:07,359 --> 00:32:09,599
+as this array of integers.
+
+921
+00:32:10,670 --> 00:32:13,170
+And so why is this helpful information to know?
+
+922
+00:32:14,859 --> 00:32:15,599
+Let's try
+
+923
+00:32:16,060 --> 00:32:17,520
+seeing that in this exercise.
+
+924
+00:32:18,869 --> 00:32:19,640
+So we're gonna write
+
+925
+00:32:19,859 --> 00:32:21,239
+a program called Alphabetical
+
+926
+00:32:21,660 --> 00:32:22,979
+that prints out yes
+
+927
+00:32:23,099 --> 00:32:25,880
+if a lowercase strings characters
+
+928
+00:32:26,219 --> 00:32:27,750
+are in alphabetical order,
+
+929
+00:32:28,260 --> 00:32:29,739
+no if they are not.
+
+930
+00:32:31,069 --> 00:32:32,619
+So right off the bat here.
+
+931
+00:32:33,479 --> 00:32:33,489
+How
+
+932
+00:32:34,560 --> 00:32:35,680
+do I know
+
+933
+00:32:35,829 --> 00:32:36,540
+if something
+
+934
+00:32:37,119 --> 00:32:38,729
+is in alphabetical order?
+
+935
+00:32:39,280 --> 00:32:40,180
+Say if I got
+
+936
+00:32:40,479 --> 00:32:42,839
+a lowercase A and lowercase b.
+
+937
+00:32:43,800 --> 00:32:45,900
+How would I know that these two things?
+
+938
+00:32:47,050 --> 00:32:47,839
+In order
+
+939
+00:32:48,209 --> 00:32:49,189
+are alphabetical,
+
+940
+00:32:49,890 --> 00:32:49,969
+yeah,
+
+941
+00:32:50,089 --> 00:32:52,589
+so someone says if X is less than Y.
+
+942
+00:32:54,150 --> 00:32:55,400
+As we saw with this chart.
+
+943
+00:32:56,069 --> 00:32:56,079
+B
+
+944
+00:32:57,510 --> 00:32:58,979
+has the value of 98,
+
+945
+00:32:59,229 --> 00:33:00,369
+which is greater
+
+946
+00:33:00,530 --> 00:33:01,089
+than
+
+947
+00:33:01,270 --> 00:33:03,010
+A's value of 97.
+
+948
+00:33:04,150 --> 00:33:07,969
+So we can take that piece of knowledge into this exercise
+
+949
+00:33:08,589 --> 00:33:09,930
+and come up with a way
+
+950
+00:33:10,430 --> 00:33:11,069
+to check.
+
+951
+00:33:12,170 --> 00:33:15,020
+If our string is in alphabetical order.
+
+952
+00:33:16,040 --> 00:33:16,699
+So I'm gonna start
+
+953
+00:33:17,000 --> 00:33:19,050
+coding alphabetical.c.
+
+954
+00:33:22,050 --> 00:33:22,839
+And then
+
+955
+00:33:24,109 --> 00:33:24,119
+Before
+
+956
+00:33:24,969 --> 00:33:26,010
+I'm also gonna.
+
+957
+00:33:26,920 --> 00:33:28,180
+Let's just build on this
+
+958
+00:33:28,560 --> 00:33:29,400
+prissy.
+
+959
+00:33:30,660 --> 00:33:30,949
+OK,
+
+960
+00:33:31,069 --> 00:33:31,989
+so the first part is the same,
+
+961
+00:33:32,069 --> 00:33:32,189
+right?
+
+962
+00:33:32,229 --> 00:33:34,449
+We're asking for an input here,
+
+963
+00:33:34,949 --> 00:33:37,369
+but now we're not gonna be printing out
+
+964
+00:33:38,020 --> 00:33:38,650
+anything,
+
+965
+00:33:39,160 --> 00:33:39,750
+uh,
+
+966
+00:33:39,760 --> 00:33:40,689
+within this loop,
+
+967
+00:33:40,949 --> 00:33:42,410
+but we do wanna check
+
+968
+00:33:42,910 --> 00:33:44,250
+whether something
+
+969
+00:33:44,510 --> 00:33:47,040
+whether the characters are in alphabetical order.
+
+970
+00:33:49,180 --> 00:33:50,920
+So like a few people have said here
+
+971
+00:33:51,099 --> 00:33:52,400
+we're gonna be checking
+
+972
+00:33:53,800 --> 00:33:55,280
+the ASCI value we're gonna be comparing it.
+
+973
+00:33:56,660 --> 00:33:56,670
+So,
+
+974
+00:33:58,250 --> 00:33:58,729
+let's see,
+
+975
+00:33:58,890 --> 00:34:00,150
+I can do an if statement.
+
+976
+00:34:01,699 --> 00:34:04,869
+And then what might this condition look like here?
+
+977
+00:34:05,699 --> 00:34:08,120
+Let's say if I want to check the first letter
+
+978
+00:34:08,370 --> 00:34:09,659
+against the second letter.
+
+979
+00:34:14,489 --> 00:34:16,208
+Or perhaps what is,
+
+980
+00:34:16,300 --> 00:34:17,199
+how do I get
+
+981
+00:34:17,699 --> 00:34:18,958
+the first letter of
+
+982
+00:34:19,060 --> 00:34:20,360
+this text variable.
+
+983
+00:34:26,350 --> 00:34:26,520
+Yeah,
+
+984
+00:34:26,719 --> 00:34:27,659
+text I
+
+985
+00:34:28,228 --> 00:34:29,199
+text or text 0.
+
+986
+00:34:30,768 --> 00:34:31,289
+Great,
+
+987
+00:34:31,768 --> 00:34:32,188
+so
+
+988
+00:34:32,928 --> 00:34:35,009
+0 index would get us the first letter.
+
+989
+00:34:35,768 --> 00:34:38,168
+And of course because we're doing this within a loop
+
+990
+00:34:38,569 --> 00:34:40,069
+that's great we're starting with
+
+991
+00:34:40,569 --> 00:34:42,188
+I equal to 0
+
+992
+00:34:42,648 --> 00:34:44,908
+and so we want to check if that's less than.
+
+993
+00:34:46,050 --> 00:34:47,159
+The next letter,
+
+994
+00:34:47,438 --> 00:34:48,739
+which is gonna be I plus
+
+995
+00:34:49,469 --> 00:34:49,958
+1.
+
+996
+00:34:52,938 --> 00:34:53,418
+OK.
+
+997
+00:34:55,989 --> 00:34:57,459
+So if this is true.
+
+998
+00:34:58,659 --> 00:34:58,669
+Then
+
+999
+00:34:59,580 --> 00:35:00,239
+what?
+
+1000
+00:35:05,600 --> 00:35:08,399
+If it's if these two characters are in alphabetical order,
+
+1001
+00:35:08,570 --> 00:35:08,790
+then
+
+1002
+00:35:09,449 --> 00:35:10,370
+what should I be doing?
+
+1003
+00:35:13,899 --> 00:35:17,429
+Print no so we wanna print no if it's not in alphabetical order,
+
+1004
+00:35:17,699 --> 00:35:17,860
+yeah,
+
+1005
+00:35:17,979 --> 00:35:19,919
+so we're not really doing anything
+
+1006
+00:35:20,219 --> 00:35:20,800
+if
+
+1007
+00:35:20,979 --> 00:35:21,939
+this is true
+
+1008
+00:35:22,379 --> 00:35:25,040
+and so when we have cases like this it might be good to think
+
+1009
+00:35:25,459 --> 00:35:25,919
+like
+
+1010
+00:35:26,060 --> 00:35:27,620
+how can I restructure this
+
+1011
+00:35:27,820 --> 00:35:28,760
+maybe to
+
+1012
+00:35:29,620 --> 00:35:30,360
+change.
+
+1013
+00:35:31,389 --> 00:35:31,399
+This
+
+1014
+00:35:32,590 --> 00:35:33,370
+or this condition.
+
+1015
+00:35:35,709 --> 00:35:38,389
+So rather than checking if it is in alphabetical order,
+
+1016
+00:35:39,070 --> 00:35:41,860
+maybe we check if it's not in alphabetical order.
+
+1017
+00:35:43,800 --> 00:35:43,919
+Right,
+
+1018
+00:35:44,040 --> 00:35:44,820
+so if this
+
+1019
+00:35:44,959 --> 00:35:46,020
+is greater than
+
+1020
+00:35:46,590 --> 00:35:47,699
+the the next letter.
+
+1021
+00:35:48,739 --> 00:35:50,300
+Then we already know that the rest of the
+
+1022
+00:35:50,300 --> 00:35:52,120
+string is not going to be in alphabetical order
+
+1023
+00:35:52,699 --> 00:35:53,739
+so we can print F.
+
+1024
+00:35:54,750 --> 00:35:55,479
+No
+
+1025
+00:35:57,050 --> 00:35:58,060
+And then just
+
+1026
+00:35:58,310 --> 00:35:58,899
+finish
+
+1027
+00:35:59,560 --> 00:36:00,389
+this program,
+
+1028
+00:36:00,659 --> 00:36:01,439
+Return 0.
+
+1029
+00:36:02,810 --> 00:36:03,010
+Yeah,
+
+1030
+00:36:03,209 --> 00:36:03,739
+exactly
+
+1031
+00:36:04,699 --> 00:36:05,340
+OK.
+
+1032
+00:36:06,629 --> 00:36:09,159
+So if we loop through this entire
+
+1033
+00:36:09,770 --> 00:36:10,560
+string
+
+1034
+00:36:10,939 --> 00:36:11,800
+and we're checking
+
+1035
+00:36:11,939 --> 00:36:12,399
+each
+
+1036
+00:36:12,580 --> 00:36:13,899
+two letters one by one,
+
+1037
+00:36:14,300 --> 00:36:16,679
+which if they're in alphabetical order
+
+1038
+00:36:16,780 --> 00:36:19,360
+and we get through the entire string.
+
+1039
+00:36:20,629 --> 00:36:21,449
+Then we know
+
+1040
+00:36:22,350 --> 00:36:23,510
+that yes.
+
+1041
+00:36:24,270 --> 00:36:26,969
+If you've gotten to this line 17
+
+1042
+00:36:27,350 --> 00:36:28,969
+and you haven't returned
+
+1043
+00:36:29,110 --> 00:36:29,889
+the program,
+
+1044
+00:36:30,330 --> 00:36:31,030
+then we can say yes,
+
+1045
+00:36:31,110 --> 00:36:32,290
+it's in alphabetical order.
+
+1046
+00:36:34,439 --> 00:36:34,949
+OK,
+
+1047
+00:36:35,090 --> 00:36:37,209
+so let's test this out and see.
+
+1048
+00:36:39,169 --> 00:36:39,949
+How it goes,
+
+1049
+00:36:39,969 --> 00:36:40,090
+so.
+
+1050
+00:36:42,040 --> 00:36:42,719
+Uh,
+
+1051
+00:36:43,010 --> 00:36:43,580
+length.
+
+1052
+00:36:44,770 --> 00:36:45,260
+OK.
+
+1053
+00:36:48,449 --> 00:36:48,669
+OK,
+
+1054
+00:36:48,750 --> 00:36:49,850
+so I'm gonna do ABC.
+
+1055
+00:36:51,360 --> 00:36:52,570
+Not in alphabetical order.
+
+1056
+00:36:53,850 --> 00:36:55,729
+Why might that be happening?
+
+1057
+00:37:01,320 --> 00:37:04,419
+Text I + 1 will not exceed the string boundary,
+
+1058
+00:37:04,479 --> 00:37:05,030
+yeah,
+
+1059
+00:37:05,239 --> 00:37:05,510
+yeah,
+
+1060
+00:37:05,639 --> 00:37:06,060
+so
+
+1061
+00:37:06,479 --> 00:37:08,300
+just to show this more visually
+
+1062
+00:37:08,899 --> 00:37:10,159
+if I print out.
+
+1063
+00:37:11,840 --> 00:37:12,219
+Print off.
+
+1064
+00:37:14,040 --> 00:37:14,659
+The
+
+1065
+00:37:15,080 --> 00:37:17,340
+character or maybe the integer version.
+
+1066
+00:37:18,719 --> 00:37:19,439
+Of
+
+1067
+00:37:21,030 --> 00:37:21,750
+Um,
+
+1068
+00:37:22,100 --> 00:37:22,610
+text
+
+1069
+00:37:23,070 --> 00:37:23,810
+I.
+
+1070
+00:37:25,020 --> 00:37:26,719
+And then at index
+
+1071
+00:37:27,030 --> 00:37:27,939
+1 + 1.
+
+1072
+00:37:28,830 --> 00:37:29,850
+We can see like what
+
+1073
+00:37:30,070 --> 00:37:31,810
+values are actually being compared here,
+
+1074
+00:37:32,429 --> 00:37:33,489
+so let's make this again.
+
+1075
+00:37:34,600 --> 00:37:36,000
+ABC oops.
+
+1076
+00:37:37,209 --> 00:37:37,689
+OK,
+
+1077
+00:37:38,409 --> 00:37:38,610
+Yeah,
+
+1078
+00:37:38,689 --> 00:37:41,000
+so we see these are the first two
+
+1079
+00:37:41,290 --> 00:37:42,510
+that we're checking A and B.
+
+1080
+00:37:42,850 --> 00:37:43,889
+That's in alphabetical order.
+
+1081
+00:37:44,129 --> 00:37:46,169
+The next two A and and S by
+
+1082
+00:37:46,580 --> 00:37:47,689
+by accident,
+
+1083
+00:37:47,929 --> 00:37:48,050
+um,
+
+1084
+00:37:48,129 --> 00:37:49,709
+but that's still in alphabetical order.
+
+1085
+00:37:49,969 --> 00:37:50,870
+But then it's checking
+
+1086
+00:37:51,250 --> 00:37:53,189
+S and then 0,
+
+1087
+00:37:53,850 --> 00:37:56,010
+which in this case if anyone remembers what,
+
+1088
+00:37:56,090 --> 00:37:57,340
+what's this 0.
+
+1089
+00:37:58,239 --> 00:37:59,459
+Referring to
+
+1090
+00:37:59,840 --> 00:38:00,669
+the null character,
+
+1091
+00:38:00,760 --> 00:38:00,879
+yeah,
+
+1092
+00:38:01,040 --> 00:38:01,219
+exactly,
+
+1093
+00:38:01,629 --> 00:38:04,639
+and the null character at the end of the string is what it's comparing it to,
+
+1094
+00:38:04,919 --> 00:38:07,780
+so we know that we're going a little bit too far in our comparison
+
+1095
+00:38:07,959 --> 00:38:09,419
+that we should actually just stop
+
+1096
+00:38:09,719 --> 00:38:10,080
+here.
+
+1097
+00:38:11,889 --> 00:38:13,189
+So we can say.
+
+1098
+00:38:16,090 --> 00:38:18,070
+Finish or continue running this
+
+1099
+00:38:18,209 --> 00:38:22,169
+as long as I is less than length minus 1 so it it
+
+1100
+00:38:22,699 --> 00:38:24,310
+repeats one less time
+
+1101
+00:38:24,689 --> 00:38:25,870
+than before.
+
+1102
+00:38:26,679 --> 00:38:28,189
+So let's try this again.
+
+1103
+00:38:30,060 --> 00:38:31,070
+ABC,
+
+1104
+00:38:31,679 --> 00:38:32,139
+yes,
+
+1105
+00:38:32,270 --> 00:38:34,770
+and I can remove these print statements now that I'm done
+
+1106
+00:38:35,540 --> 00:38:36,610
+debugging,
+
+1107
+00:38:36,979 --> 00:38:37,669
+OK.
+
+1108
+00:38:38,489 --> 00:38:39,830
+So our last portion
+
+1109
+00:38:40,090 --> 00:38:42,590
+is talking about command line arguments.
+
+1110
+00:38:45,469 --> 00:38:48,199
+So what are some examples of programs that we've seen
+
+1111
+00:38:48,659 --> 00:38:50,639
+that take command line arguments?
+
+1112
+00:38:54,209 --> 00:38:54,820
+Cow say,
+
+1113
+00:38:54,889 --> 00:38:55,090
+yeah,
+
+1114
+00:38:55,250 --> 00:38:55,870
+exactly
+
+1115
+00:38:56,199 --> 00:38:57,189
+from lecture
+
+1116
+00:38:57,929 --> 00:38:59,949
+cow program so that takes some arguments
+
+1117
+00:39:00,250 --> 00:39:01,340
+also.
+
+1118
+00:39:02,530 --> 00:39:05,560
+Things that you've been doing this past week make Mario
+
+1119
+00:39:06,179 --> 00:39:09,459
+Mario in this case is a command line argument make is the command.
+
+1120
+00:39:11,489 --> 00:39:12,229
+Same with
+
+1121
+00:39:12,610 --> 00:39:14,110
+when I run something
+
+1122
+00:39:14,330 --> 00:39:16,429
+this is something you might encounter this week
+
+1123
+00:39:16,610 --> 00:39:18,629
+where you actually provide the
+
+1124
+00:39:19,090 --> 00:39:19,949
+program that you're running
+
+1125
+00:39:20,209 --> 00:39:22,739
+some input in this case 13.
+
+1126
+00:39:24,199 --> 00:39:27,919
+So this is no different than the functions that we've seen before,
+
+1127
+00:39:28,060 --> 00:39:28,419
+right?
+
+1128
+00:39:29,149 --> 00:39:29,739
+When we had
+
+1129
+00:39:30,199 --> 00:39:32,879
+this calculate quarters function from cash,
+
+1130
+00:39:33,120 --> 00:39:33,919
+it takes in
+
+1131
+00:39:34,120 --> 00:39:35,139
+a function argument
+
+1132
+00:39:35,639 --> 00:39:36,260
+which is
+
+1133
+00:39:36,639 --> 00:39:38,820
+an integer that we call cents,
+
+1134
+00:39:39,199 --> 00:39:42,209
+and then it specifies the type that we're returning.
+
+1135
+00:39:42,320 --> 00:39:43,780
+So in this case it returned
+
+1136
+00:39:44,159 --> 00:39:45,419
+how many quarters
+
+1137
+00:39:45,879 --> 00:39:46,820
+that we had.
+
+1138
+00:39:47,659 --> 00:39:48,270
+Similarly,
+
+1139
+00:39:48,280 --> 00:39:49,000
+we have
+
+1140
+00:39:49,139 --> 00:39:50,879
+in Maine void that we've been seeing a lot
+
+1141
+00:39:51,419 --> 00:39:53,760
+and so up until now we've used void
+
+1142
+00:39:54,100 --> 00:39:55,800
+as this input argument.
+
+1143
+00:39:55,820 --> 00:39:58,219
+It means it's not taking anything in
+
+1144
+00:39:58,580 --> 00:40:00,500
+and then it's returning an integer
+
+1145
+00:40:00,800 --> 00:40:01,239
+which
+
+1146
+00:40:01,560 --> 00:40:03,639
+like in lecture we talked about yesterday
+
+1147
+00:40:04,340 --> 00:40:07,520
+that is the exit status that signals like
+
+1148
+00:40:08,189 --> 00:40:12,479
+if it ran successfully like a 0 or if it ran into some
+
+1149
+00:40:12,729 --> 00:40:13,229
+error.
+
+1150
+00:40:14,709 --> 00:40:15,209
+So now
+
+1151
+00:40:15,790 --> 00:40:17,590
+rather than taking in no input
+
+1152
+00:40:17,870 --> 00:40:19,929
+we can try experimenting with
+
+1153
+00:40:20,350 --> 00:40:22,770
+including some command line input and so
+
+1154
+00:40:22,989 --> 00:40:24,290
+that's what this looks like
+
+1155
+00:40:24,629 --> 00:40:26,399
+we have in arc,
+
+1156
+00:40:26,540 --> 00:40:29,110
+which is like the count of the arguments,
+
+1157
+00:40:29,120 --> 00:40:30,889
+how many arguments were put in,
+
+1158
+00:40:31,310 --> 00:40:34,739
+and then an array of strings
+
+1159
+00:40:35,229 --> 00:40:37,570
+that's that has the actual
+
+1160
+00:40:37,850 --> 00:40:38,370
+um
+
+1161
+00:40:38,500 --> 00:40:39,850
+commands that were
+
+1162
+00:40:40,239 --> 00:40:41,050
+put in the
+
+1163
+00:40:41,350 --> 00:40:42,129
+in the terminal.
+
+1164
+00:40:45,100 --> 00:40:48,500
+So a question that might come up for you is like why are we even doing this?
+
+1165
+00:40:48,790 --> 00:40:51,090
+Why not just use get it or get string?
+
+1166
+00:40:52,320 --> 00:40:53,070
+So
+
+1167
+00:40:54,090 --> 00:40:54,510
+Any
+
+1168
+00:40:54,969 --> 00:40:56,560
+thoughts on this in the chat?
+
+1169
+00:40:58,080 --> 00:40:59,959
+Why might you prefer to do it,
+
+1170
+00:41:00,399 --> 00:41:02,340
+do something with command line arguments,
+
+1171
+00:41:02,929 --> 00:41:03,030
+yeah,
+
+1172
+00:41:03,080 --> 00:41:04,120
+it saves time.
+
+1173
+00:41:04,479 --> 00:41:04,600
+Yeah,
+
+1174
+00:41:04,719 --> 00:41:05,820
+so you can think about
+
+1175
+00:41:06,239 --> 00:41:07,620
+if I were running
+
+1176
+00:41:07,959 --> 00:41:09,540
+make Mario
+
+1177
+00:41:09,989 --> 00:41:10,459
+instead of
+
+1178
+00:41:10,679 --> 00:41:11,379
+running
+
+1179
+00:41:11,699 --> 00:41:13,139
+with a command line argument,
+
+1180
+00:41:13,399 --> 00:41:13,629
+uh,
+
+1181
+00:41:13,760 --> 00:41:15,459
+say you had to type in like
+
+1182
+00:41:15,840 --> 00:41:16,889
+it asks you,
+
+1183
+00:41:17,080 --> 00:41:17,510
+um,
+
+1184
+00:41:17,520 --> 00:41:19,219
+what program are you trying to make
+
+1185
+00:41:19,600 --> 00:41:20,739
+when you run make
+
+1186
+00:41:21,120 --> 00:41:22,080
+so it saves some time.
+
+1187
+00:41:23,120 --> 00:41:23,550
+Yeah.
+
+1188
+00:41:24,679 --> 00:41:25,060
+Yeah.
+
+1189
+00:41:26,010 --> 00:41:26,250
+Great,
+
+1190
+00:41:26,370 --> 00:41:26,870
+so
+
+1191
+00:41:27,570 --> 00:41:28,510
+this is what
+
+1192
+00:41:28,649 --> 00:41:30,709
+those arguments are actually gonna look like here
+
+1193
+00:41:31,260 --> 00:41:33,830
+if I run Make Mario and Terminal above,
+
+1194
+00:41:34,449 --> 00:41:36,429
+then we're gonna have a string
+
+1195
+00:41:36,570 --> 00:41:37,389
+array
+
+1196
+00:41:37,610 --> 00:41:38,429
+called RV
+
+1197
+00:41:38,639 --> 00:41:39,790
+that contains the,
+
+1198
+00:41:39,800 --> 00:41:41,909
+the string make and then the string Mario,
+
+1199
+00:41:42,449 --> 00:41:46,709
+and then an argument counter variable which has the count of that
+
+1200
+00:41:47,090 --> 00:41:47,909
+array
+
+1201
+00:41:48,129 --> 00:41:49,169
+which in this case is 2.
+
+1202
+00:41:50,239 --> 00:41:54,149
+Same thing if we had something like slash Caesar and then 13.
+
+1203
+00:41:55,090 --> 00:41:56,060
+So that has
+
+1204
+00:41:56,590 --> 00:41:57,540
+dot slash Caesar
+
+1205
+00:41:57,729 --> 00:42:01,439
+as the first string and then 13 as the second string.
+
+1206
+00:42:03,429 --> 00:42:04,060
+OK,
+
+1207
+00:42:04,679 --> 00:42:09,270
+so now let's say we're gonna make a program called Initials that takes
+
+1208
+00:42:09,840 --> 00:42:11,350
+the some person's name,
+
+1209
+00:42:11,600 --> 00:42:12,699
+in this case my name,
+
+1210
+00:42:13,159 --> 00:42:14,540
+and then spits out
+
+1211
+00:42:14,879 --> 00:42:15,860
+the first,
+
+1212
+00:42:16,300 --> 00:42:16,669
+uh,
+
+1213
+00:42:16,679 --> 00:42:17,739
+character of each
+
+1214
+00:42:18,120 --> 00:42:20,879
+giving us like the initials in my case KD.
+
+1215
+00:42:22,459 --> 00:42:22,919
+Well,
+
+1216
+00:42:23,139 --> 00:42:24,379
+with RV
+
+1217
+00:42:25,020 --> 00:42:26,199
+we know that
+
+1218
+00:42:26,860 --> 00:42:29,919
+RV 0 is gonna be this dot slash initials
+
+1219
+00:42:30,100 --> 00:42:32,600
+string and then RV1 gives us
+
+1220
+00:42:33,149 --> 00:42:34,639
+my first name Kelly,
+
+1221
+00:42:34,659 --> 00:42:35,199
+and then
+
+1222
+00:42:35,300 --> 00:42:36,280
+RV2 gives us
+
+1223
+00:42:36,620 --> 00:42:37,159
+ding.
+
+1224
+00:42:38,260 --> 00:42:41,540
+And then because these are strings we also know that if I wanted to get
+
+1225
+00:42:41,780 --> 00:42:44,239
+the actual letters within that
+
+1226
+00:42:44,639 --> 00:42:45,300
+string.
+
+1227
+00:42:46,600 --> 00:42:49,270
+I can do RV at index 1,
+
+1228
+00:42:49,520 --> 00:42:50,149
+which is Kelly,
+
+1229
+00:42:50,159 --> 00:42:50,800
+and then
+
+1230
+00:42:51,120 --> 00:42:55,580
+at index 0 it's the first letter which is K and then similarly with
+
+1231
+00:42:56,000 --> 00:42:56,600
+D.
+
+1232
+00:42:58,100 --> 00:42:58,840
+OK,
+
+1233
+00:42:59,139 --> 00:43:01,310
+so any questions about command line arguments?
+
+1234
+00:43:01,379 --> 00:43:02,139
+What would RC be?
+
+1235
+00:43:02,219 --> 00:43:02,879
+Great question.
+
+1236
+00:43:03,429 --> 00:43:05,300
+Anyone else in the chat wanna answer that?
+
+1237
+00:43:07,229 --> 00:43:10,110
+What would RGC be in this scenario?
+
+1238
+00:43:14,040 --> 00:43:14,689
+3,
+
+1239
+00:43:15,080 --> 00:43:15,439
+yeah.
+
+1240
+00:43:16,939 --> 00:43:17,179
+Yeah,
+
+1241
+00:43:17,300 --> 00:43:17,760
+so
+
+1242
+00:43:17,939 --> 00:43:19,959
+dot slash initials is 1,
+
+1243
+00:43:20,780 --> 00:43:21,760
+Kelly is 2,
+
+1244
+00:43:22,110 --> 00:43:23,340
+Ding is 3,
+
+1245
+00:43:23,479 --> 00:43:25,000
+so we have 3 arguments.
+
+1246
+00:43:27,280 --> 00:43:27,879
+OK.
+
+1247
+00:43:28,760 --> 00:43:30,820
+So let's move on to this final exercise.
+
+1248
+00:43:31,080 --> 00:43:32,179
+Why does it count from
+
+1249
+00:43:32,639 --> 00:43:33,040
+one?
+
+1250
+00:43:33,879 --> 00:43:34,010
+Yeah,
+
+1251
+00:43:34,129 --> 00:43:34,729
+great question.
+
+1252
+00:43:34,929 --> 00:43:36,639
+So RXC is
+
+1253
+00:43:36,850 --> 00:43:38,870
+giving you a count of how many
+
+1254
+00:43:39,570 --> 00:43:40,810
+arguments there are
+
+1255
+00:43:41,010 --> 00:43:41,929
+rather than
+
+1256
+00:43:42,050 --> 00:43:43,610
+when we talk about counting from zero.
+
+1257
+00:43:43,689 --> 00:43:45,350
+It's usually like an index
+
+1258
+00:43:45,649 --> 00:43:47,030
+in an array.
+
+1259
+00:43:47,689 --> 00:43:48,510
+And so
+
+1260
+00:43:49,090 --> 00:43:53,250
+rather than saying so the array still has 3 elements inside of it,
+
+1261
+00:43:53,320 --> 00:43:55,629
+which is why RXC is 3 in this case.
+
+1262
+00:43:56,409 --> 00:43:56,750
+But
+
+1263
+00:43:57,010 --> 00:43:58,750
+when we're actually doing the indexing,
+
+1264
+00:43:59,050 --> 00:44:01,590
+the first is called 0 index.
+
+1265
+00:44:02,840 --> 00:44:03,179
+Great,
+
+1266
+00:44:03,639 --> 00:44:03,959
+OK,
+
+1267
+00:44:04,080 --> 00:44:05,419
+so let's do this final exercise.
+
+1268
+00:44:06,239 --> 00:44:08,050
+Write a program initials.c
+
+1269
+00:44:08,350 --> 00:44:09,340
+just like we saw
+
+1270
+00:44:09,459 --> 00:44:12,100
+that takes the name as an input
+
+1271
+00:44:12,719 --> 00:44:14,969
+and then outputs their initials,
+
+1272
+00:44:15,370 --> 00:44:17,780
+so we're gonna accept them as command line arguments
+
+1273
+00:44:18,040 --> 00:44:21,250
+and assume that names will be separated by space.
+
+1274
+00:44:23,169 --> 00:44:23,530
+OK,
+
+1275
+00:44:23,679 --> 00:44:24,810
+so let's move over here,
+
+1276
+00:44:25,090 --> 00:44:26,870
+clear my terminal
+
+1277
+00:44:27,320 --> 00:44:30,449
+and code initials.c.
+
+1278
+00:44:32,669 --> 00:44:33,179
+OK,
+
+1279
+00:44:33,639 --> 00:44:37,020
+so I know I'm gonna need some libraries here.
+
+1280
+00:44:38,310 --> 00:44:39,699
+So if you got age for.
+
+1281
+00:44:40,850 --> 00:44:41,540
+String
+
+1282
+00:44:41,699 --> 00:44:43,379
+since we know we don't have string.
+
+1283
+00:44:44,760 --> 00:44:47,020
+And standard IO.h.
+
+1284
+00:44:50,419 --> 00:44:50,939
+OK.
+
+1285
+00:44:51,820 --> 00:44:52,500
+We might need some more,
+
+1286
+00:44:52,580 --> 00:44:54,040
+but we can always come back.
+
+1287
+00:44:55,649 --> 00:44:56,600
+So I'm gonna start with in main
+
+1288
+00:44:57,600 --> 00:44:59,239
+and then instead of void here I know I'm
+
+1289
+00:44:59,239 --> 00:45:01,500
+gonna be taking in some command line arguments.
+
+1290
+00:45:02,780 --> 00:45:04,679
+So I'm gonna have an arg C
+
+1291
+00:45:05,139 --> 00:45:06,459
+and then string arg.
+
+1292
+00:45:07,510 --> 00:45:08,419
+The
+
+1293
+00:45:09,889 --> 00:45:10,489
+OK.
+
+1294
+00:45:11,840 --> 00:45:11,850
+So.
+
+1295
+00:45:14,790 --> 00:45:16,909
+I know that I'm gonna be needing
+
+1296
+00:45:17,350 --> 00:45:18,850
+the string in each
+
+1297
+00:45:19,469 --> 00:45:21,669
+um command that was inputted.
+
+1298
+00:45:23,969 --> 00:45:25,530
+So I should probably do a loop,
+
+1299
+00:45:25,649 --> 00:45:26,010
+right?
+
+1300
+00:45:30,370 --> 00:45:31,840
+What should my loop
+
+1301
+00:45:32,080 --> 00:45:32,679
+start at?
+
+1302
+00:45:33,239 --> 00:45:33,629
+Say
+
+1303
+00:45:34,000 --> 00:45:34,820
+I'm given.
+
+1304
+00:45:37,110 --> 00:45:38,419
+Dot slash initials.
+
+1305
+00:45:40,300 --> 00:45:40,860
+Kelly Dang,
+
+1306
+00:45:40,939 --> 00:45:41,199
+right,
+
+1307
+00:45:41,340 --> 00:45:42,870
+so let's say this is my input.
+
+1308
+00:45:46,810 --> 00:45:48,570
+If I want to loop over just this,
+
+1309
+00:45:48,860 --> 00:45:49,669
+these two.
+
+1310
+00:45:50,669 --> 00:45:51,610
+Strings
+
+1311
+00:45:52,429 --> 00:45:53,949
+What should it start at?
+
+1312
+00:45:54,959 --> 00:45:55,679
+My for loop.
+
+1313
+00:45:58,139 --> 00:45:58,699
+RB 1,
+
+1314
+00:45:58,770 --> 00:45:58,820
+yeah,
+
+1315
+00:45:58,939 --> 00:45:59,810
+so this is RB 1,
+
+1316
+00:45:59,929 --> 00:46:00,840
+this is RB 2.
+
+1317
+00:46:01,639 --> 00:46:02,909
+So let's start this
+
+1318
+00:46:03,110 --> 00:46:04,050
+actually at one.
+
+1319
+00:46:04,909 --> 00:46:05,739
+And then
+
+1320
+00:46:05,899 --> 00:46:09,360
+loop as long as I is less than.
+
+1321
+00:46:13,439 --> 00:46:15,919
+What should it be looping until
+
+1322
+00:46:18,510 --> 00:46:19,110
+3,
+
+1323
+00:46:19,350 --> 00:46:19,469
+yeah,
+
+1324
+00:46:19,629 --> 00:46:20,590
+so it could be 3.
+
+1325
+00:46:21,729 --> 00:46:22,770
+I also specified,
+
+1326
+00:46:22,889 --> 00:46:23,040
+you know,
+
+1327
+00:46:23,129 --> 00:46:25,709
+and maybe I actually put my middle name in here.
+
+1328
+00:46:26,629 --> 00:46:27,810
+Now this is.
+
+1329
+00:46:29,110 --> 00:46:29,860
+4
+
+1330
+00:46:30,989 --> 00:46:31,729
+So what
+
+1331
+00:46:32,310 --> 00:46:34,530
+variable captures like this
+
+1332
+00:46:34,790 --> 00:46:37,110
+the number of arguments we're gonna have.
+
+1333
+00:46:50,520 --> 00:46:50,959
+OK.
+
+1334
+00:46:52,479 --> 00:46:55,300
+I'll give it to you for free here RC.
+
+1335
+00:46:56,530 --> 00:47:00,270
+So RGC as a reminder is the number of
+
+1336
+00:47:00,600 --> 00:47:01,310
+arguments.
+
+1337
+00:47:01,570 --> 00:47:02,370
+It's like count.
+
+1338
+00:47:03,600 --> 00:47:05,179
+So in this case it would be 4.
+
+1339
+00:47:06,560 --> 00:47:09,629
+In this case it would be 3 and so it changes dynamically,
+
+1340
+00:47:09,649 --> 00:47:12,030
+which is what we want here rather than me just
+
+1341
+00:47:12,330 --> 00:47:13,610
+saying it has to be 3.
+
+1342
+00:47:14,600 --> 00:47:16,639
+Some people have multiple middle names maybe you know,
+
+1343
+00:47:16,750 --> 00:47:17,620
+so you wanna capture
+
+1344
+00:47:18,120 --> 00:47:18,669
+um
+
+1345
+00:47:18,879 --> 00:47:20,659
+different scenarios.
+
+1346
+00:47:21,719 --> 00:47:22,320
+OK.
+
+1347
+00:47:23,290 --> 00:47:25,239
+So now that we have um
+
+1348
+00:47:25,370 --> 00:47:26,110
+this
+
+1349
+00:47:26,649 --> 00:47:27,959
+looping over each
+
+1350
+00:47:28,280 --> 00:47:28,989
+part of the name.
+
+1351
+00:47:31,139 --> 00:47:34,500
+How do we print out the first letter of that name?
+
+1352
+00:47:39,679 --> 00:47:41,449
+So what should I print out here?
+
+1353
+00:47:45,590 --> 00:47:48,179
+Possible inn equals arc.
+
+1354
+00:47:48,629 --> 00:47:48,790
+Yeah,
+
+1355
+00:47:48,870 --> 00:47:49,830
+so you could do that.
+
+1356
+00:47:50,649 --> 00:47:50,659
+Um,
+
+1357
+00:47:51,090 --> 00:47:51,929
+but if you're not,
+
+1358
+00:47:52,330 --> 00:47:53,250
+if you
+
+1359
+00:47:54,020 --> 00:47:55,219
+You don't necessarily need
+
+1360
+00:47:55,459 --> 00:47:59,360
+to save RCC as its own variable as it's already
+
+1361
+00:47:59,820 --> 00:48:00,649
+a variable.
+
+1362
+00:48:02,250 --> 00:48:02,429
+OK,
+
+1363
+00:48:02,510 --> 00:48:02,610
+yeah,
+
+1364
+00:48:02,709 --> 00:48:05,149
+people are saying RVI at index 0.
+
+1365
+00:48:05,270 --> 00:48:05,550
+Great,
+
+1366
+00:48:05,949 --> 00:48:07,330
+so I'm gonna print out a character.
+
+1367
+00:48:08,850 --> 00:48:09,840
+And that character
+
+1368
+00:48:10,100 --> 00:48:11,320
+is going to be.
+
+1369
+00:48:14,510 --> 00:48:15,370
+Hard to be
+
+1370
+00:48:16,489 --> 00:48:17,669
+At index I
+
+1371
+00:48:18,540 --> 00:48:19,639
+And position
+
+1372
+00:48:20,179 --> 00:48:20,959
+0.
+
+1373
+00:48:22,419 --> 00:48:23,199
+Great.
+
+1374
+00:48:23,780 --> 00:48:25,320
+So let's try this
+
+1375
+00:48:25,459 --> 00:48:26,379
+out here.
+
+1376
+00:48:29,000 --> 00:48:30,770
+Dot slash initials.
+
+1377
+00:48:32,850 --> 00:48:33,909
+KD great.
+
+1378
+00:48:34,850 --> 00:48:38,760
+I wanna start it on a new line just for stylistic purposes.
+
+1379
+00:48:39,100 --> 00:48:39,949
+Let's just add
+
+1380
+00:48:40,419 --> 00:48:41,280
+a new line there.
+
+1381
+00:48:42,899 --> 00:48:43,260
+Oops,
+
+1382
+00:48:43,340 --> 00:48:43,540
+OK,
+
+1383
+00:48:43,659 --> 00:48:43,669
+make,
+
+1384
+00:48:44,219 --> 00:48:44,379
+yeah,
+
+1385
+00:48:44,520 --> 00:48:45,139
+and then.
+
+1386
+00:48:46,610 --> 00:48:47,330
+Great.
+
+1387
+00:48:47,810 --> 00:48:48,050
+OK,
+
+1388
+00:48:48,149 --> 00:48:49,149
+what if now
+
+1389
+00:48:49,449 --> 00:48:50,270
+I
+
+1390
+00:48:51,129 --> 00:48:54,250
+did initials and then just didn't give it any input?
+
+1391
+00:48:55,770 --> 00:48:57,070
+It just prints out nothing,
+
+1392
+00:48:57,139 --> 00:48:57,810
+but
+
+1393
+00:48:58,169 --> 00:49:01,229
+I might wanna actually handle that right and tell the user
+
+1394
+00:49:01,570 --> 00:49:03,110
+you're supposed to give me
+
+1395
+00:49:03,290 --> 00:49:04,129
+some input.
+
+1396
+00:49:05,429 --> 00:49:07,820
+So how might I check that here?
+
+1397
+00:49:09,949 --> 00:49:10,590
+Use an if,
+
+1398
+00:49:10,629 --> 00:49:11,090
+yeah,
+
+1399
+00:49:11,590 --> 00:49:12,709
+so I should check like.
+
+1400
+00:49:13,679 --> 00:49:16,260
+Did this person input any arguments?
+
+1401
+00:49:16,600 --> 00:49:17,679
+How might I do that?
+
+1402
+00:49:19,350 --> 00:49:20,409
+Say I want them
+
+1403
+00:49:20,510 --> 00:49:22,129
+to have input it at least.
+
+1404
+00:49:24,030 --> 00:49:24,510
+2
+
+1405
+00:49:25,659 --> 00:49:25,790
+Yeah,
+
+1406
+00:49:25,909 --> 00:49:27,810
+so if RCC is less than 2,
+
+1407
+00:49:28,350 --> 00:49:29,050
+meaning
+
+1408
+00:49:29,550 --> 00:49:30,489
+they either didn't
+
+1409
+00:49:30,590 --> 00:49:31,520
+put any
+
+1410
+00:49:31,790 --> 00:49:33,770
+arguments after dot slash initials,
+
+1411
+00:49:34,189 --> 00:49:34,389
+um,
+
+1412
+00:49:34,510 --> 00:49:35,620
+or they have nothing,
+
+1413
+00:49:35,669 --> 00:49:36,989
+which is not really the case here,
+
+1414
+00:49:37,070 --> 00:49:37,409
+but.
+
+1415
+00:49:39,239 --> 00:49:39,360
+Right,
+
+1416
+00:49:39,479 --> 00:49:42,320
+so if this is not lessened or if it is less than 2,
+
+1417
+00:49:42,649 --> 00:49:43,899
+then we should just say.
+
+1418
+00:49:46,139 --> 00:49:49,939
+The correct usage of this program is initials.
+
+1419
+00:49:51,379 --> 00:49:53,739
+And then like your first and last name.
+
+1420
+00:49:54,969 --> 00:49:56,820
+And then we should just return one
+
+1421
+00:49:57,219 --> 00:49:57,989
+signify
+
+1422
+00:49:58,379 --> 00:49:59,199
+there's an error.
+
+1423
+00:50:00,620 --> 00:50:00,629
+So
+
+1424
+00:50:01,139 --> 00:50:02,239
+let's make again.
+
+1425
+00:50:03,639 --> 00:50:04,699
+And run
+
+1426
+00:50:05,709 --> 00:50:05,909
+OK,
+
+1427
+00:50:05,959 --> 00:50:06,419
+great,
+
+1428
+00:50:06,959 --> 00:50:08,719
+so now rather than printing out nothing,
+
+1429
+00:50:08,760 --> 00:50:10,020
+it actually gives us
+
+1430
+00:50:10,600 --> 00:50:11,129
+this
+
+1431
+00:50:11,310 --> 00:50:12,659
+error message here.
+
+1432
+00:50:13,790 --> 00:50:14,080
+OK,
+
+1433
+00:50:14,189 --> 00:50:15,850
+let me make one last time.
+
+1434
+00:50:20,179 --> 00:50:21,340
+And try this,
+
+1435
+00:50:21,419 --> 00:50:21,739
+but
+
+1436
+00:50:22,500 --> 00:50:23,310
+David's name?
+
+1437
+00:50:23,620 --> 00:50:24,100
+DJM.
+
+1438
+00:50:24,340 --> 00:50:24,689
+Great.
+
+1439
+00:50:25,649 --> 00:50:26,290
+OK,
+
+1440
+00:50:26,399 --> 00:50:27,280
+awesome.
+
+1441
+00:50:27,739 --> 00:50:29,919
+So any questions on
+
+1442
+00:50:30,540 --> 00:50:31,820
+this program?
+
+1443
+00:50:40,620 --> 00:50:41,429
+Some people were saying yeah.
+
+1444
+00:50:43,419 --> 00:50:44,729
+RC does not equal 3.
+
+1445
+00:50:44,850 --> 00:50:44,969
+Yeah,
+
+1446
+00:50:45,090 --> 00:50:46,129
+we could do that too.
+
+1447
+00:50:46,250 --> 00:50:47,790
+That would just mean changing,
+
+1448
+00:50:48,050 --> 00:50:48,600
+um,
+
+1449
+00:50:48,850 --> 00:50:49,659
+let's say
+
+1450
+00:50:50,169 --> 00:50:50,669
+for
+
+1451
+00:50:50,810 --> 00:50:52,590
+this case then it wouldn't work
+
+1452
+00:50:53,320 --> 00:50:55,870
+since we have 4 arguments.
+
+1453
+00:50:59,820 --> 00:51:00,179
+Yeah,
+
+1454
+00:51:00,419 --> 00:51:00,540
+yeah,
+
+1455
+00:51:00,620 --> 00:51:02,429
+so these are all design decisions that
+
+1456
+00:51:02,590 --> 00:51:03,620
+you as a programmer are gonna
+
+1457
+00:51:04,340 --> 00:51:06,159
+programmer are gonna be thinking about when you're writing
+
+1458
+00:51:06,780 --> 00:51:07,820
+your program.
+
+1459
+00:51:09,929 --> 00:51:10,570
+OK.
+
+1460
+00:51:12,260 --> 00:51:13,379
+Awesome.
+
+1461
+00:51:15,060 --> 00:51:15,270
+OK,
+
+1462
+00:51:15,389 --> 00:51:18,320
+so that's all of the content for this week.
+
+1463
+00:51:18,709 --> 00:51:20,250
+Thanks for your participation.
