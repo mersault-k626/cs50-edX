@@ -7,6 +7,8 @@
 // establish prototype
 void cipher_func(string cipher_key, string plaintext, char cipher_output[]);
 
+// argc = the total count of arguments (words typed)
+// argv[i] = the actual word/text at index 'i'; index 0 is always the filename
 int main(int argc, string argv[])
 {
     // check if command line arg contains exactly file name and an array of key

@@ -1,0 +1,12 @@
+sort1 uses: bubble sort
+
+How do you know?: 
+sort1 is bubble sort, proven by how it is able to best other sorting methods when sorting sorted files thanks to early-exit optimisation. However, dealing with reversed files means the optimisation is no longer available, so it has to perform the pairwise sorting at every juncture, which explains why it takes the longest time to sort all three reversed files.
+
+sort2 uses: merge sort
+
+How do you know?: sort2 is the fastest when sorting random and reversed files
+
+sort3 uses: selection sort
+How do you know?: 
+sort3 recorded the longest time to sort sorted files, since it still needs to go through the full length of the array
