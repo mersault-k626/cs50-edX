@@ -24,7 +24,7 @@ int main(void)
     people[1].name = "David";
     people[1].number = "0000";
 
-    people[2].name = "John";
+    people[2].name = "Kelly";
     people[2].number = "0001";
     
 
