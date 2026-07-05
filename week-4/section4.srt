@@ -1,0 +1,7171 @@
+0
+00:00:02,579 --> 00:00:07,730
+So welcome to CS 50 week 4 section on memory,
+
+1
+00:00:08,060 --> 00:00:10,359
+and today we're going to be diving into memory,
+
+2
+00:00:10,579 --> 00:00:11,369
+pointers,
+
+3
+00:00:11,869 --> 00:00:13,250
+working with files
+
+4
+00:00:13,619 --> 00:00:14,789
+and all
+
+5
+00:00:15,380 --> 00:00:17,959
+to get you more familiar with what C can do
+
+6
+00:00:18,260 --> 00:00:20,340
+as you prepare for future weeks.
+
+7
+00:00:21,610 --> 00:00:22,239
+So
+
+8
+00:00:22,469 --> 00:00:23,280
+if you're new here,
+
+9
+00:00:23,389 --> 00:00:23,989
+I'm Kelly,
+
+10
+00:00:24,110 --> 00:00:25,860
+I'm the preceptor here at Harvard,
+
+11
+00:00:26,389 --> 00:00:27,819
+so I run the college course
+
+12
+00:00:28,469 --> 00:00:29,860
+and there's my email
+
+13
+00:00:30,510 --> 00:00:31,979
+if you ever want to contact me.
+
+14
+00:00:33,740 --> 00:00:33,750
+OK.
+
+15
+00:00:34,770 --> 00:00:34,959
+So,
+
+16
+00:00:34,970 --> 00:00:36,810
+what are we gonna be talking about today?
+
+17
+00:00:38,049 --> 00:00:38,349
+First,
+
+18
+00:00:38,509 --> 00:00:41,279
+some questions that might have come up for you in lecture
+
+19
+00:00:41,709 --> 00:00:42,200
+are,
+
+20
+00:00:42,509 --> 00:00:44,659
+what are these new things called pointers?
+
+21
+00:00:45,000 --> 00:00:47,590
+How can we become familiar with their syntax?
+
+22
+00:00:48,189 --> 00:00:49,819
+What is the dynamic memory?
+
+23
+00:00:50,110 --> 00:00:51,139
+How can we use it?
+
+24
+00:00:51,750 --> 00:00:54,200
+And how can we read and write data from a file?
+
+25
+00:00:55,029 --> 00:00:57,279
+So we're going to talk about all of these things here
+
+26
+00:00:57,689 --> 00:00:58,119
+today,
+
+27
+00:00:58,290 --> 00:00:59,319
+one by one.
+
+28
+00:00:59,610 --> 00:01:01,659
+And as a first a preface,
+
+29
+00:01:01,810 --> 00:01:05,639
+we're going to talk a little bit about hexadecimal notation to get you
+
+30
+00:01:05,970 --> 00:01:07,839
+um comfortable with seeing
+
+31
+00:01:08,290 --> 00:01:09,319
+numbers that are written,
+
+32
+00:01:09,769 --> 00:01:10,800
+addresses that are written
+
+33
+00:01:10,970 --> 00:01:12,319
+in hexadecimal.
+
+34
+00:01:13,610 --> 00:01:15,059
+So as a quick review,
+
+35
+00:01:16,230 --> 00:01:16,500
+Um,
+
+36
+00:01:16,629 --> 00:01:17,800
+for this week's problem site,
+
+37
+00:01:17,910 --> 00:01:18,680
+it's
+
+38
+00:01:18,989 --> 00:01:22,559
+probably gonna be helpful to understand hexadecimal notation,
+
+39
+00:01:23,029 --> 00:01:27,819
+and hexadecimal numbers are usually indicated by a 0 X in the front.
+
+40
+00:01:27,949 --> 00:01:30,860
+So when you see 0 X some number,
+
+41
+00:01:31,010 --> 00:01:31,489
+um,
+
+42
+00:01:31,669 --> 00:01:35,900
+that is usually indicative of the fact that it's a hexadecimal number.
+
+43
+00:01:36,610 --> 00:01:38,120
+In hexadecimal,
+
+44
+00:01:38,449 --> 00:01:38,620
+uh,
+
+45
+00:01:38,690 --> 00:01:39,529
+unlike base 10,
+
+46
+00:01:39,569 --> 00:01:40,839
+where you have only
+
+47
+00:01:41,269 --> 00:01:42,639
+numbers 0 through 9,
+
+48
+00:01:42,809 --> 00:01:43,879
+you also have
+
+49
+00:01:44,129 --> 00:01:44,470
+A,
+
+50
+00:01:44,650 --> 00:01:44,849
+B,
+
+51
+00:01:45,010 --> 00:01:45,250
+C,
+
+52
+00:01:45,410 --> 00:01:45,639
+D,
+
+53
+00:01:45,930 --> 00:01:46,160
+E,
+
+54
+00:01:46,169 --> 00:01:47,040
+and F,
+
+55
+00:01:47,529 --> 00:01:47,849
+um,
+
+56
+00:01:47,860 --> 00:01:49,370
+corresponding with 1011,
+
+57
+00:01:49,379 --> 00:01:50,169
+1213,
+
+58
+00:01:50,209 --> 00:01:51,199
+1415,
+
+59
+00:01:51,580 --> 00:01:52,360
+respectively.
+
+60
+00:01:53,099 --> 00:01:57,970
+And so hex notation is usually used for representing addresses in memory.
+
+61
+00:01:59,769 --> 00:02:02,389
+This base 16 system is
+
+62
+00:02:02,650 --> 00:02:03,800
+um not too
+
+63
+00:02:03,970 --> 00:02:06,379
+different from what you've seen before and the base
+
+64
+00:02:06,379 --> 00:02:08,960
+10 system that you use on a daily basis.
+
+65
+00:02:09,479 --> 00:02:09,639
+Um,
+
+66
+00:02:09,649 --> 00:02:12,869
+so when you normally see a number like 15
+
+67
+00:02:13,169 --> 00:02:13,770
+in your head,
+
+68
+00:02:13,800 --> 00:02:15,440
+you very quickly
+
+69
+00:02:15,690 --> 00:02:18,619
+are doing the same sort of 10 to 0,
+
+70
+00:02:18,690 --> 00:02:19,199
+which is
+
+71
+00:02:19,410 --> 00:02:20,919
+1 times 5,
+
+72
+00:02:21,089 --> 00:02:22,039
+so I have 5,
+
+73
+00:02:22,289 --> 00:02:24,160
+and then the 1 is in the 10s place,
+
+74
+00:02:24,330 --> 00:02:25,360
+so 10 to 1.
+
+75
+00:02:25,860 --> 00:02:26,660
+And so,
+
+76
+00:02:26,869 --> 00:02:27,860
+instinctively,
+
+77
+00:02:28,110 --> 00:02:28,539
+um,
+
+78
+00:02:28,550 --> 00:02:29,179
+all of us,
+
+79
+00:02:29,309 --> 00:02:30,100
+when we see
+
+80
+00:02:30,309 --> 00:02:31,300
+the numbers 15,
+
+81
+00:02:31,309 --> 00:02:31,740
+we'll think,
+
+82
+00:02:31,910 --> 00:02:32,070
+OK,
+
+83
+00:02:32,110 --> 00:02:34,220
+10 + 5 is 15.
+
+84
+00:02:35,089 --> 00:02:36,350
+Hexadecimal is
+
+85
+00:02:36,529 --> 00:02:37,639
+the same logic,
+
+86
+00:02:37,770 --> 00:02:39,440
+but now instead of base 10,
+
+87
+00:02:39,610 --> 00:02:41,429
+we're using base 16.
+
+88
+00:02:41,690 --> 00:02:43,110
+And the same goes for binary.
+
+89
+00:02:43,250 --> 00:02:46,639
+Binary is just the same logic applied to base 2.
+
+90
+00:02:47,630 --> 00:02:50,289
+And so when you see a hexadecimal number,
+
+91
+00:02:50,539 --> 00:02:50,850
+um,
+
+92
+00:02:50,860 --> 00:02:53,759
+for example here we have 0 X and then 3
+
+93
+00:02:54,300 --> 00:02:55,210
+or 4
+
+94
+00:02:56,339 --> 00:02:57,229
+bases,
+
+95
+00:02:57,779 --> 00:02:58,410
+you can
+
+96
+00:02:58,619 --> 00:03:00,889
+apply the same logic where the
+
+97
+00:03:01,500 --> 00:03:02,339
+one on the right
+
+98
+00:03:02,500 --> 00:03:04,429
+will have 16 to 0,
+
+99
+00:03:04,779 --> 00:03:06,929
+so whatever number there times
+
+100
+00:03:07,300 --> 00:03:07,770
+1,
+
+101
+00:03:07,940 --> 00:03:08,669
+and then
+
+102
+00:03:08,940 --> 00:03:10,649
+whatever numbers in that next
+
+103
+00:03:10,899 --> 00:03:11,880
+place here
+
+104
+00:03:12,660 --> 00:03:13,929
+16 to 1
+
+105
+00:03:14,660 --> 00:03:16,490
+and so on and so forth.
+
+106
+00:03:17,610 --> 00:03:21,779
+So I'll pause here for any initial questions on hexadecimal.
+
+107
+00:03:25,350 --> 00:03:28,940
+Couldn't we go to 37 with A to Z or even capitals?
+
+108
+00:03:28,949 --> 00:03:29,820
+I have 48.
+
+109
+00:03:30,050 --> 00:03:30,229
+Yeah,
+
+110
+00:03:30,350 --> 00:03:31,100
+and so
+
+111
+00:03:31,949 --> 00:03:34,089
+it's really a question of
+
+112
+00:03:34,389 --> 00:03:37,169
+um what is efficient to represent in memory.
+
+113
+00:03:37,589 --> 00:03:38,039
+So
+
+114
+00:03:38,350 --> 00:03:40,779
+Pexadecimal is great because
+
+115
+00:03:41,100 --> 00:03:42,110
+um it
+
+116
+00:03:42,399 --> 00:03:44,419
+is pretty compatible with
+
+117
+00:03:44,710 --> 00:03:48,300
+the number of bits that we usually like to store,
+
+118
+00:03:48,750 --> 00:03:49,139
+um,
+
+119
+00:03:49,149 --> 00:03:51,830
+and so as you'll see in a second here,
+
+120
+00:03:52,110 --> 00:03:52,660
+oops,
+
+121
+00:03:52,949 --> 00:03:53,470
+um.
+
+122
+00:03:54,880 --> 00:03:55,770
+The,
+
+123
+00:03:56,210 --> 00:03:56,669
+for example,
+
+124
+00:03:56,809 --> 00:03:58,190
+255,
+
+125
+00:03:58,250 --> 00:03:58,839
+which is
+
+126
+00:03:59,169 --> 00:04:05,279
+uh a commonly used number to represent RGB values for represented color,
+
+127
+00:04:05,610 --> 00:04:05,960
+um,
+
+128
+00:04:05,970 --> 00:04:08,039
+can be easily represented
+
+129
+00:04:08,369 --> 00:04:10,800
+as um a hexadecimal
+
+130
+00:04:11,009 --> 00:04:12,240
+number and so,
+
+131
+00:04:12,850 --> 00:04:12,970
+yeah,
+
+132
+00:04:13,130 --> 00:04:14,839
+these are just decisions that were made,
+
+133
+00:04:15,089 --> 00:04:15,399
+uh,
+
+134
+00:04:15,410 --> 00:04:18,410
+a long time ago but are very compatible with the
+
+135
+00:04:18,890 --> 00:04:19,238
+like
+
+136
+00:04:19,488 --> 00:04:21,608
+amount of memory that we're typically using.
+
+137
+00:04:23,359 --> 00:04:23,739
+OK,
+
+138
+00:04:23,820 --> 00:04:24,250
+great.
+
+139
+00:04:24,619 --> 00:04:28,450
+So if I look at a hex value of color and I see other letters like H.
+
+140
+00:04:29,220 --> 00:04:31,779
+It's a different base system representing color.
+
+141
+00:04:33,920 --> 00:04:33,929
+Mm.
+
+142
+00:04:36,220 --> 00:04:36,519
+Yeah,
+
+143
+00:04:36,720 --> 00:04:36,910
+so,
+
+144
+00:04:37,040 --> 00:04:38,630
+so that might just be a different
+
+145
+00:04:38,839 --> 00:04:41,750
+um system that is representing those colors.
+
+146
+00:04:41,959 --> 00:04:43,000
+But in this
+
+147
+00:04:43,200 --> 00:04:44,089
+uh piece set,
+
+148
+00:04:44,119 --> 00:04:48,309
+you'll be using the RGB system of representing colors.
+
+149
+00:04:48,559 --> 00:04:49,190
+Great question.
+
+150
+00:04:50,559 --> 00:04:51,079
+OK.
+
+151
+00:04:52,809 --> 00:04:53,440
+So from that,
+
+152
+00:04:53,450 --> 00:04:58,369
+we're gonna move on to pointers and talk a little bit more about what that
+
+153
+00:04:58,609 --> 00:04:59,140
+means,
+
+154
+00:04:59,339 --> 00:05:00,820
+what these are used for,
+
+155
+00:05:01,019 --> 00:05:03,970
+and how you might have already actually been using pointers all along,
+
+156
+00:05:04,059 --> 00:05:06,489
+but you didn't necessarily realize.
+
+157
+00:05:07,739 --> 00:05:07,750
+OK.
+
+158
+00:05:09,299 --> 00:05:10,369
+So this
+
+159
+00:05:10,940 --> 00:05:15,609
+chunk of memory might be something similar to what we've seen in the lecture here
+
+160
+00:05:15,980 --> 00:05:20,459
+and so this is really just an abstraction of what is going on in your computer,
+
+161
+00:05:20,470 --> 00:05:23,109
+but hopefully it gives you a bit of a visual
+
+162
+00:05:23,380 --> 00:05:24,250
+to see
+
+163
+00:05:25,019 --> 00:05:26,570
+what is really going on here.
+
+164
+00:05:26,940 --> 00:05:27,609
+And so
+
+165
+00:05:27,779 --> 00:05:31,089
+you can imagine this is um we have
+
+166
+00:05:32,019 --> 00:05:32,609
+Um,
+
+167
+00:05:32,899 --> 00:05:35,299
+a number of bytes in our memory here,
+
+168
+00:05:35,459 --> 00:05:37,390
+each with an address
+
+169
+00:05:38,100 --> 00:05:42,480
+arbitrarily starting from 0X08 all the way to 0X1F.
+
+170
+00:05:42,859 --> 00:05:46,609
+Normally we also don't really care about what these addresses really are,
+
+171
+00:05:46,820 --> 00:05:48,369
+and they're normally not going to be
+
+172
+00:05:48,619 --> 00:05:51,149
+this simple when you're actually working in your memory,
+
+173
+00:05:51,179 --> 00:05:51,609
+but
+
+174
+00:05:51,859 --> 00:05:53,489
+this is just to demonstrate.
+
+175
+00:05:54,500 --> 00:05:55,200
+And so,
+
+176
+00:05:55,750 --> 00:05:56,279
+if
+
+177
+00:05:56,570 --> 00:05:57,170
+we,
+
+178
+00:05:57,809 --> 00:05:58,239
+for example,
+
+179
+00:05:58,410 --> 00:06:00,980
+want to create an integer called N.
+
+180
+00:06:02,450 --> 00:06:03,660
+We might have that
+
+181
+00:06:03,890 --> 00:06:05,440
+look a little bit like this.
+
+182
+00:06:05,929 --> 00:06:07,579
+So if we recall an integer,
+
+183
+00:06:07,970 --> 00:06:08,359
+um,
+
+184
+00:06:08,450 --> 00:06:09,760
+takes 4 bytes,
+
+185
+00:06:10,089 --> 00:06:11,239
+we can see here
+
+186
+00:06:11,489 --> 00:06:12,829
+that we've allocated
+
+187
+00:06:13,049 --> 00:06:14,079
+4 bytes
+
+188
+00:06:14,529 --> 00:06:15,040
+to
+
+189
+00:06:15,209 --> 00:06:17,279
+this integer and that stores
+
+190
+00:06:17,529 --> 00:06:18,410
+the value of 4.
+
+191
+00:06:19,730 --> 00:06:22,399
+And so you can also see that this integer
+
+192
+00:06:22,750 --> 00:06:25,869
+has an address associated with where it is in memory.
+
+193
+00:06:27,420 --> 00:06:28,140
+And so,
+
+194
+00:06:29,029 --> 00:06:30,619
+what is the address of N here?
+
+195
+00:06:31,609 --> 00:06:32,980
+0 X 08,
+
+196
+00:06:33,010 --> 00:06:34,329
+as you can see on
+
+197
+00:06:34,769 --> 00:06:35,760
+this diagram.
+
+198
+00:06:36,209 --> 00:06:36,880
+And so
+
+199
+00:06:37,170 --> 00:06:40,450
+we learned some new syntax to represent this
+
+200
+00:06:40,730 --> 00:06:43,290
+um and if I wanted to get this address.
+
+201
+00:06:44,609 --> 00:06:46,640
+We can use this ampersand.
+
+202
+00:06:47,049 --> 00:06:48,269
+So ampersand N
+
+203
+00:06:48,739 --> 00:06:50,869
+means like the address of N,
+
+204
+00:06:51,570 --> 00:06:55,089
+and we can see here that that's equal to 0X08.
+
+205
+00:06:57,880 --> 00:07:00,000
+So next we have this idea,
+
+206
+00:07:00,059 --> 00:07:01,570
+this new idea of a pointer,
+
+207
+00:07:01,739 --> 00:07:01,859
+right?
+
+208
+00:07:01,980 --> 00:07:02,950
+So we have in
+
+209
+00:07:03,559 --> 00:07:04,049
+P
+
+210
+00:07:04,579 --> 00:07:06,779
+equals address of N.
+
+211
+00:07:07,260 --> 00:07:09,850
+So what just happened with this line of code
+
+212
+00:07:10,140 --> 00:07:10,910
+is that
+
+213
+00:07:11,299 --> 00:07:13,929
+I created an integer pointer.
+
+214
+00:07:14,179 --> 00:07:15,049
+So that's
+
+215
+00:07:15,339 --> 00:07:16,220
+just another variable,
+
+216
+00:07:16,260 --> 00:07:18,540
+but it's a type integer pointer,
+
+217
+00:07:18,980 --> 00:07:22,489
+and that's what we can see here with this blue rectangle.
+
+218
+00:07:23,059 --> 00:07:24,100
+It's called P.
+
+219
+00:07:24,890 --> 00:07:27,609
+And it's storing the address of N.
+
+220
+00:07:28,190 --> 00:07:28,660
+So,
+
+221
+00:07:28,950 --> 00:07:33,059
+we use Ampersand N to get the address of this N variable,
+
+222
+00:07:33,230 --> 00:07:34,700
+and we're storing it in
+
+223
+00:07:35,109 --> 00:07:36,910
+our pointer variable P.
+
+224
+00:07:39,170 --> 00:07:39,179
+OK,
+
+225
+00:07:40,079 --> 00:07:44,190
+so let's just go over this syntax a little bit more deeply since it's new here.
+
+226
+00:07:44,440 --> 00:07:44,989
+And so
+
+227
+00:07:45,920 --> 00:07:48,940
+when you see this first um initializing
+
+228
+00:07:49,380 --> 00:07:51,350
+statement we're initializing P
+
+229
+00:07:51,899 --> 00:07:55,260
+in star here is referring to the type.
+
+230
+00:07:55,760 --> 00:07:58,549
+So it's just another type like in float,
+
+231
+00:07:58,720 --> 00:07:59,410
+char.
+
+232
+00:07:59,959 --> 00:08:04,869
+Now we have in star to indicate this is going to be an integer pointer.
+
+233
+00:08:07,399 --> 00:08:11,350
+This ampersand refers to the address of
+
+234
+00:08:11,559 --> 00:08:12,200
+a certain
+
+235
+00:08:12,359 --> 00:08:13,190
+variable,
+
+236
+00:08:13,480 --> 00:08:14,230
+so we have
+
+237
+00:08:14,519 --> 00:08:17,980
+ampersan and giving us the address of the integer and.
+
+238
+00:08:19,940 --> 00:08:20,790
+And then
+
+239
+00:08:21,070 --> 00:08:22,420
+we can see here
+
+240
+00:08:22,989 --> 00:08:25,660
+we have another new piece of syntax.
+
+241
+00:08:26,890 --> 00:08:29,760
+So this star P equals 9.
+
+242
+00:08:30,720 --> 00:08:33,409
+What's important to note is that the star here
+
+243
+00:08:33,679 --> 00:08:34,750
+is not
+
+244
+00:08:35,080 --> 00:08:37,558
+being used the exact same way as the star
+
+245
+00:08:37,558 --> 00:08:40,590
+we just saw a second ago with this declaration,
+
+246
+00:08:41,130 --> 00:08:41,469
+right?
+
+247
+00:08:41,760 --> 00:08:43,710
+So this star means
+
+248
+00:08:44,320 --> 00:08:46,789
+go to or de-reference
+
+249
+00:08:47,400 --> 00:08:48,679
+the address stored at P.
+
+250
+00:08:49,619 --> 00:08:50,280
+So,
+
+251
+00:08:50,599 --> 00:08:51,590
+look at this address,
+
+252
+00:08:51,679 --> 00:08:52,950
+0X08,
+
+253
+00:08:53,239 --> 00:08:55,150
+and then go to that address.
+
+254
+00:08:56,049 --> 00:08:57,530
+So we're looking now at
+
+255
+00:08:57,710 --> 00:08:58,510
+0X08,
+
+256
+00:08:58,549 --> 00:08:59,130
+which is
+
+257
+00:08:59,429 --> 00:09:00,619
+where N is stored,
+
+258
+00:09:00,989 --> 00:09:02,460
+and then set that value
+
+259
+00:09:02,750 --> 00:09:03,219
+to
+
+260
+00:09:03,400 --> 00:09:04,099
+9.
+
+261
+00:09:04,590 --> 00:09:07,219
+So I've now changed the value of N
+
+262
+00:09:07,950 --> 00:09:09,150
+without actually
+
+263
+00:09:09,590 --> 00:09:10,780
+modifying N itself.
+
+264
+00:09:10,880 --> 00:09:12,380
+Instead we just modified
+
+265
+00:09:12,979 --> 00:09:14,280
+it using the pointer.
+
+266
+00:09:17,049 --> 00:09:17,460
+So again,
+
+267
+00:09:17,500 --> 00:09:17,979
+this,
+
+268
+00:09:18,219 --> 00:09:19,460
+this star here
+
+269
+00:09:19,900 --> 00:09:22,299
+is what we call dereferencing.
+
+270
+00:09:22,419 --> 00:09:23,369
+Dereference
+
+271
+00:09:23,659 --> 00:09:24,770
+or go to
+
+272
+00:09:24,979 --> 00:09:27,219
+the address that is stored in P.
+
+273
+00:09:30,260 --> 00:09:30,270
+OK,
+
+274
+00:09:31,169 --> 00:09:31,539
+so
+
+275
+00:09:31,690 --> 00:09:32,619
+as a summary.
+
+276
+00:09:33,690 --> 00:09:34,890
+Type star
+
+277
+00:09:35,570 --> 00:09:38,119
+is a pointer that stores the address of type,
+
+278
+00:09:38,330 --> 00:09:38,729
+so
+
+279
+00:09:39,250 --> 00:09:40,330
+type could be an integer,
+
+280
+00:09:40,489 --> 00:09:42,190
+type could be a character,
+
+281
+00:09:42,489 --> 00:09:43,640
+type could be a float,
+
+282
+00:09:43,849 --> 00:09:44,219
+etc.
+
+283
+00:09:45,919 --> 00:09:48,190
+Ampers X gets the address of
+
+284
+00:09:48,390 --> 00:09:50,469
+X where X is some variable.
+
+285
+00:09:51,869 --> 00:09:52,669
+And
+
+286
+00:09:52,950 --> 00:09:56,409
+X goes to the address stored at the pointer
+
+287
+00:09:56,809 --> 00:09:57,460
+X.
+
+288
+00:09:57,950 --> 00:09:59,619
+So in this third scenario,
+
+289
+00:09:59,989 --> 00:10:03,460
+the X is referring to some sort of pointer that we have,
+
+290
+00:10:03,789 --> 00:10:07,359
+and goes to the address that is stored at that pointer.
+
+291
+00:10:09,809 --> 00:10:10,349
+OK,
+
+292
+00:10:10,549 --> 00:10:12,219
+so before we do this practice,
+
+293
+00:10:12,590 --> 00:10:14,580
+are there any questions about
+
+294
+00:10:15,119 --> 00:10:16,179
+pointers?
+
+295
+00:10:18,330 --> 00:10:18,549
+no
+
+296
+00:10:20,460 --> 00:10:21,010
+OK.
+
+297
+00:10:22,109 --> 00:10:22,780
+Um,
+
+298
+00:10:24,099 --> 00:10:25,500
+How did the address numbers get chosen?
+
+299
+00:10:25,539 --> 00:10:26,750
+They all seem pretty random.
+
+300
+00:10:27,150 --> 00:10:27,340
+Yeah,
+
+301
+00:10:27,580 --> 00:10:27,659
+yeah,
+
+302
+00:10:27,820 --> 00:10:30,659
+so when you actually go and look at what the
+
+303
+00:10:30,659 --> 00:10:33,330
+address numbers that are being stored in your computer are,
+
+304
+00:10:33,500 --> 00:10:34,859
+they do seem pretty random to you,
+
+305
+00:10:34,869 --> 00:10:37,530
+but the computer has a system
+
+306
+00:10:37,820 --> 00:10:39,000
+that manages
+
+307
+00:10:39,219 --> 00:10:41,729
+which parts of memory should be dedicated to
+
+308
+00:10:42,020 --> 00:10:42,530
+which
+
+309
+00:10:43,090 --> 00:10:44,489
+pieces of code,
+
+310
+00:10:44,500 --> 00:10:44,659
+right?
+
+311
+00:10:44,780 --> 00:10:45,130
+So
+
+312
+00:10:45,320 --> 00:10:47,229
+if you recall from lecture,
+
+313
+00:10:47,419 --> 00:10:48,570
+David mentioned
+
+314
+00:10:49,419 --> 00:10:50,619
+um the heap
+
+315
+00:10:50,780 --> 00:10:51,729
+and the stack.
+
+316
+00:10:52,010 --> 00:10:53,340
+The heap is where
+
+317
+00:10:53,630 --> 00:10:54,179
+um
+
+318
+00:10:54,429 --> 00:10:57,619
+the memory that you dynamically allocate comes from
+
+319
+00:10:57,830 --> 00:11:00,419
+and the stack is used for
+
+320
+00:11:00,659 --> 00:11:02,869
+the local variables that you initialize
+
+321
+00:11:03,229 --> 00:11:03,929
+and so
+
+322
+00:11:04,270 --> 00:11:06,419
+the computer does all these things for you.
+
+323
+00:11:06,429 --> 00:11:08,739
+You don't really necessarily need to think about it yourself,
+
+324
+00:11:08,789 --> 00:11:09,140
+but
+
+325
+00:11:09,390 --> 00:11:09,909
+um
+
+326
+00:11:10,109 --> 00:11:12,419
+it's helpful if you look at lecture to know
+
+327
+00:11:12,830 --> 00:11:13,299
+which
+
+328
+00:11:13,549 --> 00:11:15,320
+pieces of memory
+
+329
+00:11:15,739 --> 00:11:19,659
+and how that's organized so that you know where those numbers are coming from.
+
+330
+00:11:21,530 --> 00:11:21,690
+Yeah,
+
+331
+00:11:21,809 --> 00:11:22,489
+great question.
+
+332
+00:11:27,059 --> 00:11:27,500
+OK,
+
+333
+00:11:27,700 --> 00:11:29,530
+so let's do a little bit of practice here.
+
+334
+00:11:30,299 --> 00:11:31,289
+And
+
+335
+00:11:31,619 --> 00:11:32,109
+see,
+
+336
+00:11:32,500 --> 00:11:35,369
+we have a little piece of code on the left here
+
+337
+00:11:36,059 --> 00:11:37,729
+and a little visual of
+
+338
+00:11:38,409 --> 00:11:39,130
+3
+
+339
+00:11:39,659 --> 00:11:40,669
+bits of memory
+
+340
+00:11:41,140 --> 00:11:41,919
+and so
+
+341
+00:11:42,210 --> 00:11:46,130
+basically I would encourage you to pause here for a second
+
+342
+00:11:46,419 --> 00:11:50,690
+and just think at the end of this piece of code running,
+
+343
+00:11:51,380 --> 00:11:54,710
+what will the final values be for each variable
+
+344
+00:11:55,380 --> 00:11:56,229
+or pointer?
+
+345
+00:11:59,030 --> 00:12:00,760
+So I'll give you a second to think.
+
+346
+00:12:01,049 --> 00:12:01,679
+You can
+
+347
+00:12:02,010 --> 00:12:03,520
+put your answers in the chat.
+
+348
+00:12:57,599 --> 00:12:57,799
+Alright,
+
+349
+00:12:57,960 --> 00:12:59,760
+so hopefully you've thought about this a little bit.
+
+350
+00:12:59,919 --> 00:13:01,390
+We have some people putting
+
+351
+00:13:01,760 --> 00:13:02,309
+some
+
+352
+00:13:02,590 --> 00:13:04,630
+um of their thoughts in the chat here.
+
+353
+00:13:05,080 --> 00:13:06,590
+So let's walk through it together.
+
+354
+00:13:07,710 --> 00:13:07,719
+OK,
+
+355
+00:13:08,619 --> 00:13:09,780
+so line by line,
+
+356
+00:13:10,260 --> 00:13:12,859
+we're gonna see what's happening to variables A,
+
+357
+00:13:13,020 --> 00:13:13,320
+B,
+
+358
+00:13:13,380 --> 00:13:14,119
+and C.
+
+359
+00:13:14,729 --> 00:13:17,929
+So this first line is nothing new.
+
+360
+00:13:18,099 --> 00:13:20,559
+We have integer A equals 28.
+
+361
+00:13:20,940 --> 00:13:23,650
+So A is going to store the value 28.
+
+362
+00:13:25,549 --> 00:13:28,119
+Then B is going to store the value of 50.
+
+363
+00:13:29,219 --> 00:13:29,960
+And so
+
+364
+00:13:30,530 --> 00:13:32,789
+these two pieces shouldn't be too new to you,
+
+365
+00:13:32,840 --> 00:13:33,229
+but
+
+366
+00:13:33,520 --> 00:13:36,669
+what about for this next line of code?
+
+367
+00:13:36,880 --> 00:13:37,599
+We have in
+
+368
+00:13:39,140 --> 00:13:42,049
+C equals Ampersand A.
+
+369
+00:13:44,500 --> 00:13:47,820
+So maybe first I'll ask what type is C.
+
+370
+00:13:50,340 --> 00:13:51,179
+What's the
+
+371
+00:13:51,280 --> 00:13:54,369
+variable type that C is going to be?
+
+372
+00:14:00,010 --> 00:14:00,159
+Yeah,
+
+373
+00:14:00,320 --> 00:14:02,479
+so it's going to be an end pointer,
+
+374
+00:14:02,880 --> 00:14:03,690
+an integer pointer,
+
+375
+00:14:03,710 --> 00:14:06,169
+and it's gonna store the address of A.
+
+376
+00:14:07,469 --> 00:14:08,559
+So as you can see here,
+
+377
+00:14:08,890 --> 00:14:10,280
+now the address of A,
+
+378
+00:14:10,330 --> 00:14:13,659
+which I just arbitrarily set as 0 X 12,
+
+379
+00:14:13,890 --> 00:14:16,119
+is now being stored in C.
+
+380
+00:14:16,849 --> 00:14:17,169
+Great.
+
+381
+00:14:17,849 --> 00:14:21,169
+So then this next line of code we have star C
+
+382
+00:14:21,450 --> 00:14:22,760
+equals 14.
+
+383
+00:14:24,840 --> 00:14:26,000
+So what
+
+384
+00:14:26,280 --> 00:14:27,349
+is that doing?
+
+385
+00:14:27,400 --> 00:14:29,119
+What is the star here doing?
+
+386
+00:14:30,229 --> 00:14:33,030
+And which variable is that going to change?
+
+387
+00:14:41,760 --> 00:14:43,109
+Any thoughts here?
+
+388
+00:14:45,799 --> 00:14:46,080
+Yeah,
+
+389
+00:14:46,400 --> 00:14:46,679
+exactly.
+
+390
+00:14:46,840 --> 00:14:49,150
+So A's value is gonna change.
+
+391
+00:14:49,520 --> 00:14:50,450
+Why is that?
+
+392
+00:14:50,760 --> 00:14:51,190
+So.
+
+393
+00:14:52,840 --> 00:14:54,250
+The star see.
+
+394
+00:14:54,989 --> 00:14:57,890
+Is the referencing the address stored at C.
+
+395
+00:14:58,150 --> 00:14:59,820
+And so the address stored at C
+
+396
+00:15:00,179 --> 00:15:02,440
+is our A variable and so it's gonna
+
+397
+00:15:02,700 --> 00:15:03,809
+use that address,
+
+398
+00:15:04,020 --> 00:15:05,369
+go to that address.
+
+399
+00:15:05,419 --> 00:15:05,890
+So
+
+400
+00:15:06,380 --> 00:15:07,260
+we see this address,
+
+401
+00:15:07,349 --> 00:15:08,419
+go to it.
+
+402
+00:15:09,140 --> 00:15:09,789
+And
+
+403
+00:15:09,919 --> 00:15:12,159
+then change that value to 14.
+
+404
+00:15:13,770 --> 00:15:13,780
+OK.
+
+405
+00:15:14,919 --> 00:15:15,830
+And then this next line,
+
+406
+00:15:15,840 --> 00:15:17,510
+we have C equals
+
+407
+00:15:17,880 --> 00:15:18,729
+Ampersand
+
+408
+00:15:19,080 --> 00:15:19,599
+B.
+
+409
+00:15:20,989 --> 00:15:23,219
+So I'm reassigning C's value
+
+410
+00:15:23,510 --> 00:15:24,940
+to the address
+
+411
+00:15:25,070 --> 00:15:25,750
+of B.
+
+412
+00:15:26,729 --> 00:15:27,799
+So we can see that here,
+
+413
+00:15:27,890 --> 00:15:30,239
+it's now changed to X X 13.
+
+414
+00:15:31,489 --> 00:15:31,500
+Oh
+
+415
+00:15:32,989 --> 00:15:33,640
+And then
+
+416
+00:15:33,809 --> 00:15:34,760
+this final line,
+
+417
+00:15:34,809 --> 00:15:37,299
+we have star C equals 25.
+
+418
+00:15:37,369 --> 00:15:38,880
+So similar to what we just saw,
+
+419
+00:15:39,460 --> 00:15:42,099
+I'm gonna go to the address store.c.
+
+420
+00:15:43,099 --> 00:15:45,609
+So go to X X 13
+
+421
+00:15:46,020 --> 00:15:46,809
+and then
+
+422
+00:15:47,140 --> 00:15:47,849
+set that
+
+423
+00:15:48,260 --> 00:15:49,340
+to 25.
+
+424
+00:15:52,369 --> 00:15:53,049
+OK,
+
+425
+00:15:53,650 --> 00:15:56,239
+any questions about this exercise?
+
+426
+00:15:57,599 --> 00:15:59,719
+These addresses are relatively arbitrary.
+
+427
+00:15:59,760 --> 00:16:01,520
+In reality they would probably
+
+428
+00:16:01,919 --> 00:16:02,429
+be
+
+429
+00:16:02,799 --> 00:16:03,369
+um.
+
+430
+00:16:04,950 --> 00:16:05,950
+Bigger numbers
+
+431
+00:16:06,150 --> 00:16:07,140
+farther apart,
+
+432
+00:16:07,429 --> 00:16:07,590
+um,
+
+433
+00:16:07,669 --> 00:16:09,390
+since these are integers and pointers.
+
+434
+00:16:10,789 --> 00:16:11,429
+Someone asks,
+
+435
+00:16:11,510 --> 00:16:14,570
+why would you use this um if you could set the value directly.
+
+436
+00:16:14,869 --> 00:16:15,030
+Yeah,
+
+437
+00:16:15,229 --> 00:16:15,909
+that's a great question.
+
+438
+00:16:15,989 --> 00:16:16,489
+And so,
+
+439
+00:16:16,750 --> 00:16:17,590
+um,
+
+440
+00:16:18,150 --> 00:16:21,989
+one example we saw yesterday in lecture was
+
+441
+00:16:21,989 --> 00:16:25,700
+the swap function where if you're trying to
+
+442
+00:16:26,950 --> 00:16:28,619
+Swap two values,
+
+443
+00:16:28,630 --> 00:16:29,299
+um,
+
+444
+00:16:29,630 --> 00:16:31,830
+you couldn't pass them in by value
+
+445
+00:16:31,830 --> 00:16:34,270
+because that wouldn't change those values directly
+
+446
+00:16:34,510 --> 00:16:37,059
+in a separate function like it's out of scope
+
+447
+00:16:37,349 --> 00:16:41,820
+and so when we used um pointers and referenced those,
+
+448
+00:16:42,789 --> 00:16:43,780
+then the pointers
+
+449
+00:16:44,150 --> 00:16:47,549
+um were able to change the values in the main function
+
+450
+00:16:48,070 --> 00:16:48,820
+even though
+
+451
+00:16:49,150 --> 00:16:49,780
+um
+
+452
+00:16:50,229 --> 00:16:54,150
+what happens in the function was going to be like not necessarily.
+
+453
+00:16:54,940 --> 00:16:57,330
+Remembered after the function was done running.
+
+454
+00:17:02,090 --> 00:17:02,270
+OK.
+
+455
+00:17:05,198 --> 00:17:05,509
+OK,
+
+456
+00:17:05,628 --> 00:17:08,667
+can pointers be used in a loop to change value of multiple integers?
+
+457
+00:17:08,708 --> 00:17:09,019
+Yeah,
+
+458
+00:17:09,269 --> 00:17:09,808
+definitely.
+
+459
+00:17:10,969 --> 00:17:14,439
+Why do you say C equals B,
+
+460
+00:17:14,650 --> 00:17:17,848
+but in C equals 8% A?
+
+461
+00:17:18,640 --> 00:17:19,209
+OK,
+
+462
+00:17:19,300 --> 00:17:19,699
+yeah,
+
+463
+00:17:20,060 --> 00:17:20,618
+so.
+
+464
+00:17:21,598 --> 00:17:24,138
+This line of code in C
+
+465
+00:17:24,479 --> 00:17:26,588
+equals Ampers and A.
+
+466
+00:17:27,319 --> 00:17:28,500
+Is just like
+
+467
+00:17:28,670 --> 00:17:29,589
+the ones before it,
+
+468
+00:17:29,670 --> 00:17:29,790
+right?
+
+469
+00:17:29,839 --> 00:17:31,939
+We're just declaring a new variable
+
+470
+00:17:32,719 --> 00:17:34,430
+instead of it being an integer,
+
+471
+00:17:34,469 --> 00:17:37,380
+it's gonna be an integer um pointer
+
+472
+00:17:37,949 --> 00:17:38,770
+and so
+
+473
+00:17:39,069 --> 00:17:44,500
+we're initially setting that value to to the address of A which is XX 13.
+
+474
+00:17:45,410 --> 00:17:46,180
+And then
+
+475
+00:17:47,219 --> 00:17:47,969
+When I do
+
+476
+00:17:48,180 --> 00:17:49,569
+C equals
+
+477
+00:17:50,760 --> 00:17:51,219
+A and B.
+
+478
+00:17:52,150 --> 00:17:54,000
+We're just updating the value.
+
+479
+00:17:54,130 --> 00:17:55,380
+So like I could have done
+
+480
+00:17:55,689 --> 00:18:00,599
+um like in or A equals 5 to update the value of A
+
+481
+00:18:00,849 --> 00:18:01,680
+the same way
+
+482
+00:18:02,010 --> 00:18:03,199
+we're just taking C,
+
+483
+00:18:03,250 --> 00:18:04,040
+which is a pointer,
+
+484
+00:18:04,050 --> 00:18:06,719
+and updating its value to a different address.
+
+485
+00:18:06,930 --> 00:18:08,119
+So in this case
+
+486
+00:18:08,489 --> 00:18:09,939
+the address of B.
+
+487
+00:18:18,229 --> 00:18:18,699
+Uh,
+
+488
+00:18:18,880 --> 00:18:19,270
+I see.
+
+489
+00:18:19,400 --> 00:18:19,599
+OK,
+
+490
+00:18:19,719 --> 00:18:21,099
+so someone asks when
+
+491
+00:18:22,479 --> 00:18:23,709
+C equals 25,
+
+492
+00:18:23,880 --> 00:18:27,709
+then is A also gonna change to 25?
+
+493
+00:18:28,369 --> 00:18:28,640
+Yeah,
+
+494
+00:18:28,739 --> 00:18:29,750
+that's a great question.
+
+495
+00:18:29,839 --> 00:18:30,479
+So,
+
+496
+00:18:31,160 --> 00:18:31,630
+um,
+
+497
+00:18:31,719 --> 00:18:32,949
+because I've updated
+
+498
+00:18:33,359 --> 00:18:35,750
+the address that's stored in C here
+
+499
+00:18:36,119 --> 00:18:38,089
+to the address of B,
+
+500
+00:18:38,359 --> 00:18:40,069
+it's no longer pointing
+
+501
+00:18:40,239 --> 00:18:41,310
+to the variable A.
+
+502
+00:18:42,380 --> 00:18:42,560
+Alright,
+
+503
+00:18:42,739 --> 00:18:46,050
+so now it's pointing to the variable B and so when I do this
+
+504
+00:18:46,579 --> 00:18:47,369
+de-reference,
+
+505
+00:18:47,459 --> 00:18:49,130
+and I set it to 25,
+
+506
+00:18:49,380 --> 00:18:51,250
+it's setting 25
+
+507
+00:18:51,459 --> 00:18:52,089
+um
+
+508
+00:18:52,859 --> 00:18:55,890
+for the B variable and not A anymore.
+
+509
+00:19:00,750 --> 00:19:01,329
+OK.
+
+510
+00:19:03,349 --> 00:19:03,550
+All right,
+
+511
+00:19:03,699 --> 00:19:04,900
+these are great questions.
+
+512
+00:19:05,939 --> 00:19:06,859
+And,
+
+513
+00:19:07,109 --> 00:19:07,510
+OK.
+
+514
+00:19:08,400 --> 00:19:09,130
+Hopefully,
+
+515
+00:19:09,599 --> 00:19:10,229
+uh,
+
+516
+00:19:10,239 --> 00:19:13,829
+more clarity will come in these next few
+
+517
+00:19:14,420 --> 00:19:15,050
+words.
+
+518
+00:19:15,280 --> 00:19:16,869
+Can a pointer point to two things?
+
+519
+00:19:20,589 --> 00:19:20,900
+No,
+
+520
+00:19:20,949 --> 00:19:22,780
+a pointer can only store
+
+521
+00:19:23,310 --> 00:19:24,060
+an address,
+
+522
+00:19:24,150 --> 00:19:24,339
+right?
+
+523
+00:19:24,390 --> 00:19:25,380
+One address.
+
+524
+00:19:26,300 --> 00:19:27,119
+And so
+
+525
+00:19:27,359 --> 00:19:29,670
+we did see that you can have
+
+526
+00:19:30,000 --> 00:19:31,150
+two pointers
+
+527
+00:19:31,560 --> 00:19:32,719
+storing the same address,
+
+528
+00:19:32,800 --> 00:19:34,510
+so that would mean pointing to the same
+
+529
+00:19:35,000 --> 00:19:36,589
+integer or variable,
+
+530
+00:19:36,770 --> 00:19:38,750
+but you can't have one pointer
+
+531
+00:19:39,079 --> 00:19:40,880
+that's pointing to two
+
+532
+00:19:41,359 --> 00:19:41,680
+things.
+
+533
+00:19:41,800 --> 00:19:43,000
+So that's a great question.
+
+534
+00:19:46,339 --> 00:19:46,910
+OK.
+
+535
+00:19:48,569 --> 00:19:50,339
+Can you make a pointer array?
+
+536
+00:19:51,520 --> 00:19:51,939
+Uh,
+
+537
+00:19:51,979 --> 00:19:52,140
+yeah,
+
+538
+00:19:52,300 --> 00:19:53,310
+just like any other
+
+539
+00:19:53,500 --> 00:19:55,959
+array of like integers or
+
+540
+00:19:56,219 --> 00:19:56,739
+um.
+
+541
+00:19:57,839 --> 00:19:58,780
+Floats,
+
+542
+00:19:58,939 --> 00:20:00,180
+you can also do that
+
+543
+00:20:00,500 --> 00:20:01,329
+with pointers.
+
+544
+00:20:02,680 --> 00:20:03,099
+OK,
+
+545
+00:20:03,160 --> 00:20:04,500
+we're going to keep going now
+
+546
+00:20:04,829 --> 00:20:08,270
+to talking about dynamic memory.
+
+547
+00:20:10,229 --> 00:20:10,599
+OK.
+
+548
+00:20:12,560 --> 00:20:13,050
+So
+
+549
+00:20:13,800 --> 00:20:16,930
+We were introduced to this idea of Mao and like
+
+550
+00:20:17,310 --> 00:20:19,819
+getting memory from the computer
+
+551
+00:20:20,270 --> 00:20:23,560
+and basically Malloch is like asking the computer,
+
+552
+00:20:23,630 --> 00:20:23,790
+Hey,
+
+553
+00:20:23,829 --> 00:20:27,540
+can I have this amount of memory allocated?
+
+554
+00:20:27,829 --> 00:20:30,339
+And so let's say we again have this
+
+555
+00:20:30,750 --> 00:20:32,630
+memory chunk here.
+
+556
+00:20:33,579 --> 00:20:34,589
+And
+
+557
+00:20:34,910 --> 00:20:36,569
+now I want to create.
+
+558
+00:20:37,609 --> 00:20:38,140
+In
+
+559
+00:20:38,410 --> 00:20:38,849
+pointer,
+
+560
+00:20:38,930 --> 00:20:40,180
+so an integer pointer
+
+561
+00:20:40,650 --> 00:20:41,280
+called
+
+562
+00:20:41,810 --> 00:20:43,119
+array per se.
+
+563
+00:20:43,829 --> 00:20:49,030
+And I'm going to set that equal to the address returned to me
+
+564
+00:20:49,420 --> 00:20:51,839
+from the Mao function.
+
+565
+00:20:52,140 --> 00:20:52,569
+So
+
+566
+00:20:53,140 --> 00:20:55,400
+Mao takes the input of how much
+
+567
+00:20:55,619 --> 00:20:57,650
+memory you need and so I'm going to say,
+
+568
+00:20:57,819 --> 00:20:57,939
+well,
+
+569
+00:20:58,060 --> 00:21:00,250
+I'm just going to store one integer for now,
+
+570
+00:21:00,420 --> 00:21:00,920
+so
+
+571
+00:21:01,339 --> 00:21:02,109
+give me
+
+572
+00:21:02,579 --> 00:21:05,849
+whatever the size of an integer is that much memory.
+
+573
+00:21:06,420 --> 00:21:08,489
+And so that's 4 bytes as we know,
+
+574
+00:21:08,579 --> 00:21:10,339
+and so we can see in the memory here.
+
+575
+00:21:10,880 --> 00:21:14,349
+We have our pointer called ray pointing
+
+576
+00:21:14,890 --> 00:21:15,650
+to
+
+577
+00:21:16,359 --> 00:21:17,250
+A block
+
+578
+00:21:17,359 --> 00:21:18,140
+of memory.
+
+579
+00:21:19,439 --> 00:21:20,680
+That's the size of an integer.
+
+580
+00:21:22,280 --> 00:21:22,560
+OK.
+
+581
+00:21:23,339 --> 00:21:24,579
+So that if I wanted
+
+582
+00:21:25,270 --> 00:21:26,219
+for more
+
+583
+00:21:26,390 --> 00:21:27,579
+integers here,
+
+584
+00:21:27,910 --> 00:21:30,660
+I can update my Mao call to be
+
+585
+00:21:31,189 --> 00:21:35,349
+Mao and then give me the size of an integer times 5,
+
+586
+00:21:35,420 --> 00:21:36,829
+that amount of memory.
+
+587
+00:21:38,109 --> 00:21:39,030
+So now we have
+
+588
+00:21:39,270 --> 00:21:39,880
+5
+
+589
+00:21:40,119 --> 00:21:41,989
+contiguous pieces of memory,
+
+590
+00:21:42,119 --> 00:21:43,810
+like one after the other,
+
+591
+00:21:44,400 --> 00:21:49,150
+and that's all pointed to at the beginning by the pointer array.
+
+592
+00:21:51,930 --> 00:21:52,439
+OK.
+
+593
+00:21:52,910 --> 00:21:54,739
+And so if I wanted to update
+
+594
+00:21:55,069 --> 00:21:57,119
+the first value in this array.
+
+595
+00:21:58,030 --> 00:22:01,739
+I can use the same dereferencing notation where I have
+
+596
+00:22:02,750 --> 00:22:06,300
+go to the address sort at array
+
+597
+00:22:06,869 --> 00:22:08,469
+and then set that to one.
+
+598
+00:22:08,750 --> 00:22:10,040
+So I'm gonna go to that first
+
+599
+00:22:10,439 --> 00:22:12,099
+uh integer slot
+
+600
+00:22:12,469 --> 00:22:13,500
+and set that to one.
+
+601
+00:22:15,229 --> 00:22:17,180
+What if I wanted to update
+
+602
+00:22:17,500 --> 00:22:19,180
+the value for the next
+
+603
+00:22:19,420 --> 00:22:20,910
+um integer.
+
+604
+00:22:22,869 --> 00:22:26,339
+What integer or what address comes after.
+
+605
+00:22:28,569 --> 00:22:29,469
+That
+
+606
+00:22:34,810 --> 00:22:35,079
+Yeah,
+
+607
+00:22:35,239 --> 00:22:37,750
+so we can do some pointer arithmetic here,
+
+608
+00:22:38,880 --> 00:22:39,810
+we can do.
+
+609
+00:22:43,170 --> 00:22:43,609
+Star,
+
+610
+00:22:43,810 --> 00:22:44,729
+so go to.
+
+611
+00:22:45,479 --> 00:22:48,689
+The address of array plus 1
+
+612
+00:22:49,160 --> 00:22:50,589
+and set that equal to 2.
+
+613
+00:22:51,430 --> 00:22:51,439
+Right,
+
+614
+00:22:52,219 --> 00:22:52,660
+so,
+
+615
+00:22:53,660 --> 00:22:54,449
+Instead of,
+
+616
+00:22:54,540 --> 00:22:55,010
+um,
+
+617
+00:22:55,020 --> 00:22:58,699
+because these numbers are just the addresses are just numbers,
+
+618
+00:22:58,819 --> 00:23:00,859
+we can also do some arithmetic to them.
+
+619
+00:23:00,979 --> 00:23:02,329
+So like you just add one
+
+620
+00:23:02,540 --> 00:23:03,689
+and we're gonna go to the next.
+
+621
+00:23:04,579 --> 00:23:04,750
+Right
+
+622
+00:23:06,420 --> 00:23:06,979
+Similarly,
+
+623
+00:23:07,020 --> 00:23:09,060
+we can kind of do this um.
+
+624
+00:23:10,619 --> 00:23:11,170
+With
+
+625
+00:23:11,739 --> 00:23:12,530
+3,
+
+626
+00:23:12,859 --> 00:23:14,890
+this next 3rd element.
+
+627
+00:23:15,579 --> 00:23:17,930
+And so you can also use this bracket notation
+
+628
+00:23:18,530 --> 00:23:19,650
+to refer to
+
+629
+00:23:20,050 --> 00:23:20,969
+the 3rd.
+
+630
+00:23:21,640 --> 00:23:22,380
+Um,
+
+631
+00:23:22,810 --> 00:23:23,709
+element in the array.
+
+632
+00:23:26,219 --> 00:23:26,229
+And
+
+633
+00:23:26,569 --> 00:23:26,930
+so on,
+
+634
+00:23:26,939 --> 00:23:28,459
+and we can update the next 1 to 4.
+
+635
+00:23:29,390 --> 00:23:30,130
+And so
+
+636
+00:23:31,569 --> 00:23:34,739
+Another thing we have to remember when we're working with memory like this
+
+637
+00:23:34,989 --> 00:23:35,780
+is that
+
+638
+00:23:36,189 --> 00:23:36,949
+we have
+
+639
+00:23:37,810 --> 00:23:38,540
+some
+
+640
+00:23:39,030 --> 00:23:40,939
+thing where we'remlocking,
+
+641
+00:23:41,150 --> 00:23:44,260
+so we're asking for this amount of memory from the computer.
+
+642
+00:23:45,189 --> 00:23:46,579
+And so I'm gonna say like,
+
+643
+00:23:46,900 --> 00:23:48,930
+here's this array pointer,
+
+644
+00:23:49,180 --> 00:23:50,380
+give me this amount of memory.
+
+645
+00:23:51,189 --> 00:23:51,589
+Um,
+
+646
+00:23:51,609 --> 00:23:54,560
+and then it's also important to know that we should always check
+
+647
+00:23:54,729 --> 00:23:56,800
+that that has is not null.
+
+648
+00:23:56,969 --> 00:23:58,000
+So if it is null,
+
+649
+00:23:58,250 --> 00:24:01,880
+there's nothing to do like the computer didn't have enough memory to give us,
+
+650
+00:24:02,089 --> 00:24:03,079
+we should return one.
+
+651
+00:24:03,689 --> 00:24:07,160
+Then we might use this array pointer somehow,
+
+652
+00:24:07,449 --> 00:24:09,969
+but at the end of that program we always
+
+653
+00:24:09,969 --> 00:24:12,699
+need to make sure that we're freeing this array.
+
+654
+00:24:13,510 --> 00:24:16,459
+Or freeing that memory that the computer has given us,
+
+655
+00:24:16,869 --> 00:24:19,589
+otherwise we're gonna run into some memory issues.
+
+656
+00:24:22,910 --> 00:24:27,739
+A few more memory errors that are pretty common just like the one we saw.
+
+657
+00:24:28,449 --> 00:24:29,199
+Is,
+
+658
+00:24:29,329 --> 00:24:29,739
+um,
+
+659
+00:24:29,839 --> 00:24:33,290
+what we just saw was failing to free every block of memory which we've maillocked.
+
+660
+00:24:33,319 --> 00:24:34,910
+So if I didn't have that free
+
+661
+00:24:35,160 --> 00:24:36,229
+call at the end,
+
+662
+00:24:36,560 --> 00:24:36,989
+then
+
+663
+00:24:37,160 --> 00:24:38,489
+that would be a memory error.
+
+664
+00:24:39,079 --> 00:24:41,400
+Failing to close every file we've opened,
+
+665
+00:24:41,520 --> 00:24:42,160
+so we're gonna
+
+666
+00:24:42,439 --> 00:24:42,910
+just,
+
+667
+00:24:42,959 --> 00:24:44,140
+we're gonna see in a second,
+
+668
+00:24:44,280 --> 00:24:44,510
+um,
+
+669
+00:24:44,560 --> 00:24:45,670
+working with files,
+
+670
+00:24:45,719 --> 00:24:47,500
+we also need to make sure
+
+671
+00:24:47,760 --> 00:24:49,949
+that we're dealing with that memory correctly
+
+672
+00:24:50,719 --> 00:24:53,130
+and also using more memory than we've allocated.
+
+673
+00:24:53,670 --> 00:24:57,839
+So this might be an issue you've already seen working with arrays.
+
+674
+00:24:57,969 --> 00:24:59,079
+If you have,
+
+675
+00:24:59,520 --> 00:24:59,640
+say,
+
+676
+00:24:59,650 --> 00:25:03,479
+an array of 5 elements and you try to access
+
+677
+00:25:03,839 --> 00:25:05,280
+um the array
+
+678
+00:25:05,689 --> 00:25:08,599
+element at the like 5th index or the 6th index,
+
+679
+00:25:08,930 --> 00:25:10,520
+that doesn't exist and that
+
+680
+00:25:10,930 --> 00:25:14,410
+is going to cause an error because you don't have access to that
+
+681
+00:25:14,689 --> 00:25:15,650
+piece of memory.
+
+682
+00:25:18,719 --> 00:25:19,339
+Yeah,
+
+683
+00:25:19,660 --> 00:25:20,069
+OK.
+
+684
+00:25:21,829 --> 00:25:27,160
+So we're gonna get into some practice here using pointers and using
+
+685
+00:25:27,410 --> 00:25:28,010
+Mao.
+
+686
+00:25:29,170 --> 00:25:29,680
+So
+
+687
+00:25:30,680 --> 00:25:33,270
+We're gonna write a function called concatenate.
+
+688
+00:25:33,640 --> 00:25:35,030
+It takes 2 strings
+
+689
+00:25:35,319 --> 00:25:39,589
+and returns a concatenated version of the 2 strings.
+
+690
+00:25:40,709 --> 00:25:40,719
+OK.
+
+691
+00:25:43,849 --> 00:25:46,439
+So I'm gonna move here to BS code.
+
+692
+00:25:47,750 --> 00:25:48,359
+OK.
+
+693
+00:25:49,849 --> 00:25:50,410
+Oh,
+
+694
+00:25:50,770 --> 00:25:51,609
+I restarted.
+
+695
+00:25:52,250 --> 00:25:52,469
+OK,
+
+696
+00:25:52,510 --> 00:25:53,339
+we'll restart it.
+
+697
+00:26:00,709 --> 00:26:01,160
+Someone says,
+
+698
+00:26:01,239 --> 00:26:03,060
+can we start array from index 0?
+
+699
+00:26:03,119 --> 00:26:03,349
+Yes,
+
+700
+00:26:03,520 --> 00:26:06,709
+you can index or arrays are always 0 indexed,
+
+701
+00:26:07,359 --> 00:26:07,800
+um.
+
+702
+00:26:15,359 --> 00:26:15,959
+OK.
+
+703
+00:26:17,329 --> 00:26:17,599
+OK,
+
+704
+00:26:17,719 --> 00:26:19,369
+so I'm gonna start out by
+
+705
+00:26:19,760 --> 00:26:20,589
+creating
+
+706
+00:26:20,959 --> 00:26:21,910
+um
+
+707
+00:26:23,410 --> 00:26:23,880
+So in here,
+
+708
+00:26:24,089 --> 00:26:25,050
+can create
+
+709
+00:26:27,010 --> 00:26:28,020
+concatenate.c.
+
+710
+00:26:29,439 --> 00:26:32,280
+And we're first gonna start by importing some libraries here,
+
+711
+00:26:32,530 --> 00:26:33,089
+so.
+
+712
+00:26:34,219 --> 00:26:34,920
+Um,
+
+713
+00:26:35,000 --> 00:26:37,150
+I know that I'm going to be asking the user
+
+714
+00:26:37,520 --> 00:26:39,359
+for 2 strings.
+
+715
+00:26:41,219 --> 00:26:41,579
+OK,
+
+716
+00:26:41,739 --> 00:26:42,890
+so I'm gonna include.
+
+717
+00:26:43,839 --> 00:26:44,199
+Oops,
+
+718
+00:26:44,319 --> 00:26:44,849
+CS 50.
+
+719
+00:26:45,040 --> 00:26:45,459
+H,
+
+720
+00:26:46,079 --> 00:26:47,739
+which gives us cat string.
+
+721
+00:26:49,920 --> 00:26:53,229
+Can include standard IO.H.
+
+722
+00:26:55,849 --> 00:26:59,420
+I'm going to include string out and
+
+723
+00:27:00,359 --> 00:27:01,430
+Standard.
+
+724
+00:27:02,839 --> 00:27:03,500
+Lib.
+
+725
+00:27:05,670 --> 00:27:06,109
+OK.
+
+726
+00:27:06,719 --> 00:27:08,959
+So I'm gonna start with this main function.
+
+727
+00:27:12,760 --> 00:27:13,189
+Um,
+
+728
+00:27:13,199 --> 00:27:14,630
+and if we recall,
+
+729
+00:27:15,040 --> 00:27:16,949
+I'm gonna take two strings from the input.
+
+730
+00:27:19,339 --> 00:27:19,349
+So,
+
+731
+00:27:21,109 --> 00:27:22,219
+I can say
+
+732
+00:27:22,650 --> 00:27:24,829
+my first string is gonna be
+
+733
+00:27:25,170 --> 00:27:26,160
+get string.
+
+734
+00:27:27,859 --> 00:27:30,089
+Whatever the user gives to me,
+
+735
+00:27:30,300 --> 00:27:30,770
+so.
+
+736
+00:27:31,930 --> 00:27:33,560
+Maybe like string one is
+
+737
+00:27:33,839 --> 00:27:34,469
+this.
+
+738
+00:27:37,329 --> 00:27:39,010
+And I'm gonna do the same thing
+
+739
+00:27:39,219 --> 00:27:40,369
+for a string
+
+740
+00:27:40,859 --> 00:27:41,540
+to.
+
+741
+00:27:42,930 --> 00:27:43,560
+OK,
+
+742
+00:27:44,010 --> 00:27:45,109
+right off the bat here,
+
+743
+00:27:45,369 --> 00:27:48,959
+what are some training wheels that I can take off,
+
+744
+00:27:49,290 --> 00:27:52,160
+given what we've learned this week about pointers?
+
+745
+00:27:58,640 --> 00:27:59,189
+Yeah,
+
+746
+00:27:59,380 --> 00:27:59,459
+yeah,
+
+747
+00:27:59,699 --> 00:28:00,170
+exactly.
+
+748
+00:28:00,339 --> 00:28:03,609
+String is a data type that we've defined
+
+749
+00:28:03,780 --> 00:28:04,810
+at CS 50,
+
+750
+00:28:05,500 --> 00:28:05,810
+but
+
+751
+00:28:05,939 --> 00:28:06,500
+in reality,
+
+752
+00:28:06,579 --> 00:28:08,569
+what we learned this week is that this is actually
+
+753
+00:28:08,900 --> 00:28:10,140
+a char star,
+
+754
+00:28:10,219 --> 00:28:11,260
+so it's a pointer
+
+755
+00:28:12,219 --> 00:28:13,170
+to a character.
+
+756
+00:28:13,739 --> 00:28:14,729
+So I can replace that.
+
+757
+00:28:15,989 --> 00:28:20,729
+And then we want to be returning our concatenated string,
+
+758
+00:28:20,890 --> 00:28:21,520
+so like
+
+759
+00:28:22,170 --> 00:28:25,359
+basically the first string after the next string in one string.
+
+760
+00:28:26,500 --> 00:28:31,430
+And that's gonna be whatever the result is of my function.
+
+761
+00:28:32,160 --> 00:28:34,829
+So I'm just gonna call my function cat
+
+762
+00:28:35,160 --> 00:28:36,709
+and it's going to take in.
+
+763
+00:28:37,949 --> 00:28:39,130
+S1 and S2,
+
+764
+00:28:39,150 --> 00:28:40,739
+so it's gonna take in two
+
+765
+00:28:41,790 --> 00:28:42,540
+pointers,
+
+766
+00:28:43,040 --> 00:28:43,489
+to
+
+767
+00:28:43,949 --> 00:28:44,790
+some strings.
+
+768
+00:28:45,550 --> 00:28:47,199
+And I'm going to store
+
+769
+00:28:47,369 --> 00:28:50,569
+this results in this 3rd string.
+
+770
+00:28:53,140 --> 00:28:53,920
+OK.
+
+771
+00:28:55,170 --> 00:28:55,979
+And then
+
+772
+00:28:56,300 --> 00:28:57,810
+finally I can just print
+
+773
+00:28:58,380 --> 00:28:59,729
+whatever I get here.
+
+774
+00:29:00,530 --> 00:29:01,819
+So I'm just gonna print.
+
+775
+00:29:03,060 --> 00:29:03,930
+S3.
+
+776
+00:29:06,699 --> 00:29:06,709
+OK,
+
+777
+00:29:07,930 --> 00:29:11,439
+so we've set up the part of getting in the input from the user
+
+778
+00:29:11,810 --> 00:29:14,180
+and calling this function that we haven't defined yet.
+
+779
+00:29:14,290 --> 00:29:15,660
+So let's actually define
+
+780
+00:29:16,050 --> 00:29:17,030
+that function.
+
+781
+00:29:17,609 --> 00:29:18,170
+OK.
+
+782
+00:29:18,890 --> 00:29:20,640
+So the first thing to note with
+
+783
+00:29:20,849 --> 00:29:24,290
+defining functions is what is my return type gonna be?
+
+784
+00:29:25,689 --> 00:29:27,130
+What am I returning?
+
+785
+00:29:30,500 --> 00:29:30,819
+Yeah,
+
+786
+00:29:30,969 --> 00:29:31,290
+that's true.
+
+787
+00:29:32,699 --> 00:29:34,459
+Which I can also write as a char star.
+
+788
+00:29:35,510 --> 00:29:37,689
+So I'm gonna say returns to Trustar
+
+789
+00:29:38,319 --> 00:29:43,670
+and then what are the types of my inputs to this function?
+
+790
+00:29:48,170 --> 00:29:49,349
+So you can see here that I,
+
+791
+00:29:49,430 --> 00:29:51,910
+I hope that it takes in an S1 S2,
+
+792
+00:29:51,949 --> 00:29:52,030
+yeah,
+
+793
+00:29:52,229 --> 00:29:52,420
+exactly.
+
+794
+00:29:52,550 --> 00:29:53,750
+So 2 pointers.
+
+795
+00:29:54,750 --> 00:29:56,699
+Each of Charar type,
+
+796
+00:29:56,829 --> 00:29:58,189
+so I'm gonna say it takes in.
+
+797
+00:29:59,510 --> 00:30:00,900
+One char star
+
+798
+00:30:01,160 --> 00:30:05,900
+called S1 and then one called S2.
+
+799
+00:30:08,130 --> 00:30:08,859
+OK.
+
+800
+00:30:11,170 --> 00:30:11,849
+OK,
+
+801
+00:30:12,510 --> 00:30:14,579
+so within this concatenate function,
+
+802
+00:30:14,790 --> 00:30:18,060
+we're gonna need to do a couple of things here.
+
+803
+00:30:19,000 --> 00:30:19,469
+So,
+
+804
+00:30:20,410 --> 00:30:22,479
+The first thing we're gonna need to do is
+
+805
+00:30:23,290 --> 00:30:24,959
+get the amount of memory,
+
+806
+00:30:25,369 --> 00:30:26,060
+so get
+
+807
+00:30:26,489 --> 00:30:29,400
+memory for this like 3rd string,
+
+808
+00:30:30,130 --> 00:30:31,319
+and how much
+
+809
+00:30:31,729 --> 00:30:33,180
+memory do we need
+
+810
+00:30:33,530 --> 00:30:34,670
+for this
+
+811
+00:30:34,969 --> 00:30:35,560
+string?
+
+812
+00:30:39,040 --> 00:30:40,239
+It's gonna be based on
+
+813
+00:30:40,400 --> 00:30:41,819
+the two strings that I get,
+
+814
+00:30:41,880 --> 00:30:42,400
+right?
+
+815
+00:30:42,560 --> 00:30:43,680
+2 Char stars.
+
+816
+00:30:44,479 --> 00:30:45,359
+And so,
+
+817
+00:30:45,729 --> 00:30:47,459
+I'm gonna get some amount of memory.
+
+818
+00:30:48,520 --> 00:30:49,359
+And then
+
+819
+00:30:50,050 --> 00:30:52,069
+that memory is going to be empty,
+
+820
+00:30:52,130 --> 00:30:53,209
+so I have to then
+
+821
+00:30:53,569 --> 00:30:55,050
+copy over
+
+822
+00:30:55,369 --> 00:30:56,719
+the values from
+
+823
+00:30:57,209 --> 00:30:58,479
+S1 and S2.
+
+824
+00:30:59,430 --> 00:31:00,239
+2 S3.
+
+825
+00:31:02,060 --> 00:31:03,790
+After I've done that,
+
+826
+00:31:04,859 --> 00:31:06,369
+then I can just return.
+
+827
+00:31:08,040 --> 00:31:10,310
+My new string S3,
+
+828
+00:31:10,439 --> 00:31:11,229
+which has
+
+829
+00:31:11,599 --> 00:31:12,270
+the
+
+830
+00:31:12,400 --> 00:31:14,170
+values from S1 and S2.
+
+831
+00:31:16,800 --> 00:31:17,290
+OK,
+
+832
+00:31:17,520 --> 00:31:18,219
+so let's
+
+833
+00:31:18,920 --> 00:31:20,079
+try this out.
+
+834
+00:31:21,410 --> 00:31:23,010
+So I know that I want to set up
+
+835
+00:31:23,569 --> 00:31:25,010
+HR star.
+
+836
+00:31:25,989 --> 00:31:26,000
+Of
+
+837
+00:31:27,140 --> 00:31:28,489
+S3 I'm gonna call it.
+
+838
+00:31:28,880 --> 00:31:31,290
+And I first need to get this memory from the computer,
+
+839
+00:31:31,380 --> 00:31:32,939
+so I'm going to use Matlock.
+
+840
+00:31:33,839 --> 00:31:37,589
+But then the question here is how much memory do I need to allocate?
+
+841
+00:31:40,489 --> 00:31:40,500
+OK
+
+842
+00:31:44,359 --> 00:31:45,880
+So I need
+
+843
+00:31:46,109 --> 00:31:48,900
+it to be at least as long as
+
+844
+00:31:49,349 --> 00:31:50,459
+my two
+
+845
+00:31:51,069 --> 00:31:52,310
+strings here.
+
+846
+00:31:53,040 --> 00:31:53,329
+Yeah,
+
+847
+00:31:53,510 --> 00:31:55,619
+so I need the size of these two strings.
+
+848
+00:31:56,229 --> 00:31:58,359
+So maybe I will actually get that first.
+
+849
+00:31:58,469 --> 00:32:00,560
+So I'm gonna say the length of the first string
+
+850
+00:32:01,069 --> 00:32:02,390
+and the length of the second string.
+
+851
+00:32:03,780 --> 00:32:09,180
+Does anyone recall how do we get this length of two strings or 1 string?
+
+852
+00:32:11,079 --> 00:32:11,339
+Yeah,
+
+853
+00:32:11,500 --> 00:32:12,930
+Sterling.
+
+854
+00:32:13,979 --> 00:32:14,949
+So this function
+
+855
+00:32:15,260 --> 00:32:16,619
+that I imported with string.
+
+856
+00:32:16,819 --> 00:32:17,329
+H here.
+
+857
+00:32:18,689 --> 00:32:19,880
+I'm gonna pass in
+
+858
+00:32:20,410 --> 00:32:21,130
+S1.
+
+859
+00:32:22,089 --> 00:32:25,290
+And that will give me the length of the first string.
+
+860
+00:32:26,410 --> 00:32:28,160
+I can do the same thing for the 2nd string.
+
+861
+00:32:30,170 --> 00:32:32,939
+So now we have these two values stored in here.
+
+862
+00:32:33,229 --> 00:32:35,989
+That helps us with allocating the right amount of memory here,
+
+863
+00:32:36,069 --> 00:32:36,430
+right?
+
+864
+00:32:38,089 --> 00:32:38,599
+So
+
+865
+00:32:39,910 --> 00:32:40,900
+How much
+
+866
+00:32:41,469 --> 00:32:44,869
+memory is gonna go in this Mao inputs?
+
+867
+00:32:44,989 --> 00:32:45,430
+What am I gonna,
+
+868
+00:32:45,550 --> 00:32:46,859
+how much am I gonna ask for?
+
+869
+00:32:50,079 --> 00:32:51,449
+Given that I now have
+
+870
+00:32:51,609 --> 00:32:52,959
+length 1 and length 2.
+
+871
+00:33:05,150 --> 00:33:05,319
+Yeah,
+
+872
+00:33:05,469 --> 00:33:06,680
+so it's going to be.
+
+873
+00:33:07,900 --> 00:33:08,699
+Length 1
+
+874
+00:33:08,989 --> 00:33:10,130
+plus length 2.
+
+875
+00:33:11,989 --> 00:33:14,709
+And the reason we don't have to necessarily use size up here
+
+876
+00:33:14,920 --> 00:33:17,939
+is because we know that the size of a character
+
+877
+00:33:18,239 --> 00:33:18,790
+is
+
+878
+00:33:19,000 --> 00:33:20,010
+just one bite.
+
+879
+00:33:20,359 --> 00:33:21,229
+And so I could
+
+880
+00:33:21,560 --> 00:33:22,420
+say like
+
+881
+00:33:22,729 --> 00:33:25,880
+length one times the size of a char.
+
+882
+00:33:28,790 --> 00:33:29,969
+But it's a bit unnecessary,
+
+883
+00:33:30,079 --> 00:33:30,930
+so I'm just gonna
+
+884
+00:33:31,550 --> 00:33:33,969
+stick with length 1 plus length 2.
+
+885
+00:33:35,900 --> 00:33:36,130
+Yeah,
+
+886
+00:33:36,290 --> 00:33:36,689
+someone asked,
+
+887
+00:33:36,729 --> 00:33:38,000
+what about the null character?
+
+888
+00:33:38,489 --> 00:33:39,290
+That's exactly right.
+
+889
+00:33:39,380 --> 00:33:40,000
+And so
+
+890
+00:33:40,449 --> 00:33:44,290
+we have to make sure that we actually allocate one more than these two lengths.
+
+891
+00:33:45,030 --> 00:33:47,510
+So that we accommodate the null character
+
+892
+00:33:47,800 --> 00:33:49,510
+and we make sure that it's copied over.
+
+893
+00:33:52,479 --> 00:33:53,160
+OK,
+
+894
+00:33:53,489 --> 00:33:56,280
+so now that we've allocated the right amount of memory,
+
+895
+00:33:56,530 --> 00:34:00,000
+now we need to copy over string 1 and string 2
+
+896
+00:34:00,609 --> 00:34:02,609
+into this new S3,
+
+897
+00:34:02,890 --> 00:34:03,959
+uh string.
+
+898
+00:34:04,760 --> 00:34:04,770
+OK,
+
+899
+00:34:05,670 --> 00:34:06,709
+so what
+
+900
+00:34:07,030 --> 00:34:08,060
+might I do here?
+
+901
+00:34:08,159 --> 00:34:09,300
+What might I use?
+
+902
+00:34:10,668 --> 00:34:10,760
+Yeah,
+
+903
+00:34:10,909 --> 00:34:12,149
+someone says string copy.
+
+904
+00:34:13,469 --> 00:34:14,629
+You could do that.
+
+905
+00:34:15,610 --> 00:34:16,560
+It's true.
+
+906
+00:34:16,969 --> 00:34:17,810
+For now,
+
+907
+00:34:17,889 --> 00:34:21,208
+maybe what I might propose is that we just.
+
+908
+00:34:22,228 --> 00:34:23,458
+Have a for loop
+
+909
+00:34:23,790 --> 00:34:24,860
+that copies.
+
+910
+00:34:25,030 --> 00:34:28,379
+We're gonna first start out with copying the first string over.
+
+911
+00:34:31,389 --> 00:34:33,478
+So I'm gonna start at 0 and then
+
+912
+00:34:33,929 --> 00:34:34,760
+I
+
+913
+00:34:36,320 --> 00:34:39,679
+How many times do I need a loop if I want
+
+914
+00:34:40,199 --> 00:34:42,510
+to go over every character in S1?
+
+915
+00:34:51,458 --> 00:34:52,620
+Some string length,
+
+916
+00:34:53,310 --> 00:34:53,540
+yeah,
+
+917
+00:34:53,679 --> 00:34:55,370
+length length one,
+
+918
+00:34:55,510 --> 00:34:56,070
+length one,
+
+919
+00:34:56,149 --> 00:34:59,260
+which is I have the length of my first string.
+
+920
+00:35:00,649 --> 00:35:01,600
+And then I'm gonna
+
+921
+00:35:01,870 --> 00:35:02,939
+do I plus plus,
+
+922
+00:35:03,270 --> 00:35:03,500
+great.
+
+923
+00:35:04,199 --> 00:35:04,989
+And so,
+
+924
+00:35:06,280 --> 00:35:07,020
+Here
+
+925
+00:35:08,070 --> 00:35:09,510
+I know that I want.
+
+926
+00:35:11,060 --> 00:35:13,830
+S3 some value in S3
+
+927
+00:35:14,260 --> 00:35:15,219
+to be updated.
+
+928
+00:35:17,379 --> 00:35:18,570
+Which index
+
+929
+00:35:20,379 --> 00:35:21,459
+Should go here,
+
+930
+00:35:21,560 --> 00:35:22,919
+what should I be indexing?
+
+931
+00:35:23,919 --> 00:35:25,479
+If I want like the first.
+
+932
+00:35:26,340 --> 00:35:27,909
+Value in S3,
+
+933
+00:35:27,949 --> 00:35:28,820
+then the 2nd character,
+
+934
+00:35:28,889 --> 00:35:29,300
+then the 3rd,
+
+935
+00:35:29,409 --> 00:35:30,060
+then the 4th.
+
+936
+00:35:31,389 --> 00:35:32,340
+Up to,
+
+937
+00:35:32,709 --> 00:35:32,830
+yeah,
+
+938
+00:35:32,949 --> 00:35:34,060
+people are saying I,
+
+939
+00:35:34,070 --> 00:35:34,540
+exactly.
+
+940
+00:35:35,439 --> 00:35:35,919
+OK,
+
+941
+00:35:36,110 --> 00:35:36,310
+great.
+
+942
+00:35:36,389 --> 00:35:37,860
+And then I'm gonna set this equal
+
+943
+00:35:38,229 --> 00:35:38,860
+to.
+
+944
+00:35:39,780 --> 00:35:41,219
+As ones
+
+945
+00:35:41,500 --> 00:35:42,739
+I value,
+
+946
+00:35:42,899 --> 00:35:43,290
+so.
+
+947
+00:35:44,929 --> 00:35:46,330
+Now I've basically copied over,
+
+948
+00:35:46,370 --> 00:35:47,020
+let's say if
+
+949
+00:35:47,649 --> 00:35:49,959
+my first string is um
+
+950
+00:35:50,250 --> 00:35:50,929
+the word.
+
+951
+00:35:51,939 --> 00:35:52,280
+Uh,
+
+952
+00:35:52,459 --> 00:35:53,030
+cat
+
+953
+00:35:53,979 --> 00:35:54,649
+Then
+
+954
+00:35:54,979 --> 00:35:59,729
+my C is gonna be copied into the first character of S3,
+
+955
+00:35:59,899 --> 00:36:00,510
+then the A,
+
+956
+00:36:00,580 --> 00:36:01,340
+then the T,
+
+957
+00:36:01,820 --> 00:36:03,610
+and then this 4 loop is over.
+
+958
+00:36:05,340 --> 00:36:07,729
+But then I still need to copy over
+
+959
+00:36:08,100 --> 00:36:09,090
+the second string.
+
+960
+00:36:09,879 --> 00:36:11,429
+So if my string 2
+
+961
+00:36:11,820 --> 00:36:12,489
+was
+
+962
+00:36:12,780 --> 00:36:13,500
+um.
+
+963
+00:36:14,620 --> 00:36:15,340
+House,
+
+964
+00:36:15,909 --> 00:36:16,899
+then I need
+
+965
+00:36:17,389 --> 00:36:21,659
+the 4th character of S3 to be H and then O then you,
+
+966
+00:36:21,830 --> 00:36:22,459
+then S,
+
+967
+00:36:22,530 --> 00:36:23,459
+and so on.
+
+968
+00:36:24,070 --> 00:36:26,239
+So I know I'm going to need another 4 loop here.
+
+969
+00:36:29,300 --> 00:36:31,120
+And I know that this is gonna loop
+
+970
+00:36:31,300 --> 00:36:32,689
+how many times?
+
+971
+00:36:38,600 --> 00:36:39,169
+Length too,
+
+972
+00:36:39,330 --> 00:36:39,570
+exactly,
+
+973
+00:36:39,610 --> 00:36:39,989
+yeah.
+
+974
+00:36:42,729 --> 00:36:42,739
+Great.
+
+975
+00:36:44,360 --> 00:36:44,919
+OK.
+
+976
+00:36:45,120 --> 00:36:45,669
+And then
+
+977
+00:36:45,840 --> 00:36:46,699
+now,
+
+978
+00:36:47,199 --> 00:36:48,639
+the index is gonna be a little bit different here,
+
+979
+00:36:48,800 --> 00:36:48,959
+right?
+
+980
+00:36:49,000 --> 00:36:51,110
+I can't do I again because
+
+981
+00:36:51,320 --> 00:36:53,989
+that's just gonna overwrite what I just wrote.
+
+982
+00:36:54,969 --> 00:36:56,030
+For the first string.
+
+983
+00:36:56,800 --> 00:37:00,419
+So how do I set up this index so that it starts
+
+984
+00:37:00,739 --> 00:37:01,290
+where
+
+985
+00:37:01,500 --> 00:37:02,340
+S1
+
+986
+00:37:02,739 --> 00:37:03,340
+ended?
+
+987
+00:37:05,290 --> 00:37:05,520
+Yeah,
+
+988
+00:37:05,719 --> 00:37:08,310
+I was saying lang one,
+
+989
+00:37:08,489 --> 00:37:09,959
+so that's the length of the first string.
+
+990
+00:37:11,429 --> 00:37:12,229
+Plus
+
+991
+00:37:12,489 --> 00:37:13,110
+I.
+
+992
+00:37:13,979 --> 00:37:13,989
+Yeah,
+
+993
+00:37:15,010 --> 00:37:15,250
+exactly.
+
+994
+00:37:15,370 --> 00:37:16,239
+So
+
+995
+00:37:16,810 --> 00:37:20,560
+if my first string was say 3 characters,
+
+996
+00:37:21,050 --> 00:37:21,560
+then
+
+997
+00:37:22,409 --> 00:37:23,919
+this would start at
+
+998
+00:37:24,330 --> 00:37:25,120
+the 3rd
+
+999
+00:37:25,610 --> 00:37:26,260
+index,
+
+1000
+00:37:26,489 --> 00:37:28,360
+which is where the last one left off.
+
+1001
+00:37:29,110 --> 00:37:29,979
+And then go
+
+1002
+00:37:30,189 --> 00:37:30,939
+subsequently.
+
+1003
+00:37:31,030 --> 00:37:31,659
+So I'm gonna
+
+1004
+00:37:31,949 --> 00:37:33,179
+then set that equal
+
+1005
+00:37:33,750 --> 00:37:36,540
+to S2's character.
+
+1006
+00:37:38,560 --> 00:37:39,120
+OK.
+
+1007
+00:37:41,739 --> 00:37:42,939
+Am I done here?
+
+1008
+00:37:44,000 --> 00:37:45,810
+Am I missing anything from
+
+1009
+00:37:46,139 --> 00:37:46,979
+S3?
+
+1010
+00:37:47,020 --> 00:37:48,290
+Is S3 done
+
+1011
+00:37:48,620 --> 00:37:49,850
+and ready to return?
+
+1012
+00:37:51,580 --> 00:37:51,760
+Yeah,
+
+1013
+00:37:51,919 --> 00:37:52,989
+the null character.
+
+1014
+00:37:53,120 --> 00:37:56,189
+I need to include the null character so that
+
+1015
+00:37:56,560 --> 00:37:58,149
+um my computer actually knows
+
+1016
+00:37:58,439 --> 00:37:59,830
+when this string is stopping.
+
+1017
+00:38:01,620 --> 00:38:04,340
+So at what index is the null character gonna be at?
+
+1018
+00:38:10,939 --> 00:38:11,149
+Yeah,
+
+1019
+00:38:11,229 --> 00:38:11,820
+the last,
+
+1020
+00:38:11,989 --> 00:38:12,659
+the last.
+
+1021
+00:38:13,879 --> 00:38:15,159
+Which is gonna be.
+
+1022
+00:38:16,870 --> 00:38:18,189
+The length of the 1st,
+
+1023
+00:38:18,409 --> 00:38:18,530
+yeah,
+
+1024
+00:38:18,689 --> 00:38:19,770
+the length of the 2nd.
+
+1025
+00:38:21,419 --> 00:38:22,229
+And so
+
+1026
+00:38:22,479 --> 00:38:23,709
+that will give us
+
+1027
+00:38:24,000 --> 00:38:24,870
+that final
+
+1028
+00:38:25,479 --> 00:38:26,149
+index,
+
+1029
+00:38:26,360 --> 00:38:27,750
+and we're gonna set that equal to.
+
+1030
+00:38:28,760 --> 00:38:29,340
+Oops,
+
+1031
+00:38:29,520 --> 00:38:29,750
+uh,
+
+1032
+00:38:29,760 --> 00:38:30,959
+I said that equal
+
+1033
+00:38:31,800 --> 00:38:33,959
+to backslash zero,
+
+1034
+00:38:34,000 --> 00:38:35,389
+which is that null character.
+
+1035
+00:38:36,830 --> 00:38:37,530
+OK,
+
+1036
+00:38:37,909 --> 00:38:38,500
+and finally,
+
+1037
+00:38:38,530 --> 00:38:40,040
+we can just return
+
+1038
+00:38:40,820 --> 00:38:41,889
+S3.
+
+1039
+00:38:45,090 --> 00:38:45,659
+OK.
+
+1040
+00:38:46,389 --> 00:38:46,679
+Yeah,
+
+1041
+00:38:46,879 --> 00:38:48,449
+I say I have to free,
+
+1042
+00:38:48,520 --> 00:38:50,100
+so I maillocked this.
+
+1043
+00:38:51,199 --> 00:38:53,290
+But I also have to make sure that I free it
+
+1044
+00:38:53,820 --> 00:38:58,060
+and where should that free go is a quite a good question is.
+
+1045
+00:38:59,100 --> 00:39:00,280
+Because I maillog it
+
+1046
+00:39:00,840 --> 00:39:01,939
+for my S3,
+
+1047
+00:39:02,040 --> 00:39:02,199
+right?
+
+1048
+00:39:02,239 --> 00:39:03,550
+And then I'm returning
+
+1049
+00:39:04,360 --> 00:39:06,100
+S3 to the main function.
+
+1050
+00:39:06,719 --> 00:39:08,679
+And so I need it here when I print it,
+
+1051
+00:39:08,760 --> 00:39:10,409
+so I can't give it back just yet.
+
+1052
+00:39:11,760 --> 00:39:12,899
+So maybe I'm going to say here,
+
+1053
+00:39:12,909 --> 00:39:14,379
+I'm actually going to free.
+
+1054
+00:39:15,760 --> 00:39:17,409
+S3 after I've printed it,
+
+1055
+00:39:17,489 --> 00:39:18,840
+after I'm done using it.
+
+1056
+00:39:20,219 --> 00:39:22,179
+Then I can free up that memory.
+
+1057
+00:39:23,409 --> 00:39:23,969
+OK.
+
+1058
+00:39:25,560 --> 00:39:27,139
+So I think we can try.
+
+1059
+00:39:28,370 --> 00:39:29,439
+Making it.
+
+1060
+00:39:32,090 --> 00:39:32,610
+Let's see,
+
+1061
+00:39:32,739 --> 00:39:32,949
+OK,
+
+1062
+00:39:33,110 --> 00:39:34,540
+what error did we get here?
+
+1063
+00:39:36,790 --> 00:39:38,620
+Called undeclared function,
+
+1064
+00:39:38,790 --> 00:39:39,290
+uh,
+
+1065
+00:39:39,909 --> 00:39:40,879
+rookie mistake.
+
+1066
+00:39:40,989 --> 00:39:41,800
+What did,
+
+1067
+00:39:41,979 --> 00:39:42,979
+what went wrong here?
+
+1068
+00:39:47,750 --> 00:39:48,929
+What did I forget to do?
+
+1069
+00:39:49,050 --> 00:39:49,760
+Header.
+
+1070
+00:39:50,300 --> 00:39:50,409
+Yeah,
+
+1071
+00:39:50,489 --> 00:39:52,080
+I forgot to prototype my function.
+
+1072
+00:39:53,169 --> 00:39:53,489
+Exactly,
+
+1073
+00:39:53,610 --> 00:39:53,969
+so
+
+1074
+00:39:54,330 --> 00:39:55,010
+quick fix here,
+
+1075
+00:39:55,050 --> 00:39:56,120
+let's see
+
+1076
+00:39:56,330 --> 00:39:57,870
+if it makes this time.
+
+1077
+00:39:58,250 --> 00:39:58,449
+OK,
+
+1078
+00:39:58,530 --> 00:39:59,479
+looks good.
+
+1079
+00:40:01,239 --> 00:40:01,889
+String one,
+
+1080
+00:40:02,139 --> 00:40:02,729
+say,
+
+1081
+00:40:03,179 --> 00:40:03,800
+uh,
+
+1082
+00:40:04,100 --> 00:40:04,629
+David.
+
+1083
+00:40:05,459 --> 00:40:05,750
+Maylin.
+
+1084
+00:40:06,889 --> 00:40:07,100
+There you go,
+
+1085
+00:40:07,139 --> 00:40:08,350
+and then prints out David Malan.
+
+1086
+00:40:09,629 --> 00:40:10,169
+OK.
+
+1087
+00:40:11,219 --> 00:40:12,010
+It's a great job.
+
+1088
+00:40:12,100 --> 00:40:14,260
+Any questions about?
+
+1089
+00:40:15,120 --> 00:40:16,399
+What we just did here.
+
+1090
+00:40:21,770 --> 00:40:22,320
+OK.
+
+1091
+00:40:25,459 --> 00:40:25,729
+OK,
+
+1092
+00:40:25,810 --> 00:40:26,080
+great.
+
+1093
+00:40:27,340 --> 00:40:28,010
+Um
+
+1094
+00:40:32,000 --> 00:40:32,300
+OK,
+
+1095
+00:40:32,419 --> 00:40:35,409
+so we have a few questions about why are we even
+
+1096
+00:40:36,260 --> 00:40:36,899
+doing these things?
+
+1097
+00:40:36,979 --> 00:40:40,659
+What's the difference between a regular variable name and these pointers?
+
+1098
+00:40:40,810 --> 00:40:41,229
+And
+
+1099
+00:40:41,459 --> 00:40:43,169
+so the main difference is really just that
+
+1100
+00:40:43,340 --> 00:40:44,100
+um
+
+1101
+00:40:44,379 --> 00:40:45,489
+the pointer
+
+1102
+00:40:46,000 --> 00:40:46,540
+variation,
+
+1103
+00:40:46,620 --> 00:40:47,929
+so like in Star,
+
+1104
+00:40:48,629 --> 00:40:49,570
+Tartar,
+
+1105
+00:40:49,860 --> 00:40:51,770
+those things are storing addresses,
+
+1106
+00:40:52,060 --> 00:40:52,810
+not
+
+1107
+00:40:53,100 --> 00:40:55,610
+like the values that we typically are seeing.
+
+1108
+00:40:56,020 --> 00:40:59,340
+So those are pointing to addresses of variables that already exist.
+
+1109
+00:41:01,939 --> 00:41:02,239
+OK.
+
+1110
+00:41:04,179 --> 00:41:04,409
+OK,
+
+1111
+00:41:04,479 --> 00:41:06,149
+we're gonna do another exercise here.
+
+1112
+00:41:06,969 --> 00:41:09,860
+And it's gonna be less coding and more debugging.
+
+1113
+00:41:09,929 --> 00:41:11,840
+Like what is gonna go wrong with
+
+1114
+00:41:12,209 --> 00:41:13,800
+spotting some of these memory
+
+1115
+00:41:14,330 --> 00:41:15,000
+issues?
+
+1116
+00:41:16,820 --> 00:41:19,370
+So we're going to debug a program Create.c
+
+1117
+00:41:19,820 --> 00:41:21,129
+that creates a file
+
+1118
+00:41:21,389 --> 00:41:21,949
+given
+
+1119
+00:41:22,139 --> 00:41:23,770
+as input at the command line.
+
+1120
+00:41:23,979 --> 00:41:26,340
+So if I runcret test.c,
+
+1121
+00:41:26,379 --> 00:41:29,409
+it's going to create a file called test.c.
+
+1122
+00:41:30,100 --> 00:41:32,659
+But our code has 3 memory errors.
+
+1123
+00:41:32,899 --> 00:41:34,290
+Can you find and fix them?
+
+1124
+00:41:35,760 --> 00:41:36,439
+OK,
+
+1125
+00:41:36,840 --> 00:41:37,520
+so.
+
+1126
+00:41:38,489 --> 00:41:39,850
+And I come back here.
+
+1127
+00:41:41,370 --> 00:41:42,399
+And
+
+1128
+00:41:42,570 --> 00:41:43,360
+um.
+
+1129
+00:41:45,239 --> 00:41:47,129
+We're going to,
+
+1130
+00:41:47,530 --> 00:41:49,899
+where's my terminals.
+
+1131
+00:41:51,000 --> 00:41:52,270
+Bring my terminal back here.
+
+1132
+00:41:53,300 --> 00:41:55,520
+And I already have Create.c
+
+1133
+00:41:56,320 --> 00:41:57,510
+loaded up here.
+
+1134
+00:41:59,270 --> 00:42:01,679
+So let's take a look at what this is doing.
+
+1135
+00:42:04,340 --> 00:42:04,750
+OK.
+
+1136
+00:42:06,469 --> 00:42:06,850
+So,
+
+1137
+00:42:06,899 --> 00:42:08,290
+it takes in a
+
+1138
+00:42:08,820 --> 00:42:10,169
+command line argument here
+
+1139
+00:42:10,419 --> 00:42:12,899
+as like the file name and so we're checking
+
+1140
+00:42:12,899 --> 00:42:16,330
+did they actually include a command line argument.
+
+1141
+00:42:16,860 --> 00:42:17,729
+If they didn't,
+
+1142
+00:42:17,939 --> 00:42:20,449
+then we're just gonna print this error message in return.
+
+1143
+00:42:21,709 --> 00:42:24,550
+Then we're going to get the length of the file name that they gave us.
+
+1144
+00:42:25,860 --> 00:42:29,100
+We're gonna create a new block of memory to store that file name,
+
+1145
+00:42:29,429 --> 00:42:29,860
+so
+
+1146
+00:42:30,260 --> 00:42:31,100
+Chartar
+
+1147
+00:42:31,469 --> 00:42:32,340
+called filename,
+
+1148
+00:42:32,479 --> 00:42:34,179
+and we're asking for
+
+1149
+00:42:35,030 --> 00:42:36,330
+the size of a char
+
+1150
+00:42:37,360 --> 00:42:39,429
+times the length of our file name.
+
+1151
+00:42:42,010 --> 00:42:43,280
+Then we're gonna check
+
+1152
+00:42:43,449 --> 00:42:45,270
+if that Mao failed.
+
+1153
+00:42:45,679 --> 00:42:48,139
+So if they didn't have enough
+
+1154
+00:42:48,489 --> 00:42:49,239
+memory for us,
+
+1155
+00:42:49,330 --> 00:42:51,850
+then we're just also gonna say Malloch failed,
+
+1156
+00:42:52,250 --> 00:42:52,580
+return.
+
+1157
+00:42:54,340 --> 00:42:54,850
+Then
+
+1158
+00:42:55,060 --> 00:42:55,770
+we're gonna
+
+1159
+00:42:56,020 --> 00:42:56,770
+copy
+
+1160
+00:42:57,260 --> 00:42:57,879
+this
+
+1161
+00:42:58,040 --> 00:42:58,780
+file name.
+
+1162
+00:42:59,540 --> 00:43:01,409
+In a block of memory for the file name.
+
+1163
+00:43:03,889 --> 00:43:05,050
+So sprint F.
+
+1164
+00:43:05,310 --> 00:43:05,429
+yeah,
+
+1165
+00:43:05,590 --> 00:43:09,699
+so we're copying whatever was inputted at the at the command line
+
+1166
+00:43:09,989 --> 00:43:13,639
+into this newly created block of memory.
+
+1167
+00:43:15,580 --> 00:43:17,530
+Then we're gonna open a new file,
+
+1168
+00:43:17,939 --> 00:43:18,489
+so
+
+1169
+00:43:19,300 --> 00:43:21,989
+we'll go in depth into open in a second,
+
+1170
+00:43:22,020 --> 00:43:22,409
+but.
+
+1171
+00:43:23,560 --> 00:43:24,750
+Open this new file.
+
+1172
+00:43:25,439 --> 00:43:27,030
+We're going to write to it.
+
+1173
+00:43:28,570 --> 00:43:31,280
+Or just have it open to be able to write to it,
+
+1174
+00:43:31,530 --> 00:43:34,610
+and then we're going to check if that F open failed.
+
+1175
+00:43:36,090 --> 00:43:36,770
+OK,
+
+1176
+00:43:37,050 --> 00:43:38,399
+so right off the bat here.
+
+1177
+00:43:40,649 --> 00:43:41,199
+Um,
+
+1178
+00:43:41,209 --> 00:43:42,570
+we're missing a few things,
+
+1179
+00:43:42,770 --> 00:43:43,560
+but we're gonna
+
+1180
+00:43:44,879 --> 00:43:46,479
+run Valgrind here.
+
+1181
+00:43:48,919 --> 00:43:49,639
+Bagrind
+
+1182
+00:43:50,010 --> 00:43:50,840
+create.c.
+
+1183
+00:43:52,149 --> 00:43:52,840
+Or
+
+1184
+00:43:53,889 --> 00:43:54,340
+should we create?
+
+1185
+00:43:55,750 --> 00:43:57,270
+And I'm gonna give it a
+
+1186
+00:43:57,530 --> 00:44:01,679
+in command line argument of tests and we're gonna see what that gives us here.
+
+1187
+00:44:03,620 --> 00:44:04,209
+OK.
+
+1188
+00:44:06,219 --> 00:44:07,780
+So there's a lot of texts,
+
+1189
+00:44:08,040 --> 00:44:10,229
+can be a little bit overwhelming to read,
+
+1190
+00:44:11,159 --> 00:44:15,790
+but we can pick out a few things that might tell us what's going on.
+
+1191
+00:44:17,520 --> 00:44:20,909
+So first we have an invalid right of size one.
+
+1192
+00:44:22,500 --> 00:44:23,020
+OK.
+
+1193
+00:44:24,659 --> 00:44:26,419
+And it's pointing us at
+
+1194
+00:44:27,370 --> 00:44:28,850
+Line 16.
+
+1195
+00:44:30,070 --> 00:44:30,800
+So they're saying,
+
+1196
+00:44:30,850 --> 00:44:31,040
+OK,
+
+1197
+00:44:31,169 --> 00:44:33,040
+something might be going wrong here.
+
+1198
+00:44:35,800 --> 00:44:36,629
+We have
+
+1199
+00:44:36,790 --> 00:44:37,520
+um.
+
+1200
+00:44:39,969 --> 00:44:42,260
+6 bites definitely lost.
+
+1201
+00:44:43,129 --> 00:44:46,520
+472 bytes still reachable.
+
+1202
+00:44:48,969 --> 00:44:49,530
+OK.
+
+1203
+00:44:51,919 --> 00:44:54,439
+So any ideas about what?
+
+1204
+00:44:55,379 --> 00:44:56,610
+Issues we have
+
+1205
+00:44:58,050 --> 00:45:00,229
+Someone says we are not freeing,
+
+1206
+00:45:00,370 --> 00:45:01,320
+not closing,
+
+1207
+00:45:01,489 --> 00:45:03,610
+and using more memory than we allocated.
+
+1208
+00:45:04,459 --> 00:45:04,850
+OK,
+
+1209
+00:45:05,100 --> 00:45:05,739
+so
+
+1210
+00:45:06,260 --> 00:45:07,330
+with this free,
+
+1211
+00:45:07,500 --> 00:45:08,169
+which
+
+1212
+00:45:08,939 --> 00:45:09,699
+block of memory,
+
+1213
+00:45:09,739 --> 00:45:11,770
+what variable do I need to free?
+
+1214
+00:45:22,520 --> 00:45:23,909
+It's wherever I do.
+
+1215
+00:45:25,229 --> 00:45:26,229
+Mallock,
+
+1216
+00:45:26,510 --> 00:45:26,830
+so yeah,
+
+1217
+00:45:26,989 --> 00:45:28,270
+file name exactly.
+
+1218
+00:45:29,260 --> 00:45:31,879
+I need to make sure I free file name after I'm done using it,
+
+1219
+00:45:31,959 --> 00:45:33,600
+so I'm just going to put it down here.
+
+1220
+00:45:34,540 --> 00:45:35,209
+Free
+
+1221
+00:45:35,459 --> 00:45:36,010
+file name.
+
+1222
+00:45:38,439 --> 00:45:39,070
+OK,
+
+1223
+00:45:39,639 --> 00:45:42,540
+and then we also are not closing
+
+1224
+00:45:42,800 --> 00:45:43,550
+this file,
+
+1225
+00:45:43,600 --> 00:45:45,350
+this new file that I have opened.
+
+1226
+00:45:46,320 --> 00:45:48,090
+So I'm going to do Flo
+
+1227
+00:45:48,939 --> 00:45:49,719
+new file.
+
+1228
+00:45:51,620 --> 00:45:52,000
+OK,
+
+1229
+00:45:52,060 --> 00:45:54,739
+and then using more memory than we allocated.
+
+1230
+00:45:56,149 --> 00:45:57,830
+What is going on there?
+
+1231
+00:45:58,000 --> 00:45:59,080
+Why do I need?
+
+1232
+00:46:00,010 --> 00:46:02,040
+Why am I using more memory than I allocated?
+
+1233
+00:46:08,750 --> 00:46:10,879
+So pointed us to line 16.
+
+1234
+00:46:12,090 --> 00:46:13,449
+Where I ask for.
+
+1235
+00:46:14,860 --> 00:46:17,169
+The size of a character
+
+1236
+00:46:17,860 --> 00:46:19,610
+times the file name's length.
+
+1237
+00:46:20,260 --> 00:46:22,729
+And that is the length of.
+
+1238
+00:46:23,879 --> 00:46:25,320
+My file name.
+
+1239
+00:46:26,830 --> 00:46:27,540
+Potentially
+
+1240
+00:46:31,719 --> 00:46:33,030
+So if I have like.
+
+1241
+00:46:34,540 --> 00:46:35,939
+A length of
+
+1242
+00:46:36,620 --> 00:46:37,030
+someone,
+
+1243
+00:46:37,100 --> 00:46:37,500
+OK.
+
+1244
+00:46:40,070 --> 00:46:40,600
+Yeah,
+
+1245
+00:46:40,810 --> 00:46:41,250
+not quite.
+
+1246
+00:46:41,330 --> 00:46:42,260
+So someone says the size,
+
+1247
+00:46:42,610 --> 00:46:44,320
+this should be size of Char star.
+
+1248
+00:46:46,129 --> 00:46:50,129
+So we do want the size of a character since we're gonna try to store a length,
+
+1249
+00:46:50,219 --> 00:46:51,689
+a string of length
+
+1250
+00:46:52,179 --> 00:46:53,100
+of the file name.
+
+1251
+00:46:55,739 --> 00:46:58,679
+But let's say my file name in this case was test.c,
+
+1252
+00:46:58,800 --> 00:46:58,919
+right?
+
+1253
+00:46:58,969 --> 00:46:59,669
+So that's.
+
+1254
+00:47:00,949 --> 00:47:02,320
+TEST.
+
+1255
+00:47:04,030 --> 00:47:06,189
+C 6 characters.
+
+1256
+00:47:07,060 --> 00:47:08,610
+So this would return 6.
+
+1257
+00:47:10,729 --> 00:47:13,350
+Is it correct that I only need 6?
+
+1258
+00:47:14,669 --> 00:47:16,350
+Right to store that.
+
+1259
+00:47:25,429 --> 00:47:26,699
+So
+
+1260
+00:47:26,989 --> 00:47:28,919
+something that we saw
+
+1261
+00:47:29,830 --> 00:47:31,229
+for in our
+
+1262
+00:47:31,510 --> 00:47:31,989
+past.
+
+1263
+00:47:32,760 --> 00:47:33,379
+Um,
+
+1264
+00:47:33,919 --> 00:47:34,639
+program was that we,
+
+1265
+00:47:34,679 --> 00:47:34,840
+yeah,
+
+1266
+00:47:34,959 --> 00:47:35,870
+we actually needed
+
+1267
+00:47:36,120 --> 00:47:38,159
+one more to count for
+
+1268
+00:47:38,439 --> 00:47:40,239
+our null character at the end.
+
+1269
+00:47:41,629 --> 00:47:43,510
+So if I update this to file name,
+
+1270
+00:47:44,189 --> 00:47:45,639
+length plus one,
+
+1271
+00:47:46,010 --> 00:47:48,280
+then that accounts for my null character.
+
+1272
+00:47:49,840 --> 00:47:51,449
+So if I
+
+1273
+00:47:51,659 --> 00:47:53,169
+make this again.
+
+1274
+00:47:54,830 --> 00:47:55,760
+And we ran.
+
+1275
+00:47:56,239 --> 00:47:56,889
+Create
+
+1276
+00:47:57,800 --> 00:47:58,360
+test.c.
+
+1277
+00:48:00,510 --> 00:48:00,770
+OK,
+
+1278
+00:48:00,889 --> 00:48:01,679
+I'm gonna run
+
+1279
+00:48:02,360 --> 00:48:03,370
+Valgrind.
+
+1280
+00:48:06,949 --> 00:48:07,889
+And see,
+
+1281
+00:48:08,409 --> 00:48:10,729
+now it seems like.
+
+1282
+00:48:11,989 --> 00:48:13,379
+All heat box for free,
+
+1283
+00:48:13,520 --> 00:48:14,699
+no errors.
+
+1284
+00:48:16,199 --> 00:48:18,600
+And everything is well in the world.
+
+1285
+00:48:20,179 --> 00:48:20,620
+OK.
+
+1286
+00:48:22,179 --> 00:48:25,449
+So feel free to drop in the chat if you have any questions about this.
+
+1287
+00:48:25,659 --> 00:48:28,469
+We're gonna finally move on to.
+
+1288
+00:48:29,909 --> 00:48:30,689
+File IO,
+
+1289
+00:48:30,909 --> 00:48:32,149
+so working with files,
+
+1290
+00:48:32,629 --> 00:48:33,090
+reading,
+
+1291
+00:48:33,229 --> 00:48:33,800
+writing,
+
+1292
+00:48:34,070 --> 00:48:34,860
+opening,
+
+1293
+00:48:35,030 --> 00:48:35,639
+closing,
+
+1294
+00:48:35,830 --> 00:48:36,780
+all that good stuff.
+
+1295
+00:48:38,239 --> 00:48:39,169
+So really,
+
+1296
+00:48:39,340 --> 00:48:40,330
+we want to know here,
+
+1297
+00:48:40,580 --> 00:48:43,570
+we're gonna work on this example of how might we copy
+
+1298
+00:48:44,060 --> 00:48:46,510
+the contents of one file into another file.
+
+1299
+00:48:49,169 --> 00:48:51,149
+So let's say for example we have
+
+1300
+00:48:51,530 --> 00:48:52,889
+in.txt
+
+1301
+00:48:53,129 --> 00:48:54,760
+as this input
+
+1302
+00:48:55,010 --> 00:48:55,879
+text file
+
+1303
+00:48:56,169 --> 00:48:58,929
+and then we also have an output text file that we want
+
+1304
+00:48:59,489 --> 00:49:00,780
+whatever is in
+
+1305
+00:49:01,090 --> 00:49:03,439
+in.txt to be copied to.
+
+1306
+00:49:04,340 --> 00:49:05,270
+And so
+
+1307
+00:49:05,629 --> 00:49:08,379
+those are the file names inex out dots.
+
+1308
+00:49:09,030 --> 00:49:11,739
+We have like the file contents and then we also have
+
+1309
+00:49:11,989 --> 00:49:14,080
+an address of the file.
+
+1310
+00:49:15,350 --> 00:49:16,479
+So these two things
+
+1311
+00:49:16,729 --> 00:49:18,770
+have their own addresses in memory.
+
+1312
+00:49:20,780 --> 00:49:21,129
+Hi
+
+1313
+00:49:21,889 --> 00:49:25,060
+So this first line of code here that we
+
+1314
+00:49:25,310 --> 00:49:28,340
+got a peek of inslacreate
+
+1315
+00:49:28,790 --> 00:49:29,379
+was
+
+1316
+00:49:29,750 --> 00:49:33,620
+we have file input equals F open
+
+1317
+00:49:35,909 --> 00:49:36,389
+N.XTR.
+
+1318
+00:49:37,070 --> 00:49:37,899
+So it's a lot of
+
+1319
+00:49:38,110 --> 00:49:38,770
+bits and pieces,
+
+1320
+00:49:38,830 --> 00:49:39,429
+but let's break down.
+
+1321
+00:49:39,510 --> 00:49:40,790
+What does that actually mean?
+
+1322
+00:49:43,129 --> 00:49:45,330
+So input is the name
+
+1323
+00:49:45,540 --> 00:49:46,090
+of
+
+1324
+00:49:46,419 --> 00:49:48,500
+our pointer variable that we're creating.
+
+1325
+00:49:50,729 --> 00:49:53,239
+File star is the type.
+
+1326
+00:49:54,320 --> 00:49:55,120
+So
+
+1327
+00:49:55,439 --> 00:49:55,520
+again,
+
+1328
+00:49:55,560 --> 00:49:58,030
+it's a pointer to a file.
+
+1329
+00:49:59,360 --> 00:50:03,659
+And then we're setting that equal to the return of F open
+
+1330
+00:50:04,270 --> 00:50:06,659
+and F open is going to return
+
+1331
+00:50:07,310 --> 00:50:09,060
+the address of
+
+1332
+00:50:09,639 --> 00:50:10,219
+the
+
+1333
+00:50:10,350 --> 00:50:12,979
+um file that you're opening up here
+
+1334
+00:50:13,310 --> 00:50:14,060
+and so
+
+1335
+00:50:14,590 --> 00:50:18,229
+you might wonder like how do we actually know what F Open is returning.
+
+1336
+00:50:19,520 --> 00:50:23,919
+This is a good chance to read some of the documentation that we have
+
+1337
+00:50:24,479 --> 00:50:26,060
+for functions like F Open.
+
+1338
+00:50:26,179 --> 00:50:29,350
+And so this is an excerpt from CS 50's manual.
+
+1339
+00:50:29,540 --> 00:50:30,419
+It's also linked
+
+1340
+00:50:30,629 --> 00:50:31,169
+there,
+
+1341
+00:50:31,530 --> 00:50:31,780
+um,
+
+1342
+00:50:31,860 --> 00:50:33,330
+so you can feel free to go and read that,
+
+1343
+00:50:33,459 --> 00:50:33,909
+but
+
+1344
+00:50:34,520 --> 00:50:35,459
+It's a lot of
+
+1345
+00:50:35,590 --> 00:50:37,139
+um it's a bit cryptic
+
+1346
+00:50:37,469 --> 00:50:39,459
+but more or less this is saying
+
+1347
+00:50:40,310 --> 00:50:40,979
+we have
+
+1348
+00:50:41,469 --> 00:50:42,860
+file F open
+
+1349
+00:50:43,229 --> 00:50:45,139
+and it takes in these two
+
+1350
+00:50:45,389 --> 00:50:46,290
+inputs.
+
+1351
+00:50:46,469 --> 00:50:47,560
+So the first input
+
+1352
+00:50:47,909 --> 00:50:48,620
+is
+
+1353
+00:50:49,110 --> 00:50:49,659
+a
+
+1354
+00:50:50,090 --> 00:50:51,080
+char star,
+
+1355
+00:50:51,550 --> 00:50:52,389
+so a pointer
+
+1356
+00:50:52,709 --> 00:50:53,500
+to a character
+
+1357
+00:50:53,909 --> 00:50:55,530
+that contains the path name.
+
+1358
+00:50:55,949 --> 00:50:59,919
+So in the last example we had index TXT as that path name.
+
+1359
+00:51:00,790 --> 00:51:03,419
+Then it also has this mode.
+
+1360
+00:51:04,219 --> 00:51:04,800
+So
+
+1361
+00:51:04,959 --> 00:51:05,750
+the mode
+
+1362
+00:51:05,979 --> 00:51:09,159
+can be R if we're opening a file to read from it,
+
+1363
+00:51:09,679 --> 00:51:12,469
+W if we're opening a file to write to it,
+
+1364
+00:51:12,879 --> 00:51:15,159
+and A if we're opening a file
+
+1365
+00:51:15,439 --> 00:51:16,120
+to a pended.
+
+1366
+00:51:19,030 --> 00:51:23,500
+function returns a pointer to a file representing the open file
+
+1367
+00:51:23,949 --> 00:51:26,550
+and in cases of error when the path name doesn't exist,
+
+1368
+00:51:26,590 --> 00:51:28,270
+it returns null.
+
+1369
+00:51:29,860 --> 00:51:31,919
+So it's all helpful information to know here.
+
+1370
+00:51:33,070 --> 00:51:36,600
+Another note that we've already discussed a lot here that
+
+1371
+00:51:37,209 --> 00:51:41,080
+string is actually just an alias for Char Star and so
+
+1372
+00:51:41,780 --> 00:51:42,760
+these pointers
+
+1373
+00:51:43,090 --> 00:51:43,699
+are,
+
+1374
+00:51:43,709 --> 00:51:44,120
+um,
+
+1375
+00:51:44,129 --> 00:51:45,000
+we've been using
+
+1376
+00:51:45,169 --> 00:51:46,209
+for many weeks now,
+
+1377
+00:51:46,330 --> 00:51:46,629
+but
+
+1378
+00:51:48,219 --> 00:51:51,860
+Both represent the address of the first character in a sequence of characters
+
+1379
+00:51:52,219 --> 00:51:54,169
+ending with the null character.
+
+1380
+00:51:55,949 --> 00:51:55,959
+OK.
+
+1381
+00:51:57,580 --> 00:51:59,770
+So let's say we we've now opened up
+
+1382
+00:51:59,939 --> 00:52:01,020
+in that TXT
+
+1383
+00:52:01,379 --> 00:52:03,110
+and we have this input
+
+1384
+00:52:03,500 --> 00:52:04,110
+pointer
+
+1385
+00:52:04,340 --> 00:52:05,969
+that's pointing to this file.
+
+1386
+00:52:09,020 --> 00:52:09,659
+You can,
+
+1387
+00:52:09,979 --> 00:52:12,040
+this is like a representation where
+
+1388
+00:52:12,389 --> 00:52:14,659
+um each of these blocks is a bite.
+
+1389
+00:52:15,770 --> 00:52:16,459
+And so
+
+1390
+00:52:16,699 --> 00:52:19,139
+we have one bite for lowercase h,
+
+1391
+00:52:19,219 --> 00:52:20,689
+then lowercase i,
+
+1392
+00:52:20,860 --> 00:52:22,330
+then exclamation point,
+
+1393
+00:52:22,699 --> 00:52:24,229
+and then our null character.
+
+1394
+00:52:26,399 --> 00:52:28,739
+So how do we actually get that information?
+
+1395
+00:52:28,820 --> 00:52:29,959
+How do we read it?
+
+1396
+00:52:30,820 --> 00:52:30,899
+Well,
+
+1397
+00:52:30,939 --> 00:52:32,620
+we can use F read.
+
+1398
+00:52:33,699 --> 00:52:35,739
+So Fee takes in 4
+
+1399
+00:52:35,939 --> 00:52:37,090
+inputs here.
+
+1400
+00:52:38,820 --> 00:52:41,379
+And so what are those act what do those inputs mean?
+
+1401
+00:52:43,020 --> 00:52:43,969
+Here we have
+
+1402
+00:52:44,419 --> 00:52:45,159
+Ampersani,
+
+1403
+00:52:46,060 --> 00:52:46,570
+so.
+
+1404
+00:52:47,689 --> 00:52:48,879
+The address
+
+1405
+00:52:49,010 --> 00:52:49,600
+of
+
+1406
+00:52:49,939 --> 00:52:50,459
+C,
+
+1407
+00:52:50,860 --> 00:52:52,350
+we'll talk about what C is,
+
+1408
+00:52:53,050 --> 00:52:54,709
+size of character,
+
+1409
+00:52:55,370 --> 00:52:56,010
+size of chart,
+
+1410
+00:52:56,239 --> 00:52:57,929
+and then 1 and then input.
+
+1411
+00:52:58,050 --> 00:52:59,320
+So what does that actually mean?
+
+1412
+00:52:59,909 --> 00:53:00,850
+So the first thing
+
+1413
+00:53:01,189 --> 00:53:01,889
+is.
+
+1414
+00:53:02,699 --> 00:53:04,219
+A pointer,
+
+1415
+00:53:04,620 --> 00:53:05,810
+so the address
+
+1416
+00:53:06,060 --> 00:53:09,489
+of the first bite of memory into which to read the data.
+
+1417
+00:53:10,409 --> 00:53:11,300
+So it's
+
+1418
+00:53:11,689 --> 00:53:12,360
+some
+
+1419
+00:53:12,840 --> 00:53:14,669
+address of a bite of memory
+
+1420
+00:53:14,969 --> 00:53:16,739
+and that's where we're saying
+
+1421
+00:53:17,010 --> 00:53:19,399
+OK you're gonna be reading from something
+
+1422
+00:53:19,810 --> 00:53:21,600
+you should read it into
+
+1423
+00:53:21,929 --> 00:53:22,560
+this
+
+1424
+00:53:22,810 --> 00:53:23,810
+piece of memory.
+
+1425
+00:53:25,239 --> 00:53:26,800
+Then the next one is size,
+
+1426
+00:53:26,810 --> 00:53:27,989
+and so that tells us
+
+1427
+00:53:28,510 --> 00:53:31,469
+the size and bytes of the type of data to read.
+
+1428
+00:53:32,320 --> 00:53:33,750
+In this example we saw,
+
+1429
+00:53:34,080 --> 00:53:36,000
+we wanted the size of a character.
+
+1430
+00:53:37,790 --> 00:53:38,860
+Then we have
+
+1431
+00:53:39,429 --> 00:53:42,780
+the number of those types to read at once.
+
+1432
+00:53:42,989 --> 00:53:43,820
+So how many,
+
+1433
+00:53:44,389 --> 00:53:48,699
+how many of the size blocks do you want to do you want to read?
+
+1434
+00:53:49,229 --> 00:53:49,639
+In this case,
+
+1435
+00:53:49,669 --> 00:53:51,830
+we just wanted to do one character at a time.
+
+1436
+00:53:53,679 --> 00:53:55,199
+And then stream,
+
+1437
+00:53:55,370 --> 00:53:58,479
+which is the pointer to the file that you want to read from,
+
+1438
+00:53:58,560 --> 00:53:59,439
+in this case,
+
+1439
+00:53:59,699 --> 00:54:00,360
+input.
+
+1440
+00:54:02,540 --> 00:54:02,550
+OK,
+
+1441
+00:54:03,370 --> 00:54:05,800
+this is going to return the number of items that we read
+
+1442
+00:54:06,010 --> 00:54:09,000
+and so if an error occurs or if we,
+
+1443
+00:54:09,280 --> 00:54:10,649
+the end of the file is reached.
+
+1444
+00:54:11,300 --> 00:54:11,879
+Um,
+
+1445
+00:54:11,989 --> 00:54:15,350
+then this function might actually return a value smaller
+
+1446
+00:54:15,760 --> 00:54:16,389
+than
+
+1447
+00:54:17,760 --> 00:54:18,149
+uh
+
+1448
+00:54:19,139 --> 00:54:20,330
+than NME,
+
+1449
+00:54:21,000 --> 00:54:21,750
+which is
+
+1450
+00:54:22,040 --> 00:54:23,040
+in this case one.
+
+1451
+00:54:24,000 --> 00:54:24,399
+So,
+
+1452
+00:54:24,489 --> 00:54:24,919
+in this case,
+
+1453
+00:54:24,929 --> 00:54:27,520
+it could either be 1 or it could be 0.
+
+1454
+00:54:28,129 --> 00:54:30,600
+This would return 0 if there was nothing
+
+1455
+00:54:30,929 --> 00:54:31,479
+to read.
+
+1456
+00:54:34,199 --> 00:54:34,600
+OK,
+
+1457
+00:54:34,800 --> 00:54:35,189
+so,
+
+1458
+00:54:35,320 --> 00:54:35,929
+as a recap,
+
+1459
+00:54:36,040 --> 00:54:37,870
+this is the location that we're reading from.
+
+1460
+00:54:38,770 --> 00:54:39,540
+Which is
+
+1461
+00:54:39,770 --> 00:54:40,729
+pointing to input.
+
+1462
+00:54:42,050 --> 00:54:42,479
+This
+
+1463
+00:54:42,610 --> 00:54:45,439
+refers to the size of the blocks that we want to read.
+
+1464
+00:54:45,610 --> 00:54:46,439
+In this case,
+
+1465
+00:54:46,929 --> 00:54:48,770
+one chart at a time and we're reading.
+
+1466
+00:54:49,620 --> 00:54:49,850
+Yeah,
+
+1467
+00:54:50,050 --> 00:54:50,479
+one
+
+1468
+00:54:50,649 --> 00:54:52,370
+character lock at a time.
+
+1469
+00:54:54,149 --> 00:54:55,459
+And then this
+
+1470
+00:54:56,189 --> 00:54:57,560
+uh Ampersan C
+
+1471
+00:54:58,030 --> 00:55:00,149
+is the location we want to store these blocks.
+
+1472
+00:55:02,139 --> 00:55:04,080
+And so we've actually set up here.
+
+1473
+00:55:05,350 --> 00:55:06,100
+A
+
+1474
+00:55:06,909 --> 00:55:07,729
+character.
+
+1475
+00:55:08,550 --> 00:55:08,989
+Um,
+
+1476
+00:55:09,149 --> 00:55:10,479
+that's called C.
+
+1477
+00:55:11,659 --> 00:55:14,020
+And this is gonna store one character at a time,
+
+1478
+00:55:14,239 --> 00:55:15,469
+so it's gonna store each.
+
+1479
+00:55:16,300 --> 00:55:17,689
+After the first F read.
+
+1480
+00:55:19,209 --> 00:55:19,899
+And then
+
+1481
+00:55:20,899 --> 00:55:22,699
+Once we have that stored and see,
+
+1482
+00:55:23,379 --> 00:55:25,330
+how do we actually write it to a new file?
+
+1483
+00:55:26,510 --> 00:55:28,300
+Or that we can use right.
+
+1484
+00:55:29,510 --> 00:55:32,100
+Here the inputs are relatively similar
+
+1485
+00:55:32,389 --> 00:55:33,189
+and so
+
+1486
+00:55:33,750 --> 00:55:35,399
+we look at the documentation again.
+
+1487
+00:55:36,310 --> 00:55:37,820
+It's pretty much.
+
+1488
+00:55:38,820 --> 00:55:40,419
+Almost the same that we've just seen,
+
+1489
+00:55:40,459 --> 00:55:41,409
+so it's gonna,
+
+1490
+00:55:41,739 --> 00:55:42,330
+um,
+
+1491
+00:55:42,739 --> 00:55:46,250
+instead of reading from or reading to a certain buffer,
+
+1492
+00:55:46,379 --> 00:55:48,370
+which we call or this address,
+
+1493
+00:55:48,780 --> 00:55:49,610
+we're gonna be
+
+1494
+00:55:49,969 --> 00:55:51,540
+writing from that.
+
+1495
+00:55:52,270 --> 00:55:52,649
+Um,
+
+1496
+00:55:52,689 --> 00:55:53,719
+byte of memory,
+
+1497
+00:55:54,250 --> 00:55:55,770
+and then we're specifying
+
+1498
+00:55:56,169 --> 00:55:56,639
+how
+
+1499
+00:55:56,929 --> 00:55:57,479
+big
+
+1500
+00:55:57,729 --> 00:56:00,330
+in bytes the type of data is we want to write,
+
+1501
+00:56:00,409 --> 00:56:02,120
+how many of those to write at once,
+
+1502
+00:56:02,409 --> 00:56:04,370
+and then where we want to write to.
+
+1503
+00:56:05,370 --> 00:56:05,679
+Again,
+
+1504
+00:56:05,760 --> 00:56:07,250
+this function is going to return
+
+1505
+00:56:07,560 --> 00:56:09,550
+number of items that we wrote.
+
+1506
+00:56:11,360 --> 00:56:11,370
+OK,
+
+1507
+00:56:12,510 --> 00:56:13,939
+so in practice we see
+
+1508
+00:56:14,469 --> 00:56:15,500
+once I have this
+
+1509
+00:56:15,620 --> 00:56:16,179
+C
+
+1510
+00:56:16,590 --> 00:56:17,679
+but with
+
+1511
+00:56:17,949 --> 00:56:19,500
+that has been read to.
+
+1512
+00:56:21,110 --> 00:56:23,020
+Then I can output it
+
+1513
+00:56:23,350 --> 00:56:25,219
+in this out.txt file.
+
+1514
+00:56:26,610 --> 00:56:27,459
+And so
+
+1515
+00:56:27,669 --> 00:56:29,260
+this is gonna continue again
+
+1516
+00:56:29,469 --> 00:56:30,939
+and again we have
+
+1517
+00:56:31,229 --> 00:56:32,469
+the inputs
+
+1518
+00:56:33,540 --> 00:56:36,540
+reading I into C which is our buffer.
+
+1519
+00:56:37,520 --> 00:56:39,610
+And then writing from our buffer
+
+1520
+00:56:40,020 --> 00:56:40,939
+to output.
+
+1521
+00:56:41,770 --> 00:56:44,929
+So on and so forth until we reach the null character.
+
+1522
+00:56:46,459 --> 00:56:48,360
+So what we just saw visually
+
+1523
+00:56:48,649 --> 00:56:51,239
+is what this piece of code does
+
+1524
+00:56:51,649 --> 00:56:52,489
+in reality.
+
+1525
+00:56:53,489 --> 00:56:54,449
+So you can see
+
+1526
+00:56:54,810 --> 00:56:56,370
+we have opened in.
+
+1527
+00:56:56,590 --> 00:56:57,239
+TT.
+
+1528
+00:56:57,530 --> 00:56:59,669
+We're checking that it didn't fail,
+
+1529
+00:57:00,370 --> 00:57:01,479
+then we're checking,
+
+1530
+00:57:01,590 --> 00:57:05,409
+then we're opening out.tt also error checking.
+
+1531
+00:57:06,340 --> 00:57:07,229
+And then
+
+1532
+00:57:08,540 --> 00:57:11,159
+We create a character called C.
+
+1533
+00:57:11,340 --> 00:57:12,090
+That's where we're
+
+1534
+00:57:12,260 --> 00:57:13,159
+gonna be storing things.
+
+1535
+00:57:13,219 --> 00:57:14,540
+It's gonna be our buffer.
+
+1536
+00:57:15,459 --> 00:57:16,219
+And then
+
+1537
+00:57:16,629 --> 00:57:18,500
+while F read
+
+1538
+00:57:19,350 --> 00:57:20,479
+to the buffer C.
+
+1539
+00:57:21,459 --> 00:57:23,629
+And we're doing one block at a time
+
+1540
+00:57:23,959 --> 00:57:26,790
+from input while that is not equal to zero,
+
+1541
+00:57:26,959 --> 00:57:28,669
+which means like while we're still
+
+1542
+00:57:28,840 --> 00:57:29,469
+reading things,
+
+1543
+00:57:29,600 --> 00:57:31,070
+while there's still things to read,
+
+1544
+00:57:31,399 --> 00:57:33,189
+we should have right
+
+1545
+00:57:33,520 --> 00:57:34,989
+from that character
+
+1546
+00:57:35,280 --> 00:57:36,030
+buffer.
+
+1547
+00:57:36,919 --> 00:57:36,929
+To
+
+1548
+00:57:37,629 --> 00:57:39,149
+the output file.
+
+1549
+00:57:41,080 --> 00:57:41,969
+OK.
+
+1550
+00:57:42,479 --> 00:57:43,350
+That was a lot.
+
+1551
+00:57:45,159 --> 00:57:49,149
+Any questions about file I opening
+
+1552
+00:57:49,760 --> 00:57:50,629
+closing?
+
+1553
+00:58:01,489 --> 00:58:01,989
+OK.
+
+1554
+00:58:02,149 --> 00:58:04,590
+Why is this useful in real life for programs?
+
+1555
+00:58:04,750 --> 00:58:05,219
+So,
+
+1556
+00:58:06,070 --> 00:58:06,189
+yeah,
+
+1557
+00:58:06,310 --> 00:58:10,699
+this copy example might not be the most useful thing we see here,
+
+1558
+00:58:10,989 --> 00:58:11,340
+but
+
+1559
+00:58:12,159 --> 00:58:16,750
+In other ways um it's helpful to be able to like write things to
+
+1560
+00:58:16,870 --> 00:58:19,270
+files and read things from files
+
+1561
+00:58:19,639 --> 00:58:21,520
+uh and you're gonna be doing a bit of that in
+
+1562
+00:58:21,520 --> 00:58:24,830
+this week's problem that hopefully that gives you a better sense
+
+1563
+00:58:25,149 --> 00:58:27,050
+um but you can imagine that
+
+1564
+00:58:27,280 --> 00:58:29,070
+if you have like a very long
+
+1565
+00:58:29,520 --> 00:58:31,219
+file to work with
+
+1566
+00:58:31,520 --> 00:58:33,040
+or a very long
+
+1567
+00:58:33,520 --> 00:58:38,110
+uh like lots of pieces of data that you want to be written to a certain file,
+
+1568
+00:58:38,919 --> 00:58:40,239
+then it can be helpful to.
+
+1569
+00:58:40,979 --> 00:58:42,979
+Use some code to do that.
+
+1570
+00:58:46,500 --> 00:58:47,020
+OK.
+
+1571
+00:58:48,439 --> 00:58:49,020
+OK,
+
+1572
+00:58:49,250 --> 00:58:52,090
+we're gonna do one final exercise here.
+
+1573
+00:58:53,550 --> 00:58:55,719
+And we're gonna create a a program
+
+1574
+00:58:55,929 --> 00:59:00,280
+called PDF.C that checks whether a file passed in as a command line argument
+
+1575
+00:59:00,610 --> 00:59:02,879
+is likely a PDF or not.
+
+1576
+00:59:03,760 --> 00:59:04,669
+And so
+
+1577
+00:59:04,899 --> 00:59:08,320
+something to note here is that PDF files,
+
+1578
+00:59:08,739 --> 00:59:11,570
+they start with a 4 byte sequence.
+
+1579
+00:59:13,149 --> 00:59:17,280
+So when you actually look at the bytes that are contained within
+
+1580
+00:59:17,510 --> 00:59:18,739
+a PDF file,
+
+1581
+00:59:19,030 --> 00:59:20,520
+it's gonna start with
+
+1582
+00:59:20,870 --> 00:59:22,110
+this 4,
+
+1583
+00:59:22,510 --> 00:59:23,469
+these 4 bytes.
+
+1584
+00:59:24,949 --> 00:59:25,540
+OK,
+
+1585
+00:59:25,989 --> 00:59:27,040
+so we're gonna
+
+1586
+00:59:27,389 --> 00:59:29,050
+move back to BS code here.
+
+1587
+00:59:29,820 --> 00:59:32,399
+And I'm going to code pdf.c.
+
+1588
+00:59:33,669 --> 00:59:34,169
+OK.
+
+1589
+00:59:36,020 --> 00:59:37,169
+copy over
+
+1590
+00:59:37,739 --> 00:59:38,459
+some of.
+
+1591
+00:59:39,879 --> 00:59:42,689
+These so I don't have to write them again.
+
+1592
+00:59:44,010 --> 00:59:45,000
+But
+
+1593
+00:59:45,370 --> 00:59:46,919
+we're gonna include
+
+1594
+00:59:47,479 --> 00:59:47,850
+50.
+
+1595
+00:59:48,090 --> 00:59:48,570
+H.
+
+1596
+00:59:50,020 --> 00:59:56,689
+And then we're also gonna include standard in that gives us access to some
+
+1597
+00:59:57,100 --> 00:59:57,729
+um
+
+1598
+00:59:58,020 --> 00:59:58,659
+types.
+
+1599
+00:59:59,370 --> 00:59:59,870
+OK.
+
+1600
+01:00:00,800 --> 01:00:01,270
+So
+
+1601
+01:00:01,439 --> 01:00:03,270
+I'm taking in a command line argument.
+
+1602
+01:00:05,899 --> 01:00:08,459
+Which means I also should check that
+
+1603
+01:00:08,659 --> 01:00:09,899
+they actually gave me
+
+1604
+01:00:10,379 --> 01:00:12,580
+2 command line arguments.
+
+1605
+01:00:13,179 --> 01:00:14,449
+They didn't give me 2.
+
+1606
+01:00:15,699 --> 01:00:16,250
+Then
+
+1607
+01:00:16,500 --> 01:00:17,370
+I'm going to print.
+
+1608
+01:00:19,060 --> 01:00:19,459
+Uh,
+
+1609
+01:00:19,540 --> 01:00:21,399
+improper usage.
+
+1610
+01:00:24,129 --> 01:00:24,409
+OK,
+
+1611
+01:00:24,510 --> 01:00:25,360
+and then return one.
+
+1612
+01:00:28,370 --> 01:00:28,780
+OK.
+
+1613
+01:00:29,909 --> 01:00:32,169
+So then once they've given me a file,
+
+1614
+01:00:32,530 --> 01:00:34,449
+the first thing I should do is open that file,
+
+1615
+01:00:34,489 --> 01:00:34,610
+right?
+
+1616
+01:00:34,659 --> 01:00:36,360
+I want to be able to see what's in it.
+
+1617
+01:00:36,610 --> 01:00:38,520
+I should first open it up.
+
+1618
+01:00:39,340 --> 01:00:41,570
+So similar to the syntax we were doing before,
+
+1619
+01:00:41,580 --> 01:00:42,229
+I'm gonna
+
+1620
+01:00:42,620 --> 01:00:43,139
+have
+
+1621
+01:00:43,889 --> 01:00:46,280
+a file pointer called PDF
+
+1622
+01:00:46,939 --> 01:00:47,790
+and I'm gonna
+
+1623
+01:00:48,469 --> 01:00:49,290
+open.
+
+1624
+01:00:50,909 --> 01:00:53,929
+Here the first argument is the file name
+
+1625
+01:00:54,469 --> 01:00:55,219
+and so
+
+1626
+01:00:55,399 --> 01:00:58,399
+in this program I'm saying that the user is gonna give me
+
+1627
+01:00:58,659 --> 01:01:00,939
+the file name in the command line argument.
+
+1628
+01:01:01,760 --> 01:01:03,860
+So I can say RV1.
+
+1629
+01:01:05,340 --> 01:01:05,459
+Right,
+
+1630
+01:01:05,580 --> 01:01:06,489
+so if we recall,
+
+1631
+01:01:08,419 --> 01:01:10,270
+PDF or PDF is going to be RV 0,
+
+1632
+01:01:10,699 --> 01:01:13,409
+then the name of the PDF is going to be RV1.
+
+1633
+01:01:14,580 --> 01:01:15,949
+I'm gonna set that.
+
+1634
+01:01:16,850 --> 01:01:19,199
+In read mode so that I can read from it.
+
+1635
+01:01:21,179 --> 01:01:25,659
+And then just like in their last example with that C character
+
+1636
+01:01:25,870 --> 01:01:27,750
+that was our buffer that stored
+
+1637
+01:01:28,070 --> 01:01:28,550
+the
+
+1638
+01:01:28,949 --> 01:01:30,090
+thing that we read from,
+
+1639
+01:01:30,870 --> 01:01:32,260
+we want to store
+
+1640
+01:01:32,550 --> 01:01:35,709
+a buffer for these 1st 4 bytes as well.
+
+1641
+01:01:36,030 --> 01:01:37,179
+So I'm going to use
+
+1642
+01:01:37,429 --> 01:01:39,229
+this is a new type here,
+
+1643
+01:01:39,350 --> 01:01:39,669
+but
+
+1644
+01:01:39,909 --> 01:01:40,790
+it's a,
+
+1645
+01:01:41,070 --> 01:01:44,050
+it's just another kind of integer here that is
+
+1646
+01:01:44,350 --> 01:01:46,469
+typically used for storing things like bytes.
+
+1647
+01:01:47,320 --> 01:01:48,629
+I'm gonna call this buffer
+
+1648
+01:01:48,840 --> 01:01:49,540
+and
+
+1649
+01:01:50,239 --> 01:01:55,840
+I'm gonna make an array of 4 bytes since I want to see those 1st 4 bytes of my PDF.
+
+1650
+01:01:57,419 --> 01:01:57,750
+OK,
+
+1651
+01:01:57,949 --> 01:02:00,020
+and since I'm also checking this against
+
+1652
+01:02:00,469 --> 01:02:02,100
+these 4 bytes,
+
+1653
+01:02:02,389 --> 01:02:05,110
+it might be helpful for me to actually store the sequence
+
+1654
+01:02:06,080 --> 01:02:06,659
+here.
+
+1655
+01:02:06,949 --> 01:02:08,209
+So I'm gonna call it
+
+1656
+01:02:09,070 --> 01:02:09,510
+signature,
+
+1657
+01:02:09,550 --> 01:02:10,979
+it's a PDF signature.
+
+1658
+01:02:12,530 --> 01:02:13,469
+And
+
+1659
+01:02:13,760 --> 01:02:15,719
+we're gonna put those values here.
+
+1660
+01:02:16,909 --> 01:02:18,770
+Xerox 50
+
+1661
+01:02:19,429 --> 01:02:20,540
+XX 44,
+
+1662
+01:02:20,550 --> 01:02:20,989
+whoops.
+
+1663
+01:02:22,870 --> 01:02:25,860
+And 0 X 46.
+
+1664
+01:02:27,899 --> 01:02:28,239
+OK,
+
+1665
+01:02:28,360 --> 01:02:30,179
+so now that I've opened,
+
+1666
+01:02:30,679 --> 01:02:32,110
+I've set up my buffer.
+
+1667
+01:02:33,040 --> 01:02:35,090
+Now I can read.
+
+1668
+01:02:36,199 --> 01:02:37,050
+So,
+
+1669
+01:02:37,459 --> 01:02:39,219
+I just want to read the 1st 4 bites.
+
+1670
+01:02:40,459 --> 01:02:42,010
+So I'm not gonna put it in a loop.
+
+1671
+01:02:42,179 --> 01:02:42,699
+I can also,
+
+1672
+01:02:42,780 --> 01:02:45,429
+I can just read those 1st 4 bites.
+
+1673
+01:02:45,790 --> 01:02:47,409
+I'm gonna read it to my buffer.
+
+1674
+01:02:49,310 --> 01:02:50,120
+And then
+
+1675
+01:02:50,399 --> 01:02:52,830
+I know that I want um
+
+1676
+01:02:53,239 --> 01:02:54,000
+it to be.
+
+1677
+01:02:55,340 --> 01:02:56,830
+One bite
+
+1678
+01:02:57,100 --> 01:02:57,649
+at a time,
+
+1679
+01:02:57,780 --> 01:02:58,179
+but
+
+1680
+01:02:58,379 --> 01:02:59,659
+I want to read 4 bites.
+
+1681
+01:03:00,550 --> 01:03:02,399
+And I want to read it from
+
+1682
+01:03:02,689 --> 01:03:03,939
+this PDF file.
+
+1683
+01:03:05,370 --> 01:03:05,860
+OK.
+
+1684
+01:03:07,300 --> 01:03:08,919
+And then once I'm done reading it,
+
+1685
+01:03:09,070 --> 01:03:10,820
+I honestly don't really need
+
+1686
+01:03:11,110 --> 01:03:11,540
+this
+
+1687
+01:03:11,750 --> 01:03:12,790
+PDF file anymore.
+
+1688
+01:03:12,830 --> 01:03:16,219
+I've already gotten the information I need and it's going to be stored in buffer.
+
+1689
+01:03:17,199 --> 01:03:18,330
+I'm just gonna close it.
+
+1690
+01:03:20,389 --> 01:03:20,770
+OK.
+
+1691
+01:03:21,489 --> 01:03:24,639
+So now at this point I've read
+
+1692
+01:03:25,000 --> 01:03:27,520
+the 1st 4 bytes from PDF into
+
+1693
+01:03:27,729 --> 01:03:30,879
+my buffer variable here in my buffer array,
+
+1694
+01:03:31,330 --> 01:03:32,600
+and so
+
+1695
+01:03:32,889 --> 01:03:34,280
+I can just check that
+
+1696
+01:03:34,649 --> 01:03:36,280
+the 4 bytes that are in buffer
+
+1697
+01:03:36,510 --> 01:03:38,520
+match up with this signature.
+
+1698
+01:03:39,929 --> 01:03:40,340
+So
+
+1699
+01:03:40,570 --> 01:03:41,729
+I'm going to loop.
+
+1700
+01:03:44,169 --> 01:03:45,320
+I equals 0,
+
+1701
+01:03:45,449 --> 01:03:48,239
+and I'm gonna loop 4 times since I know that I'm
+
+1702
+01:03:48,530 --> 01:03:49,729
+just checking those 4 bytes.
+
+1703
+01:03:52,760 --> 01:03:52,770
+OK.
+
+1704
+01:03:54,159 --> 01:03:55,040
+And then
+
+1705
+01:03:55,610 --> 01:03:59,179
+I'm gonna check bite by bite whether those two things
+
+1706
+01:03:59,770 --> 01:04:00,689
+line up.
+
+1707
+01:04:01,050 --> 01:04:01,959
+So
+
+1708
+01:04:02,649 --> 01:04:03,239
+if
+
+1709
+01:04:03,959 --> 01:04:07,929
+the I character or bite and buffer.
+
+1710
+01:04:08,770 --> 01:04:12,310
+Is not equal to signatures.
+
+1711
+01:04:13,969 --> 01:04:14,520
+Then
+
+1712
+01:04:15,879 --> 01:04:18,040
+As long as there's at least one thing that's different,
+
+1713
+01:04:18,199 --> 01:04:20,350
+I can say pretty confidently
+
+1714
+01:04:20,719 --> 01:04:21,199
+that.
+
+1715
+01:04:22,219 --> 01:04:22,810
+Print
+
+1716
+01:04:23,679 --> 01:04:24,439
+Not a PDF.
+
+1717
+01:04:29,260 --> 01:04:29,750
+OK.
+
+1718
+01:04:30,560 --> 01:04:33,320
+And then I can just return 0 since we
+
+1719
+01:04:33,570 --> 01:04:34,780
+did that successfully.
+
+1720
+01:04:37,580 --> 01:04:40,080
+At what point do I know that I can return?
+
+1721
+01:04:40,139 --> 01:04:40,409
+Like,
+
+1722
+01:04:40,540 --> 01:04:42,379
+this is probably a PDF.
+
+1723
+01:04:52,149 --> 01:04:52,350
+Ah,
+
+1724
+01:04:52,510 --> 01:04:53,469
+thanks for catching that.
+
+1725
+01:05:02,020 --> 01:05:02,290
+Yeah,
+
+1726
+01:05:02,449 --> 01:05:04,020
+so if all 4 of these
+
+1727
+01:05:04,530 --> 01:05:04,929
+are correct,
+
+1728
+01:05:05,010 --> 01:05:05,600
+which means
+
+1729
+01:05:05,889 --> 01:05:09,639
+as long as this if statement doesn't return 0.
+
+1730
+01:05:10,520 --> 01:05:12,540
+And I go through this entire for loop,
+
+1731
+01:05:12,709 --> 01:05:13,699
+then I can say.
+
+1732
+01:05:14,629 --> 01:05:15,719
+This is likely
+
+1733
+01:05:15,909 --> 01:05:16,669
+a PDF.
+
+1734
+01:05:18,729 --> 01:05:20,649
+And then return 0,
+
+1735
+01:05:21,149 --> 01:05:21,639
+oops.
+
+1736
+01:05:22,409 --> 01:05:23,270
+Print
+
+1737
+01:05:25,270 --> 01:05:25,860
+OK.
+
+1738
+01:05:26,689 --> 01:05:28,780
+So we did that kind of quickly,
+
+1739
+01:05:29,110 --> 01:05:31,669
+but are there any questions about?
+
+1740
+01:05:39,750 --> 01:05:41,090
+I can try testing it out.
+
+1741
+01:05:41,739 --> 01:05:42,429
+Um,
+
+1742
+01:05:42,520 --> 01:05:43,929
+I'm gonna make a PDF.
+
+1743
+01:05:50,229 --> 01:05:50,239
+Ah,
+
+1744
+01:05:51,979 --> 01:05:55,689
+I forgot to provide an input to my clothes.
+
+1745
+01:05:56,580 --> 01:05:57,570
+I want to close
+
+1746
+01:05:57,780 --> 01:06:00,050
+PDF here since that's what I opened.
+
+1747
+01:06:00,969 --> 01:06:02,379
+Let me make again.
+
+1748
+01:06:03,419 --> 01:06:03,889
+OK.
+
+1749
+01:06:04,949 --> 01:06:05,899
+So if I just run.
+
+1750
+01:06:06,300 --> 01:06:07,530
+PDF it's gonna say
+
+1751
+01:06:07,780 --> 01:06:08,620
+improper usage,
+
+1752
+01:06:08,699 --> 01:06:09,979
+you need to give me a
+
+1753
+01:06:10,219 --> 01:06:11,469
+command line argument.
+
+1754
+01:06:12,060 --> 01:06:16,439
+Let's say I use create.c which we know is not a PDF.
+
+1755
+01:06:17,770 --> 01:06:19,120
+We're gonna say not a PDF.
+
+1756
+01:06:19,500 --> 01:06:19,850
+Cool.
+
+1757
+01:06:20,750 --> 01:06:21,729
+Um,
+
+1758
+01:06:22,000 --> 01:06:24,110
+I'm just gonna like create some
+
+1759
+01:06:24,600 --> 01:06:26,320
+test PDF file here.
+
+1760
+01:06:27,590 --> 01:06:28,290
+OK,
+
+1761
+01:06:28,800 --> 01:06:30,370
+so now if I test.
+
+1762
+01:06:31,290 --> 01:06:33,080
+PDF with my test PDF,
+
+1763
+01:06:33,159 --> 01:06:33,909
+hopefully,
+
+1764
+01:06:34,919 --> 01:06:34,929
+oh,
+
+1765
+01:06:35,020 --> 01:06:35,959
+it says not a PDF.
+
+1766
+01:06:36,820 --> 01:06:37,530
+OK,
+
+1767
+01:06:38,020 --> 01:06:38,379
+in that case,
+
+1768
+01:06:38,409 --> 01:06:41,159
+it might be that I have to upload my own PDF,
+
+1769
+01:06:41,169 --> 01:06:41,179
+um,
+
+1770
+01:06:42,020 --> 01:06:43,209
+but either way,
+
+1771
+01:06:44,139 --> 01:06:44,969
+hopefully,
+
+1772
+01:06:45,340 --> 01:06:46,239
+uh,
+
+1773
+01:06:46,659 --> 01:06:47,169
+this
+
+1774
+01:06:47,379 --> 01:06:48,989
+would work on a normal PDF,
+
+1775
+01:06:49,340 --> 01:06:49,750
+but.
+
+1776
+01:06:50,409 --> 01:06:51,020
+Um,
+
+1777
+01:06:51,139 --> 01:06:52,810
+I'm not going to test it for now,
+
+1778
+01:06:53,060 --> 01:06:57,780
+but you can try it on your laptop and try uploading a PDF and see if.
+
+1779
+01:06:58,530 --> 01:06:59,189
+It
+
+1780
+01:06:59,439 --> 01:07:01,159
+detects it correctly or not.
+
+1781
+01:07:02,649 --> 01:07:03,129
+OK.
+
+1782
+01:07:04,760 --> 01:07:07,840
+Any other questions about this program?
+
+1783
+01:07:16,300 --> 01:07:16,310
+OK.
+
+1784
+01:07:18,879 --> 01:07:19,350
+Well then,
+
+1785
+01:07:19,360 --> 01:07:19,770
+with
+
+1786
+01:07:19,919 --> 01:07:20,429
+that,
+
+1787
+01:07:20,550 --> 01:07:21,790
+that's the end of
+
+1788
+01:07:22,040 --> 01:07:23,949
+CS 50 week 4,
+
+1789
+01:07:24,020 --> 01:07:26,040
+section 4 on memory.
+
+1790
+01:07:26,600 --> 01:07:30,229
+Thanks for your participation in the chat and all your questions,
+
+1791
+01:07:30,709 --> 01:07:30,719
+uh,
+
+1792
+01:07:30,770 --> 01:07:32,280
+and hopefully I see you next week.

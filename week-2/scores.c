@@ -14,8 +14,7 @@ int main(void) {
   // i is zero; if i is less than the number of chunk, adds one
   // inside the loop, cs50 get_int will take interger, and assign it to the
   // scores array index, hence why it starts with zero
-  for (int i = 0; i < N; i++) 
-  {
+  for (int i = 0; i < N; i++) {
     scores[i] = get_int("Score: ");
   }
 
@@ -43,7 +42,7 @@ float average(int len, int numbers[]) {
   // during each iteration. To calculate the average, use the updated sum from
   // the loop and divide by the num of chunk in array
 
-  return sum / (float) len;
+  return sum / (float)len;
 }
 
 // fixes made:
@@ -53,4 +52,4 @@ float average(int len, int numbers[]) {
 // 4. average: added `return` so the computed value leaves the function
 //    instead of being discarded (was always coming back as garbage/0)
 // 5. average: cast `len` to (float) before dividing, so the division is
-//    float division and keeps the decimal instead of truncating
+//    float division and keeps the decimal instead of truncatin
