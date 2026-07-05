@@ -39,7 +39,7 @@ int main(int argc, string argv[])
         return 2;
     }
 
-    // set startinf vote count
+    // set starting vote count
     
     for (int i = 0; i < candidate_count; i++)
     {
