@@ -1,35 +1,41 @@
 #include <cs50.h>
-#include <stdint.h>
 #include <stdio.h>
+#include <stdint.h>
 
 int main(int argc, char *argv[])
 {
-    // Check for improper usage
     if (argc != 2)
     {
-        printf("Improper usage.\n");
+        printf("wrong input dumbass\n");
         return 1;
     }
 
-    // Open PDF with inputted filename
+    // first fopen arg is taken from input when executing the programme
+    // r for read-only
     FILE *pdf = fopen(argv[1], "r");
 
+    // to check how many byte to process as per project requirement
+    //(check the first four bytes of a file to see if it's a pdf or nahha)
     uint8_t buffer[4];
+
+    // signature of a pdf file
     uint8_t signature[] = {0x25, 0x50, 0x44, 0x46};
 
-    // Read the first 4 bytes into the buffer
     fread(buffer, 1, 4, pdf);
     fclose(pdf);
 
-    // Check the buffer contents against the PDF signature
+    // use loop to compare the first four bytes of the file against pdf
+    // signature
+
     for (int i = 0; i < 4; i++)
     {
         if (buffer[i] != signature[i])
         {
-            printf("Not a PDF.\n");
+            printf("PDF? Not!!!!!!!!\n");
             return 0;
         }
     }
-    printf("Likely a PDF!");
-    return 0;
+    
+    printf("WAWAWEEWAA IT'SA PDF!!! YAKSHEMASH\n");
+
 }
