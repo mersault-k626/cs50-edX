@@ -1,43 +1,3 @@
-// lecture-4.ipynb
-
-// 4.9 Valgrind → 4.9.1 Questions
-// 4.15 File I/O
-// 4.15.1 RAM versus Persistent Storage
-// 4.15.2 The stdio File Functions
-// 4.15.3 A Persistent Phone Book
-// 4.15.4 Checking fopen
-// 4.15.5 Questions
-// 4.16 Buffers and a Home-Made cp
-// 4.16.1 What "Buffering" Means
-// 4.16.2 cp.c: Copying a File Byte by Byte
-// 4.16.3 Questions
-// 4.18 Cheat Sheet — Week 4 in One Place
-// 4.18.1 Operators
-// 4.18.2 Functions
-// 4.18.3 Memory Map
-// 4.18.4 Classic Bugs of Week 4
-// section-4.ipynb
-
-// 4.3 Dynamic Memory
-// 4.3.1 malloc and free (4.3.1.1 Allocation, 4.3.1.2 Freeing Memory)
-// 4.3.2 Common Memory Errors
-// 4.4 File I/O
-// 4.4.1 fopen and fclose
-// 4.4.2 fread and fwrite
-// 4.4.3 Copying a File
-// 4.4.4 PDF Detection Exercise (closest analog — reads bytes with uint8_t, checks against a header signature)
-// 4.4.5 Questions
-// shorts-4.ipynb
-
-// 4.4 Dynamic Memory Allocation → 4.4.1 malloc, 4.4.2 free
-// 4.6 File Pointers
-// 4.6.1 fopen and fclose
-// 4.6.2 Single Character I/O
-// 4.6.3 Block I/O
-// 4.6.4 Questions
-
-// Modifies the volume of an audio file
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,9 +33,32 @@ int main(int argc, char *argv[])
 
     float factor = atof(argv[3]);
 
-    // TODO: Copy header from input file to output file
+    // TODO: Copy header from input file to output file, ie the metadata
 
-    // TODO: Read samples from input file and write updated data to output file
+    // create an array 
+
+    uint8_t header[HEADER_SIZE];
+
+   fread(&header, HEADER_SIZE, 1, input);
+   fwrite(&header, HEADER_SIZE, 1, output);
+
+
+    // read the actual files then copy it to output
+
+    // create buffer for copy
+    int16_t buffer;
+
+
+    // use while loop to copy data from input to buffer
+
+    while (fread(&buffer, sizeof(int16_t), 1, input))
+    {
+        // increase the volume using cli input
+        buffer *= factor;
+
+        // then write it on the output fil
+        fwrite(&buffer, sizeof(int16_t), 1, output);
+    }
 
     // Close files
     fclose(input);

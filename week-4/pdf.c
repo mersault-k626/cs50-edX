@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     FILE *pdf = fopen(argv[1], "r");
 
     // to check how many byte to process as per project requirement
-    //(check the first four bytes of a file to see if it's a pdf or nahha)
+    //(check the first four bytes of a file to see if it's a pdf or nahh)
     uint8_t buffer[4];
 
     // signature of a pdf file
